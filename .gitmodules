@@ -1,0 +1,12 @@
+[submodule "third_party/googleapis"]
+	path = third_party/googleapis
+	url = https://github.com/googleapis/googleapis
+[submodule "third_party/protoc-gen-validate"]
+	path = third_party/protoc-gen-validate
+	url = git@github.com:bufbuild/protoc-gen-validate.git
+[submodule "third_party/gnostic"]
+	path = third_party/gnostic
+	url = git@github.com:google/gnostic.git
+[submodule "third_party/protobuf"]
+	path = third_party/protobuf
+	url = git@github.com:protocolbuffers/protobuf.git
