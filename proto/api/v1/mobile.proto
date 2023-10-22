@@ -1,0 +1,83 @@
+syntax = "proto3";
+
+package platform.api.v1;
+
+option go_package = "github.com/GreenSpaceNASA/client-go/src/api/v1;mobile";
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+
+
+// Service
+service API {
+    // Internal
+    rpc GetAnimals(AnimalsRequest) returns (AnimalsResponse) {};
+    rpc GetArea(AreaRequest) returns (AreaResponse) {};
+    rpc GetLocation(LocationRequest) returns (LocationResponse) {};
+
+    // BFF
+    rpc GetV1(google.protobuf.Empty) returns (V1Response) {
+        option (google.api.http) = {
+            get: "/api/v1"
+        };
+    };
+}
+
+// Location
+message Location {
+    int32 longitude = 1;
+    int32 latitude = 2;
+    string name = 3;
+}
+
+message LocationRequest {
+    string ip = 1;
+}
+
+message LocationResponse {
+    Location location = 1;
+}
+
+// Area
+enum Condition {
+    GOOD = 0;
+    MODERATE = 1;
+    CONTAMINATED = 2;
+    UNKNOWN = 3;
+    RADIATION = 4;
+    DANGER = 5;
+    PROTECTED = 6;
+}
+
+message AreaRequest {
+    Location location = 1;
+}
+
+message AreaResponse {
+    string name = 1;
+    Condition condition = 2;
+    float temperature = 3;
+    double distance = 4;
+}
+
+// Animals
+message Animal {
+    string name = 1;
+    bool inDanger = 2;
+    string description = 3;
+}
+
+message AnimalsRequest {
+    Location location = 1;
+}
+
+message AnimalsResponse {
+    repeated Animal animals = 1;
+}
+
+// BFF
+message V1Response {
+    LocationResponse location = 1;
+    AreaResponse nearestAquaticLocation = 2;
+    AnimalsResponse animals = 3;
+}
