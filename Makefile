@@ -6,6 +6,8 @@ CPUS=`getconf _NPROCESSORS_ONLN 2>/dev/null || echo 1`
 VENDOR_DIR=vendor
 SUBMODULES_DIR=third_party
 BIN_DIR ?= $(PWD)/bin
+REPO=github.com/GreenSpaceNASA/client
+TMP_REPO_DIR=$(PWD)/repo
 GEN_GO_DIR=gen/go
 
 export GO111MODULE=on
@@ -77,7 +79,7 @@ proto/go:
 	# REST -> GRPC gateway for go
 	@find proto -name '*.proto' -print0 | xargs -0 -I{} -P${CPUS} protoc ${PROTOC_GRPC_GATEWAY_OPTS} {}
 	# Ensure can be build: mockgen can generate files with unused imports, so we run goimports to remove them
-	@find gen/go -name '*.pb.go' -print0 | xargs -0 -I{} -P${CPUS} $(BIN_DIR)/goimports -w {}
+	@find gen/go/ -name '*.pb.go' -print0 | xargs -0 -I{} -P${CPUS} $(BIN_DIR)/goimports -w {}
 
 .PHONY: clean/go
 clean/go:
@@ -86,7 +88,12 @@ clean/go:
 
 .PHONY: release/go
 publish/go:
-	@echo "Publishing go client..$@."
+	@echo "Publishing go client..."
+	@rm -rf ${TMP_REPO_DIR} && mkdir -p ${TMP_REPO_DIR}
+	@git clone https://${REPO}-go.git ${TMP_REPO_DIR}/client-go
+	@cd ${TMP_REPO_DIR}/client-go && git clean -fdx #&& git checkout main
+	@cp $(PWD)/scripts/go/go.mod ${TMP_REPO_DIR}/client-go/go.mod
+	@cp -R $(PWD)/gen/go/${REPO}-go/src ${TMP_REPO_DIR}/client-go/src
 
 
 LINT_PLUGIN=${BIN_DIR}/protoc-gen-lint
