@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package platform.api.v1;
 
-option go_package = "github.com/GreenSpaceNASA/client-go/v1;mobile";
+option go_package = "github.com/GreenSpaceNASA/client-go/src/api/v1;mobile";
 
 import "google/api/annotations.proto";
 import "google/protobuf/empty.proto";
