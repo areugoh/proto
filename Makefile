@@ -18,6 +18,9 @@ GOOGLEPROTOBUF_PROTO=${SUBMODULES_DIR}/protobuf/src
 PROTOC_GEN_VALIDATE_PROTO=${SUBMODULES_DIR}/protoc-gen-validate
 GOOGLE_OPENAPI_PROTO=${SUBMODULES_DIR}/gnostic/openapiv3
 PROTO_OPTION=-I. -I${SUBMODULES_DIR} -I${GOOGLEAPIS_PROTO} -I${GOOGLEPROTOBUF_PROTO} -I${PROTOC_GEN_VALIDATE_PROTO} -I${GOOGLE_OPENAPI_PROTO}
+PROTO_DOCS_OPTS=${PROTO_OPTION} \
+	--plugin=protoc-gen-doc=${BIN_DIR}/protoc-gen-doc \
+	--doc_out=./docs
 
 # GO
 PROTOC_GO_OPTS=${PROTO_OPTION} \
@@ -42,7 +45,7 @@ vendor: go.sum .gitmodules
 	@go mod vendor
 
 .PHONY: plugin
-plugin: vendor
+plugin:
 	@echo "Building protoc plugins..."
 	@rm -rf $(BIN_DIR) && mkdir -p $(BIN_DIR) && touch $(BIN_DIR)/.dummy
 	@GOBIN=${BIN_DIR} go install -v github.com/googleapis/api-linter/cmd/api-linter@v1.59.0
@@ -54,6 +57,7 @@ plugin: vendor
 	@GOBIN=${BIN_DIR} go install -v github.com/golang/mock/mockgen@v1.6.0
 	@GOBIN=${BIN_DIR} go install -v golang.org/x/tools/cmd/goimports@v0.14.0
 	@GOBIN=${BIN_DIR} go install -v github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-grpc-gateway@v2.18.0
+	@GOBIN=${BIN_DIR} go install -v github.com/pseudomuto/protoc-gen-doc/cmd/protoc-gen-doc@v1.5.1
 	@curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s v1.55.0
 
 
@@ -94,6 +98,12 @@ publish/go:
 	@cd ${TMP_REPO_DIR}/client-go && git clean -fdx #&& git checkout main
 	@cp $(PWD)/scripts/go/go.mod ${TMP_REPO_DIR}/client-go/go.mod
 	@cp -R $(PWD)/gen/go/${REPO}-go/src ${TMP_REPO_DIR}/client-go/src
+
+.PHONY: docs
+docs:
+	@echo "Generating docs..."
+	@rm -rf docs && mkdir -p docs
+	@find proto -name '*.proto' -print0 | xargs -0 -I{} -P${CPUS} protoc ${PROTO_DOCS_OPTS} --doc_opt=markdown,README.md {}
 
 
 LINT_PLUGIN=${BIN_DIR}/protoc-gen-lint
