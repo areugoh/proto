@@ -16,7 +16,8 @@
   
     - [Condition](#platform-api-v1-Condition)
   
-    - [API](#platform-api-v1-API)
+    - [BFF](#platform-api-v1-BFF)
+    - [Internal](#platform-api-v1-Internal)
   
 - [Scalar Value Types](#scalar-value-types)
 
@@ -196,17 +197,26 @@ Area
  
 
 
-<a name="platform-api-v1-API"></a>
+<a name="platform-api-v1-BFF"></a>
 
-### API
-Service
+### BFF
+BFF service
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
-| GetAnimals | [AnimalsRequest](#platform-api-v1-AnimalsRequest) | [AnimalsResponse](#platform-api-v1-AnimalsResponse) | Internal |
+| GetV1 | [.google.protobuf.Empty](#google-protobuf-Empty) | [V1Response](#platform-api-v1-V1Response) |  |
+
+
+<a name="platform-api-v1-Internal"></a>
+
+### Internal
+Internal service
+
+| Method Name | Request Type | Response Type | Description |
+| ----------- | ------------ | ------------- | ------------|
+| GetAnimals | [AnimalsRequest](#platform-api-v1-AnimalsRequest) | [AnimalsResponse](#platform-api-v1-AnimalsResponse) |  |
 | GetArea | [AreaRequest](#platform-api-v1-AreaRequest) | [AreaResponse](#platform-api-v1-AreaResponse) |  |
 | GetLocation | [LocationRequest](#platform-api-v1-LocationRequest) | [LocationResponse](#platform-api-v1-LocationResponse) |  |
-| GetV1 | [.google.protobuf.Empty](#google-protobuf-Empty) | [V1Response](#platform-api-v1-V1Response) | BFF |
 
  
 
