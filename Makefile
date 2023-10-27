@@ -6,7 +6,7 @@ CPUS=`getconf _NPROCESSORS_ONLN 2>/dev/null || echo 1`
 VENDOR_DIR=vendor
 SUBMODULES_DIR=third_party
 BIN_DIR ?= $(PWD)/bin
-REPO=github.com/GreenSpaceNASA/client
+REPO:=$(shell test $(REPO) && echo $(REPO) || git ls-remote --get-url | rev | cut -d '/' -f2- | rev | awk '{print $$1"/client"}')
 TMP_REPO_DIR=$(PWD)/repo
 GEN_GO_DIR=gen/go
 LAST_TAG:=$(shell git describe --tags --abbrev=0 2>/dev/null || echo v0.0.0)
@@ -63,16 +63,16 @@ plugin:
 
 
 # PROTOC
-.PHONY: proto clean publish
+.PHONY: proto clean release
 proto: $(foreach var, $(CLIENTS), proto/$(var))
 clean: $(foreach var, $(CLIENTS), clean/$(var))
-publish: $(foreach var, $(CLIENTS), publish/$(var))
+release: $(foreach var, $(CLIENTS), release/$(var))
 
-proto/% publish/% clean/%:
+proto/% release/% clean/%:
 	@:
 
 .PHONY: proto/go
-proto/go: lint
+proto/go:
 	@echo "Generating go client from proto..."
 	@rm -rf ${GEN_GO_DIR} && mkdir -p ${GEN_GO_DIR}
 	# Standard grpc client for go
@@ -92,15 +92,17 @@ clean/go:
 	@rm -rf ${GEN_GO_DIR}
 
 .PHONY: release/go
-publish/go: proto docs
+release/go: proto docs
 	@echo "Publishing go client..."
 	@rm -rf ${TMP_REPO_DIR} && mkdir -p ${TMP_REPO_DIR}
-	@git clone https://${REPO}-go.git ${TMP_REPO_DIR}/client-go
+	@git clone ${REPO}-go.git ${TMP_REPO_DIR}/client-go
 	@cd ${TMP_REPO_DIR}/client-go && git clean -fdx #&& git checkout main
 	@cp $(PWD)/scripts/go/go.mod ${TMP_REPO_DIR}/client-go/go.mod
-	@cp $(PWD)/CHANGELOG.md ${TMP_REPO_DIR}/client-go/CHANGELOG.md
 	@cp $(PWD)/docs/README.md ${TMP_REPO_DIR}/client-go/README.md
-	@cp -R $(PWD)/gen/go/${REPO}-go/src ${TMP_REPO_DIR}/client-go/src
+	@cp $(PWD)/docs/CHANGELOG.md ${TMP_REPO_DIR}/client-go/CHANGELOG.md
+	@cp -R $(PWD)/gen/go/${REPO}-go/src ${TMP_REPO_DIR}/client-go
+	@$(eval NEXT_VERSION=$(shell test $(NEXT_VERSION) && echo $(NEXT_VERSION) || echo $(LAST_TAG)))
+	@cd ${TMP_REPO_DIR}/client-go && git add . && git commit -m "bump(version): $(NEXT_VERSION)" && git tag -a $(NEXT_VERSION) -m '$(NEXT_VERSION)' && git push --tags origin main
 
 .PHONY: docs
 docs:
