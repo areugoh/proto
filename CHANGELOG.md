@@ -1,4 +1,20 @@
 
+<a name="v0.2.0"></a>
+## [v0.2.0](https://github.com/GreenSpaceNASA/proto/compare/v0.1.0...v0.2.0)
+
+> 2023-10-27
+
+### Add
+
+* **dotfiles:** add chglog config
+* **github:** pipeline & templates
+
+### Change
+
+* **makefile:** update docs & variables
+* **proto:** update mobile service
+
+
 <a name="v0.1.0"></a>
 ## v0.1.0
 
