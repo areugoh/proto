@@ -6,8 +6,8 @@ on:
       - 'v[0-9]+.[0-9]+.[0-9]+'
 
 jobs:
-  changelog-and-tag:
-    runs-on: ubuntu-18.04
+  release:
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
