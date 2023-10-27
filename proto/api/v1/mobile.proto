@@ -8,14 +8,15 @@ import "google/api/annotations.proto";
 import "google/protobuf/empty.proto";
 
 
-// Service
-service API {
-    // Internal
+// Internal service
+service Internal {
     rpc GetAnimals(AnimalsRequest) returns (AnimalsResponse) {};
     rpc GetArea(AreaRequest) returns (AreaResponse) {};
     rpc GetLocation(LocationRequest) returns (LocationResponse) {};
+}
 
-    // BFF
+// BFF service
+service BFF {
     rpc GetV1(google.protobuf.Empty) returns (V1Response) {
         option (google.api.http) = {
             get: "/api/v1"
