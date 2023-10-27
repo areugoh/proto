@@ -9,6 +9,7 @@ BIN_DIR ?= $(PWD)/bin
 REPO=github.com/GreenSpaceNASA/client
 TMP_REPO_DIR=$(PWD)/repo
 GEN_GO_DIR=gen/go
+LAST_TAG:=$(shell git describe --tags --abbrev=0 2>/dev/null || echo v0.0.0)
 
 export GO111MODULE=on
 
@@ -71,7 +72,7 @@ proto/% publish/% clean/%:
 	@:
 
 .PHONY: proto/go
-proto/go:
+proto/go: lint
 	@echo "Generating go client from proto..."
 	@rm -rf ${GEN_GO_DIR} && mkdir -p ${GEN_GO_DIR}
 	# Standard grpc client for go
@@ -91,12 +92,14 @@ clean/go:
 	@rm -rf ${GEN_GO_DIR}
 
 .PHONY: release/go
-publish/go:
+publish/go: proto docs
 	@echo "Publishing go client..."
 	@rm -rf ${TMP_REPO_DIR} && mkdir -p ${TMP_REPO_DIR}
 	@git clone https://${REPO}-go.git ${TMP_REPO_DIR}/client-go
 	@cd ${TMP_REPO_DIR}/client-go && git clean -fdx #&& git checkout main
 	@cp $(PWD)/scripts/go/go.mod ${TMP_REPO_DIR}/client-go/go.mod
+	@cp $(PWD)/CHANGELOG.md ${TMP_REPO_DIR}/client-go/CHANGELOG.md
+	@cp $(PWD)/docs/README.md ${TMP_REPO_DIR}/client-go/README.md
 	@cp -R $(PWD)/gen/go/${REPO}-go/src ${TMP_REPO_DIR}/client-go/src
 
 .PHONY: docs
@@ -111,3 +114,12 @@ LINT_PLUGIN=${BIN_DIR}/protoc-gen-lint
 lint:
 	@echo "Linting..."
 	@find proto -type f -name "*.proto" | xargs | (read p: protoc $(ROTOC_OPTION) --plugin=$(LINT_PLUGIN) --lint_out=. $$p)
+
+.PHONY: changelog
+changelog:
+	@echo "Generating changelog..."
+	@$(eval NEXT_VERSION=$(shell test $(NEXT_VERSION) && echo $(NEXT_VERSION) || echo $(LAST_TAG) | awk -F. '{print $$1"."$$2+1"."$$3}'))
+	@test $NEXT_VERSION || (echo "NEXT_VERSION is not set"; exit 1)
+	@echo "NEXT_VERSION: $(LAST_TAG) -> $$NEXT_VERSION"
+	@git branch | grep -qs "* main" || (echo "This command should be run from main branch"; exit 1)
+	@git pull && git switch -c changelog_$(NEXT_VERSION) && git-chglog --next-tag $(NEXT_VERSION) -o CHANGELOG.md && git add CHANGELOG.md && git tag -a $(NEXT_VERSION) -m '$(NEXT_VERSION)' && git commit -m "add $(NEXT_VERSION) changelog" && git push --tags --set-upstream origin changelog_$(NEXT_VERSION) && git switch main && git branch -D changelog_$(NEXT_VERSION)
