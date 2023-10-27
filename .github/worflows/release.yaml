@@ -1,0 +1,51 @@
+#Generate a new version of the client
+name: Release
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+
+jobs:
+  changelog-and-tag:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Cache protobuf library
+        id: cache-protobuf
+        uses: actions/cache@v1
+        with:
+          path: protobuf
+          key: ${{ runner.os }}-protobuf
+      - name: Build protobuf library
+        if: steps.cache-protobuf.outputs.cache-hit != 'true'
+        run: |
+          git clone https://github.com/protocolbuffers/protobuf.git
+          cd protobuf
+          git submodule update --init --recursive
+          ./autogen.sh
+          ./autogen.sh
+          ./configure
+          make
+          make check
+      - name: Install protobuf library
+        run: |
+          cd protobuf
+          sudo make install
+          sudo ldconfig
+
+      - name: Setup go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.21'
+      - name: Install dependencies
+        run: go mod download
+      - name: Downloading plugins
+        run: make plugin
+
+      - name: Release
+        run: make release

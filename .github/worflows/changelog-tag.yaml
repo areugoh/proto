@@ -1,0 +1,25 @@
+#Generate a new tag and changelog
+name: "Proto version"
+on:
+  pull_request:
+    branches:
+      - main
+    types: [closed]
+
+jobs:
+  changelog-and-tag:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Setup go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.21'
+      - name: Install dependencies
+        run: go install github.com/git-chglog/git-chglog/cmd/git-chglog@latest
+
+      - name: Building new version
+        run: make changelog
