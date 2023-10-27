@@ -4,6 +4,7 @@ on:
   pull_request:
     branches:
       - main
+      - '!changelog_*'
     types: [closed]
 
 jobs:

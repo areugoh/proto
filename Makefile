@@ -120,7 +120,7 @@ lint:
 .PHONY: changelog
 changelog:
 	@echo "Generating changelog..."
-	@$(eval NEXT_VERSION=$(shell test $(NEXT_VERSION) && echo $(NEXT_VERSION) || echo $(LAST_TAG) | awk -F. '{print $$1"."$$2+1"."$$3}'))
+	@$(eval NEXT_VERSION=$(shell test $(NEXT_VERSION) && echo $(NEXT_VERSION) || echo $(LAST_TAG) | awk -F. '{print $$1"."$$2+1".0"}'))
 	@test $NEXT_VERSION || (echo "NEXT_VERSION is not set"; exit 1)
 	@echo "NEXT_VERSION: $(LAST_TAG) -> $$NEXT_VERSION"
 	@git branch | grep -qs "* main" || (echo "This command should be run from main branch"; exit 1)
