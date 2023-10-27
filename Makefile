@@ -99,8 +99,8 @@ release/go: proto docs
 	@cd ${TMP_REPO_DIR}/client-go && git clean -fdx #&& git checkout main
 	@cp $(PWD)/scripts/go/go.mod ${TMP_REPO_DIR}/client-go/go.mod
 	@cp $(PWD)/docs/README.md ${TMP_REPO_DIR}/client-go/README.md
-	@cp $(PWD)/docs/CHANGELOG.md ${TMP_REPO_DIR}/client-go/CHANGELOG.md
-	@cp -R $(PWD)/gen/go/${REPO}-go/src ${TMP_REPO_DIR}/client-go
+	@cp $(PWD)/CHANGELOG.md ${TMP_REPO_DIR}/client-go/CHANGELOG.md
+	@cp -R $(PWD)/gen/go/src ${TMP_REPO_DIR}/client-go
 	@$(eval NEXT_VERSION=$(shell test $(NEXT_VERSION) && echo $(NEXT_VERSION) || echo $(LAST_TAG)))
 	@cd ${TMP_REPO_DIR}/client-go && git add . && git commit -m "bump(version): $(NEXT_VERSION)" && git tag -a $(NEXT_VERSION) -m '$(NEXT_VERSION)' && git push --tags origin main
 
