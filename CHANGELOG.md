@@ -1,4 +1,14 @@
 
+<a name="v0.3.1"></a>
+## [v0.3.1](https://github.com/GreenSpaceNASA/proto/compare/v0.3.0...v0.3.1)
+
+> 2023-10-28
+
+### Fix
+
+* **ci:** agent as latest
+
+
 <a name="v0.3.0"></a>
 ## [v0.3.0](https://github.com/GreenSpaceNASA/proto/compare/v0.2.0...v0.3.0)
 
