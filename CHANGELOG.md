@@ -1,4 +1,18 @@
 
+<a name="v0.4.0"></a>
+## [v0.4.0](https://github.com/GreenSpaceNASA/proto/compare/v0.3.1...v0.4.0)
+
+> 2023-10-28
+
+### Fix
+
+* **ci:** get tags
+* **ci:** get tags
+* **ci:** tags & pull recursive
+* **ci:** get tags
+* **ci:** protoc
+
+
 <a name="v0.3.1"></a>
 ## [v0.3.1](https://github.com/GreenSpaceNASA/proto/compare/v0.3.0...v0.3.1)
 
