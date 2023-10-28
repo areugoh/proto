@@ -10,6 +10,7 @@ permissions:
 
 jobs:
   changelog-and-tag:
+    if: ${{!contains(github.head_ref, 'changelog')}}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -21,15 +22,12 @@ jobs:
 
       - name: Setup go
         uses: actions/setup-go@v4
-        if: ${{!contains(github.base_ref, 'changelog')}}
         with:
           go-version: '1.21'
       - name: Install dependencies
-        if: ${{!contains(github.base_ref, 'changelog')}}
         run: go install github.com/git-chglog/git-chglog/cmd/git-chglog@latest
 
       - name: Building new version
-        if: ${{!contains(github.base_ref, 'changelog')}}
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
