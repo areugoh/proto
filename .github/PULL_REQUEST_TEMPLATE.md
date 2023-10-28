@@ -9,7 +9,7 @@
 - [ ] Refactor
 - [ ] Other
 
-### What does this PR do?
+## What does this PR do?
 <!-- Describe the changes you've made. -->
 
 ## Why are we doing this?
