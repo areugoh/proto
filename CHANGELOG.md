@@ -1,4 +1,14 @@
 
+<a name="v0.9.0"></a>
+## [v0.9.0](https://github.com/GreenSpaceNASA/proto/compare/v0.8.0...v0.9.0)
+
+> 2023-10-28
+
+### Change
+
+* **template:** h3->h2
+
+
 <a name="v0.8.0"></a>
 ## [v0.8.0](https://github.com/GreenSpaceNASA/proto/compare/v0.7.0...v0.8.0)
 
