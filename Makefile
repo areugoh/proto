@@ -46,7 +46,7 @@ vendor: go.sum .gitmodules
 	@go mod vendor
 
 .PHONY: plugin
-plugin:
+plugin: plugin/lint
 	@echo "Building protoc plugins..."
 	@rm -rf $(BIN_DIR) && mkdir -p $(BIN_DIR) && touch $(BIN_DIR)/.dummy
 	@GOBIN=${BIN_DIR} go install -v github.com/googleapis/api-linter/cmd/api-linter@v1.59.0
@@ -61,6 +61,9 @@ plugin:
 	@GOBIN=${BIN_DIR} go install -v github.com/pseudomuto/protoc-gen-doc/cmd/protoc-gen-doc@v1.5.1
 	@curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s v1.55.0
 
+.PHONY: plugin/lint
+plugin/lint:
+	@GOBIN=${BIN_DIR} go install -v github.com/ckaznocha/protoc-gen-lint@v0.3.0
 
 # PROTOC
 .PHONY: proto clean release
@@ -115,7 +118,12 @@ LINT_PLUGIN=${BIN_DIR}/protoc-gen-lint
 .PHONY: lint
 lint:
 	@echo "Linting..."
-	@find proto -type f -name "*.proto" | xargs | (read p: protoc $(ROTOC_OPTION) --plugin=$(LINT_PLUGIN) --lint_out=. $$p)
+	@find proto -type f -name "*.proto" | xargs | (read p; protoc $(PROTO_OPTION) --plugin=$(LINT_PLUGIN) --lint_out=. $$p)
+
+.PHONY: fmt
+fmt:
+	@echo "Formatting..."
+	@find proto -type f -name "*.proto" | xargs -I{} -P${CPUS} clang-format -i {}
 
 .PHONY: changelog
 changelog:
