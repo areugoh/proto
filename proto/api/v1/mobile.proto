@@ -16,7 +16,7 @@ service Internal {
 }
 
 // BFF service
-service BFF {
+service Bff {
     rpc GetV1(google.protobuf.Empty) returns (V1Response) {
         option (google.api.http) = {
             get: "/api/v1"
@@ -64,7 +64,7 @@ message AreaResponse {
 // Animals
 message Animal {
     string name = 1;
-    bool inDanger = 2;
+    bool in_danger = 2;
     string description = 3;
 }
 
@@ -79,6 +79,6 @@ message AnimalsResponse {
 // BFF
 message V1Response {
     Location location = 1;
-    AreaResponse nearestAquaticLocation = 2;
+    AreaResponse nearest_aquatic_location = 2;
     repeated Animal animals = 3;
 }
