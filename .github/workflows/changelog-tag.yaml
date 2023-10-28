@@ -4,7 +4,6 @@ on:
   pull_request:
     branches:
       - main
-      - '!changelog_**'
     types: [closed]
 permissions:
   contents: write
@@ -22,12 +21,15 @@ jobs:
 
       - name: Setup go
         uses: actions/setup-go@v4
+        if: ${{!contains(github.base_ref, 'changelog')}}
         with:
           go-version: '1.21'
       - name: Install dependencies
+        if: ${{!contains(github.base_ref, 'changelog')}}
         run: go install github.com/git-chglog/git-chglog/cmd/git-chglog@latest
 
       - name: Building new version
+        if: ${{!contains(github.base_ref, 'changelog')}}
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
