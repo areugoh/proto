@@ -4,8 +4,11 @@ on:
   pull_request:
     branches:
       - main
-      - '!changelog_*'
+    branches-ignore:
+      - 'changelog_*'
     types: [closed]
+permissions:
+  contents: write
 
 jobs:
   changelog-and-tag:
