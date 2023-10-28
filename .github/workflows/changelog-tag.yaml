@@ -4,8 +4,7 @@ on:
   pull_request:
     branches:
       - main
-    branches-ignore:
-      - 'changelog_*'
+      - '!changelog_**'
     types: [closed]
 permissions:
   contents: write
