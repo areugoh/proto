@@ -1,4 +1,18 @@
 
+<a name="v0.8.0"></a>
+## [v0.8.0](https://github.com/GreenSpaceNASA/proto/compare/v0.7.0...v0.8.0)
+
+> 2023-10-28
+
+### Add
+
+* **linting:** add ci & makefile lint
+
+### Fix
+
+* **proto:** linting errors
+
+
 <a name="v0.7.0"></a>
 ## [v0.7.0](https://github.com/GreenSpaceNASA/proto/compare/v0.6.0...v0.7.0)
 
