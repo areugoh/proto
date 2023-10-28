@@ -17,9 +17,6 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-tags: 'true'
           fetch-depth: 0
-        run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
 
       - name: Setup go
         uses: actions/setup-go@v4
@@ -29,4 +26,7 @@ jobs:
         run: go install github.com/git-chglog/git-chglog/cmd/git-chglog@latest
 
       - name: Building new version
-        run: make changelog
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          make changelog
