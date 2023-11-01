@@ -16,7 +16,7 @@
   
     - [Condition](#platform-api-v1-Condition)
   
-    - [BFF](#platform-api-v1-BFF)
+    - [Bff](#platform-api-v1-Bff)
     - [Internal](#platform-api-v1-Internal)
   
 - [Scalar Value Types](#scalar-value-types)
@@ -39,7 +39,7 @@ Animals
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | name | [string](#string) |  |  |
-| inDanger | [bool](#bool) |  |  |
+| in_danger | [bool](#bool) |  |  |
 | description | [string](#string) |  |  |
 
 
@@ -166,7 +166,7 @@ BFF
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | location | [Location](#platform-api-v1-Location) |  |  |
-| nearestAquaticLocation | [AreaResponse](#platform-api-v1-AreaResponse) |  |  |
+| nearest_aquatic_location | [AreaResponse](#platform-api-v1-AreaResponse) |  |  |
 | animals | [Animal](#platform-api-v1-Animal) | repeated |  |
 
 
@@ -197,9 +197,9 @@ Area
  
 
 
-<a name="platform-api-v1-BFF"></a>
+<a name="platform-api-v1-Bff"></a>
 
-### BFF
+### Bff
 BFF service
 
 | Method Name | Request Type | Response Type | Description |
