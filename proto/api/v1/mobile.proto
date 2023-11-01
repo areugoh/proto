@@ -10,8 +10,8 @@ import "google/protobuf/empty.proto";
 
 // Internal service
 service Internal {
-    rpc GetAnimals(AnimalsRequest) returns (AnimalsResponse) {};
-    rpc GetArea(AreaRequest) returns (AreaResponse) {};
+    rpc GetAnimals(AnimalsRequest) returns (stream Animal) {};
+    rpc GetCoast(CoastRequest) returns (CoastResponse) {};
     rpc GetLocation(LocationRequest) returns (LocationResponse) {};
 }
 
@@ -25,7 +25,7 @@ service Bff {
 }
 
 // Location
-message Location {
+message LocationResponse {
     int32 longitude = 1;
     int32 latitude = 2;
     string name = 3;
@@ -35,11 +35,7 @@ message LocationRequest {
     string ip = 1;
 }
 
-message LocationResponse {
-    Location location = 1;
-}
-
-// Area
+// Coast
 enum Condition {
     GOOD = 0;
     MODERATE = 1;
@@ -50,11 +46,11 @@ enum Condition {
     PROTECTED = 6;
 }
 
-message AreaRequest {
-    Location location = 1;
+message CoastRequest {
+    LocationResponse location = 1;
 }
 
-message AreaResponse {
+message CoastResponse {
     string name = 1;
     Condition condition = 2;
     float temperature = 3;
@@ -69,16 +65,12 @@ message Animal {
 }
 
 message AnimalsRequest {
-    Location location = 1;
-}
-
-message AnimalsResponse {
-    repeated Animal animals = 1;
+    LocationResponse location = 1;
 }
 
 // BFF
 message V1Response {
-    Location location = 1;
-    AreaResponse nearest_aquatic_location = 2;
+    LocationResponse location = 1;
+    CoastResponse nearest_aquatic_location = 2;
     repeated Animal animals = 3;
 }
