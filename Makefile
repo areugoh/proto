@@ -38,6 +38,23 @@ PROTOC_GRPC_GATEWAY_OPTS=${PROTO_OPTION} \
 	--plugin=protoc-gen-grpc-gateway=${BIN_DIR}/protoc-gen-grpc-gateway \
 	--grpc-gateway_out=logtostderr=true:${GEN_GO_DIR}
 
+.PHONY: help
+help:
+	@echo "Usage: make <target>"
+	@echo ""
+	@echo "Targets:"
+	@echo "  vendor        - Update vendor"
+	@echo "  plugin        - Build protoc plugins"
+	@echo "  proto         - Generate proto"
+	@echo "  proto/go      - Generate go client from proto"
+	@echo "  clean/go      - Clean go client"
+	@echo "  release/go    - Publish go client"
+	@echo "  docs          - Generate docs"
+	@echo "  lint          - Lint proto"
+	@echo "  fmt           - Format proto"
+	@echo "  changelog     - Generate changelog"
+	@echo "  help          - Show this help message"
+
 .PHONY: vendor
 vendor: go.sum .gitmodules
 	@echo "Updating vendor..."
