@@ -1,5 +1,5 @@
 export
-CLIENTS=go
+CLIENTS=go js
 
 # CONFIG
 CPUS=`getconf _NPROCESSORS_ONLN 2>/dev/null || echo 1`
@@ -22,21 +22,6 @@ PROTO_OPTION=-I. -I${SUBMODULES_DIR} -I${GOOGLEAPIS_PROTO} -I${GOOGLEPROTOBUF_PR
 PROTO_DOCS_OPTS=${PROTO_OPTION} \
 	--plugin=protoc-gen-doc=${BIN_DIR}/protoc-gen-doc
 
-# GO
-PROTOC_GO_OPTS=${PROTO_OPTION} \
-	--plugin=protoc-gen-go=${BIN_DIR}/protoc-gen-go \
-	--go_out=${GEN_GO_DIR} \
-	--plugin=protoc-gen-go-grpc=${BIN_DIR}/protoc-gen-go-grpc \
-	--go-grpc_out=require_unimplemented_servers=false:${GEN_GO_DIR} \
-	--plugin=protoc-gen-validate=${BIN_DIR}/protoc-gen-validate-go \
-	--validate_out=${GEN_GO_DIR}
-PROTOC_GATEWAY_SPEC_OPT=${PROTO_OPTION} \
-	--plugin=protoc-gen-openapi=${BIN_DIR}/protoc-gen-openapi \
-	--openapi_out=:${GEN_GO_DIR}
-PROTOC_GRPC_GATEWAY_OPTS=${PROTO_OPTION} \
-	--plugin=protoc-gen-grpc-gateway=${BIN_DIR}/protoc-gen-grpc-gateway \
-	--grpc-gateway_out=logtostderr=true:${GEN_GO_DIR}
-
 .PHONY: help
 help:
 	@echo "Usage: make <target>"
@@ -44,13 +29,18 @@ help:
 	@echo "Targets:"
 	@echo "  vendor        - Update vendor"
 	@echo "  plugin        - Build protoc plugins"
-	@echo "  proto         - Generate proto"
+	@echo "  proto         - Generate all of the proto clients"
+	@echo "  clean         - Clean all of the proto clients"
+	@echo "  release       - Publish all of the proto clients"
 	@echo "  proto/go      - Generate go client from proto"
 	@echo "  clean/go      - Clean go client"
 	@echo "  release/go    - Publish go client"
+	@echo "  proto/js      - Generate javascript client from proto"
+	@echo "  release/js    - Publish javascript client"
+	@echo "  dep/js        - Install javascript dependencies"
 	@echo "  docs          - Generate docs"
 	@echo "  lint          - Lint proto"
-	@echo "  fmt           - Format proto"
+	@echo "  fmt           - Format proto (wip)"
 	@echo "  changelog     - Generate changelog"
 	@echo "  help          - Show this help message"
 
@@ -90,6 +80,21 @@ release: $(foreach var, $(CLIENTS), release/$(var))
 proto/% release/% clean/%:
 	@:
 
+# GO
+PROTOC_GO_OPTS=${PROTO_OPTION} \
+	--plugin=protoc-gen-go=${BIN_DIR}/protoc-gen-go \
+	--go_out=${GEN_GO_DIR} \
+	--plugin=protoc-gen-go-grpc=${BIN_DIR}/protoc-gen-go-grpc \
+	--go-grpc_out=require_unimplemented_servers=false:${GEN_GO_DIR} \
+	--plugin=protoc-gen-validate=${BIN_DIR}/protoc-gen-validate-go \
+	--validate_out=${GEN_GO_DIR}
+PROTOC_GATEWAY_SPEC_OPT=${PROTO_OPTION} \
+	--plugin=protoc-gen-openapi=${BIN_DIR}/protoc-gen-openapi \
+	--openapi_out=:${GEN_GO_DIR}
+PROTOC_GRPC_GATEWAY_OPTS=${PROTO_OPTION} \
+	--plugin=protoc-gen-grpc-gateway=${BIN_DIR}/protoc-gen-grpc-gateway \
+	--grpc-gateway_out=logtostderr=true:${GEN_GO_DIR}
+
 .PHONY: proto/go
 proto/go:
 	@echo "Generating go client from proto..."
@@ -125,6 +130,51 @@ release/go: proto
 	@$(eval NEXT_VERSION=$(shell test $(NEXT_VERSION) && echo $(NEXT_VERSION) || echo $(LAST_TAG)))
 	@cd ${TMP_REPO_DIR}/client-go && git add . && git commit -m "bump(version): $(NEXT_VERSION)" && git tag -a $(NEXT_VERSION) -m '$(NEXT_VERSION)' && git push --tags origin main
 
+# JS
+NODE_MODULES=$(PWD)/node_modules
+JAVASCRIPT_OUTPUT=gen/javascript
+PROTOC_JS_OPT=${PROTO_OPTION} \
+	--plugin=protoc-gen-grpc-web=${NODE_MODULES}/protoc-gen-grpc-web/bin/protoc-gen-grpc-web \
+	--grpc-web_out=import_style=commonjs,mode=grpcwebtext:${JAVASCRIPT_OUTPUT} \
+	--plugin=protoc-gen-js=${NODE_MODULES}/protoc-gen-js/bin/protoc-gen-js \
+	--js_out=import_style=commonjs,binary:${JAVASCRIPT_OUTPUT}
+PROTOC_JS_LIB_OPT=-I${SUBMODULES_DIR} -I${GOOGLEAPIS_PROTO} \
+	--plugin=protoc-gen-js=${NODE_MODULES}/protoc-gen-js/bin/protoc-gen-js \
+	--js_out=import_style=commonjs,binary:${JAVASCRIPT_OUTPUT}
+
+.PHONY: proto/js
+proto/js:
+	@echo "Generating javascript client from proto..."
+	@rm -rf $(JAVASCRIPT_OUTPUT) && mkdir -p $(JAVASCRIPT_OUTPUT)
+	@find proto -name '*.proto' -print0 | xargs -0 -I{} -P${CPUS} protoc ${PROTOC_JS_OPT} {}
+	@find ${SUBMODULES_DIR}/googleapis/google/api -name '*.proto' -print0 | xargs -0 -I{} -P${CPUS} protoc ${PROTOC_JS_LIB_OPT} {}
+	#protoc -I${SUBMODULES_DIR} -I${GOOGLEAPIS_PROTO} \
+	#--plugin=protoc-gen-js=${NODE_MODULES}/protoc-gen-js/bin/protoc-gen-js \
+    #--js_out=import_style=commonjs,binary:${JAVASCRIPT_OUTPUT}  \
+    #--proto_path=${SUBMODULES_DIR}/googleapis/google/api \
+    #annotations.proto
+
+.PHONY: release/js
+release/js: proto/js docs
+	@echo "Publishing javascript client..."
+	@git fetch --tags
+	@rm -rf ${TMP_REPO_DIR} && mkdir -p ${TMP_REPO_DIR}
+	@git clone ${REPO}-javascript.git ${TMP_REPO_DIR}/client-javascript
+	@cd ${TMP_REPO_DIR}/client-javascript&& git clean -fdx #&& git checkout main
+	@cp $(PWD)/scripts/javascript/*.* ${TMP_REPO_DIR}/client-javascript/
+	@cp -R $(PWD)/scripts/javascript/.github ${TMP_REPO_DIR}/client-javascript/
+	@cp $(PWD)/docs/README.md ${TMP_REPO_DIR}/client-javascript/README.md
+	@cp $(PWD)/CHANGELOG.md ${TMP_REPO_DIR}/client-javascript/CHANGELOG.md
+	@cp -R $(PWD)/gen/javascript/src ${TMP_REPO_DIR}/client-javascript
+	@$(eval NEXT_VERSION=$(shell test $(NEXT_VERSION) && echo $(NEXT_VERSION) || echo $(LAST_TAG)))
+	@cd ${TMP_REPO_DIR}/client-javascript&& git add . && git commit -m "bump(version): $(NEXT_VERSION)" && git tag -a $(NEXT_VERSION) -m '$(NEXT_VERSION)' && git push --tags origin main
+
+.PHONY: dep/js
+dep/js:
+	@echo "Installing js dependencies..."
+	@npm install
+
+# ALL
 .PHONY: docs
 docs:
 	@echo "Generating docs..."
