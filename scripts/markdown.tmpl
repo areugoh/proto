@@ -1,0 +1,127 @@
+# Documentation
+<a name="top"/>
+
+{{/* ------  Overall Reference ------ */}}
+## Reference
+{{range .Files}}
+{{$file_name := .Name}}[{{.Name}}](#{{.Name}})
+<details>
+<summary>Click to show</summary>
+
+### Messages
+{{range .Messages}}  - [{{.LongName}}](#{{.FullName}})
+{{end}}
+### Enums
+{{range .Enums}}  - [{{.LongName}}](#{{.FullName}})
+{{end}}
+{{range .Extensions}}  - [File-level Extensions](#{{$file_name}}-extensions)
+{{end}}
+</details>
+{{end}}
+
+{{/* ------  Service and Methods ------ */}}
+## Services
+{{range .Files}}
+{{range .Services}}
+<a name="{{.FullName}}"/>
+
+### {{.Name}}
+
+{{- if .Description}}
+{{.Description}}
+{{- else}}
+*Description comment will be shown here*
+{{- end}}
+
+| Method Name | Description |
+| ----------- | ------------|
+{{range .Methods -}}
+| `{{.Name}}` <br /><br /> Request: [{{.RequestLongType}}](#{{.RequestFullType}}) <br /> Response: [{{.ResponseLongType}}](#{{.RequestFullType}}) | {{para .Description | replace "|" "\\|"}} |
+{{end}}
+{{end}} <!-- end services -->
+{{end}} <!-- end files -->
+
+{{range .Files}}
+{{$file_name := .Name}}
+<a name="{{.Name}}"/>
+<p align="right"><a href="#top">Top</a></p>
+
+## {{.Name}}
+{{.Description}}
+
+{{/* ------  Messages ------ */}}
+{{- range .Messages}}
+<a name="{{.FullName}}"/>
+
+### {{.LongName}}
+
+{{- if .Description}}
+{{.Description}}
+{{- else}}
+*Description comment will be shown here (markdown supported)*
+{{- end}}
+
+{{if .HasFields}}
+#### Fields
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+{{range .Fields -}}
+  | {{.Name}} | [{{.LongType}}](#{{.FullType}}) | {{.Label}} | {{para .Description | replace "|" "\\|"}}{{if .DefaultValue}} Default: {{.DefaultValue}}{{end}} |
+{{end}}
+{{end}}
+
+{{if .HasExtensions}}
+| Extension | Type | Base | Number | Description |
+| --------- | ---- | ---- | ------ | ----------- |
+{{range .Extensions -}}
+  | {{.Name}} | {{.LongType}} | {{.ContainingLongType}} | {{.Number}} | {{para .Description | replace "|" "\\|"}}{{if .DefaultValue}} Default: {{.DefaultValue}}{{end}} |
+{{end}}
+{{end}}
+
+{{- end}}
+
+{{/* ------  Enums ------ */}}
+{{range .Enums}}
+<a name="{{.FullName}}"/>
+
+### {{.LongName}}
+
+{{- if .Description}}
+{{.Description}}
+{{- else}}
+*Description comment will be shown here (markdown supported)*
+{{- end}}
+
+{{$lengths := len .Values}}{{if gt $lengths 5}}
+<details>
+<summary>Click to show</summary>
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+{{range .Values -}}
+  | {{.Name}} | {{.Number}} | {{para .Description | replace "|" "\\|"}} |
+{{end}}
+</details>
+{{else}}
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+{{range .Values -}}
+  | {{.Name}} | {{.Number}} | {{para .Description | replace "|" "\\|"}} |
+{{end}}
+{{end}}
+
+{{end}} <!-- end enums -->
+
+{{if .HasExtensions}}
+<a name="{{$file_name}}-extensions"/>
+
+### File-level Extensions
+| Extension | Type | Base | Number | Description |
+| --------- | ---- | ---- | ------ | ----------- |
+{{range .Extensions -}}
+  | {{.Name}} | {{.LongType}} | {{.ContainingLongType}} | {{.Number}} | {{para .Description | replace "|" "\\|"}}{{if .DefaultValue}} Default: `{{.DefaultValue}}`{{end}} |
+{{end}}
+{{end}} <!-- end HasExtensions -->
+
+{{end}}
