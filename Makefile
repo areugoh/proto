@@ -20,8 +20,7 @@ PROTOC_GEN_VALIDATE_PROTO=${SUBMODULES_DIR}/protoc-gen-validate
 GOOGLE_OPENAPI_PROTO=${SUBMODULES_DIR}/gnostic/openapiv3
 PROTO_OPTION=-I. -I${SUBMODULES_DIR} -I${GOOGLEAPIS_PROTO} -I${GOOGLEPROTOBUF_PROTO} -I${PROTOC_GEN_VALIDATE_PROTO} -I${GOOGLE_OPENAPI_PROTO}
 PROTO_DOCS_OPTS=${PROTO_OPTION} \
-	--plugin=protoc-gen-doc=${BIN_DIR}/protoc-gen-doc \
-	--doc_out=./docs
+	--plugin=protoc-gen-doc=${BIN_DIR}/protoc-gen-doc
 
 # GO
 PROTOC_GO_OPTS=${PROTO_OPTION} \
@@ -112,23 +111,23 @@ clean/go:
 	@rm -rf ${GEN_GO_DIR}
 
 .PHONY: release/go
-release/go: proto docs
+release/go: proto
 	@echo "Publishing go client..."
 	@rm -rf ${TMP_REPO_DIR} && mkdir -p ${TMP_REPO_DIR}
 	@git clone ${REPO}-go.git ${TMP_REPO_DIR}/client-go
 	@cd ${TMP_REPO_DIR}/client-go && git clean -fdx #&& git checkout main
 	@cp $(PWD)/scripts/go/go.mod ${TMP_REPO_DIR}/client-go/go.mod
-	@cp $(PWD)/docs/README.md ${TMP_REPO_DIR}/client-go/README.md
+	#@cp $(PWD)/docs/README.md ${TMP_REPO_DIR}/client-go/README.md
 	@cp $(PWD)/CHANGELOG.md ${TMP_REPO_DIR}/client-go/CHANGELOG.md
-	@cp -R $(PWD)/gen/go/src ${TMP_REPO_DIR}/client-go
+	@cp -R $(PWD)/gen/go ${TMP_REPO_DIR}/client-go
+	@rm -rf ${TMP_REPO_DIR}/client-go/**openapi**.*
 	@$(eval NEXT_VERSION=$(shell test $(NEXT_VERSION) && echo $(NEXT_VERSION) || echo $(LAST_TAG)))
 	@cd ${TMP_REPO_DIR}/client-go && git add . && git commit -m "bump(version): $(NEXT_VERSION)" && git tag -a $(NEXT_VERSION) -m '$(NEXT_VERSION)' && git push --tags origin main
 
 .PHONY: docs
 docs:
 	@echo "Generating docs..."
-	@rm -rf docs && mkdir -p docs
-	@find proto -name '*.proto' -print0 | xargs -0 -I{} -P${CPUS} protoc ${PROTO_DOCS_OPTS} --doc_opt=markdown,README.md {}
+	find proto -name '*.proto' -printf '%h\0' | sort -zu | xargs -0 -I{} -P${CPUS} bash -c "d={}; protoc ${PROTO_DOCS_OPTS} --doc_opt=./scripts/markdown.tmpl,README.md:google/* --doc_out=hoguera/platform/"'$$d'" hoguera/platform/"'$$d'"/*.proto"
 
 
 LINT_PLUGIN=${BIN_DIR}/protoc-gen-lint
@@ -143,7 +142,7 @@ fmt:
 	@find proto -type f -name "*.proto" | xargs -I{} -P${CPUS} clang-format -i {}
 
 .PHONY: changelog
-changelog:
+changelog: docs
 	@echo "Generating changelog..."
 	@$(eval NEXT_VERSION=$(shell test $(NEXT_VERSION) && echo $(NEXT_VERSION) || echo $(LAST_TAG) | awk -F. '{print $$1"."$$2+1".0"}'))
 	@test $NEXT_VERSION || (echo "NEXT_VERSION is not set"; exit 1)
