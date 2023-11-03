@@ -1,4 +1,4 @@
-module github.com/GreenSpaceNASA/client-go
+module github.com/areugoh/client-go
 
 go 1.21.3
 

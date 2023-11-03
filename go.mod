@@ -1,4 +1,4 @@
-module github.com/GreenSpaceNASA/proto
+module github.com/areugoh/proto
 
 go 1.21.3
 
