@@ -1,4 +1,19 @@
 
+<a name="v0.12.0"></a>
+## [v0.12.0](https://github.com/GreenSpaceNASA/proto/compare/v0.11.0...v0.12.0)
+
+> 2023-11-03
+
+### Change
+
+* **docs:** location and folder structure
+
+### Fix
+
+* **pipeline:** add extra dep
+* **pipeline:** changelog pipeline
+
+
 <a name="v0.11.0"></a>
 ## [v0.11.0](https://github.com/GreenSpaceNASA/proto/compare/v0.10.0...v0.11.0)
 
