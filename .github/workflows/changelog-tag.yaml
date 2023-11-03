@@ -31,7 +31,9 @@ jobs:
           go-version: '1.21'
 
       - name: Install dependencies
-        run: make plugin
+        run: |
+          go install github.com/git-chglog/git-chglog/cmd/git-chglog@latest
+          make plugin
 
       - name: Building new version
         run: |
