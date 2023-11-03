@@ -1,6 +1,16 @@
 
+<a name="v0.11.0"></a>
+## [v0.11.0](https://github.com/GreenSpaceNASA/proto/compare/v0.10.0...v0.11.0)
+
+> 2023-11-03
+
+### Change
+
+* **root:** change org name and code structure
+
+
 <a name="v0.10.0"></a>
-## [v0.10.0](https://github.com/areugoh/proto/compare/v0.9.0...v0.10.0)
+## [v0.10.0](https://github.com/GreenSpaceNASA/proto/compare/v0.9.0...v0.10.0)
 
 > 2023-11-01
 
@@ -16,7 +26,7 @@
 
 
 <a name="v0.9.0"></a>
-## [v0.9.0](https://github.com/areugoh/proto/compare/v0.8.0...v0.9.0)
+## [v0.9.0](https://github.com/GreenSpaceNASA/proto/compare/v0.8.0...v0.9.0)
 
 > 2023-10-28
 
@@ -26,7 +36,7 @@
 
 
 <a name="v0.8.0"></a>
-## [v0.8.0](https://github.com/areugoh/proto/compare/v0.7.0...v0.8.0)
+## [v0.8.0](https://github.com/GreenSpaceNASA/proto/compare/v0.7.0...v0.8.0)
 
 > 2023-10-28
 
@@ -40,7 +50,7 @@
 
 
 <a name="v0.7.0"></a>
-## [v0.7.0](https://github.com/areugoh/proto/compare/v0.6.0...v0.7.0)
+## [v0.7.0](https://github.com/GreenSpaceNASA/proto/compare/v0.6.0...v0.7.0)
 
 > 2023-10-28
 
@@ -50,7 +60,7 @@
 
 
 <a name="v0.6.0"></a>
-## [v0.6.0](https://github.com/areugoh/proto/compare/v0.5.0...v0.6.0)
+## [v0.6.0](https://github.com/GreenSpaceNASA/proto/compare/v0.5.0...v0.6.0)
 
 > 2023-10-28
 
@@ -60,7 +70,7 @@
 
 
 <a name="v0.5.0"></a>
-## [v0.5.0](https://github.com/areugoh/proto/compare/v0.4.0...v0.5.0)
+## [v0.5.0](https://github.com/GreenSpaceNASA/proto/compare/v0.4.0...v0.5.0)
 
 > 2023-10-28
 
@@ -71,7 +81,7 @@
 
 
 <a name="v0.4.0"></a>
-## [v0.4.0](https://github.com/areugoh/proto/compare/v0.3.1...v0.4.0)
+## [v0.4.0](https://github.com/GreenSpaceNASA/proto/compare/v0.3.1...v0.4.0)
 
 > 2023-10-28
 
@@ -85,7 +95,7 @@
 
 
 <a name="v0.3.1"></a>
-## [v0.3.1](https://github.com/areugoh/proto/compare/v0.3.0...v0.3.1)
+## [v0.3.1](https://github.com/GreenSpaceNASA/proto/compare/v0.3.0...v0.3.1)
 
 > 2023-10-28
 
@@ -95,7 +105,7 @@
 
 
 <a name="v0.3.0"></a>
-## [v0.3.0](https://github.com/areugoh/proto/compare/v0.2.0...v0.3.0)
+## [v0.3.0](https://github.com/GreenSpaceNASA/proto/compare/v0.2.0...v0.3.0)
 
 > 2023-10-28
 
@@ -111,7 +121,7 @@
 
 
 <a name="v0.2.0"></a>
-## [v0.2.0](https://github.com/areugoh/proto/compare/v0.1.0...v0.2.0)
+## [v0.2.0](https://github.com/GreenSpaceNASA/proto/compare/v0.1.0...v0.2.0)
 
 > 2023-10-27
 
