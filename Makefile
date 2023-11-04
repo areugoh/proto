@@ -128,7 +128,7 @@ release/go: proto
 .PHONY: docs
 docs:
 	@echo "Generating docs..."
-	find proto -name '*.proto' -printf '%h\0' | sort -zu | xargs -0 -I{} -P${CPUS} bash -c "d={}; protoc ${PROTO_DOCS_OPTS} --doc_opt=./scripts/markdown.tmpl,README.md:google/* --doc_out=hoguera/platform/"'$$d'" hoguera/platform/"'$$d'"/*.proto"
+	@find proto -name '*.proto' -printf '%h\0' | sort -zu | xargs -0 -I{} -P${CPUS} bash -c "d={}; protoc ${PROTO_DOCS_OPTS} --doc_opt=./scripts/markdown.tmpl,README.md:google/* --doc_out=hoguera/platform/"'$$d'" hoguera/platform/"'$$d'"/*.proto"
 
 
 LINT_PLUGIN=${BIN_DIR}/protoc-gen-lint
@@ -143,10 +143,10 @@ fmt:
 	@find proto -type f -name "*.proto" | xargs -I{} -P${CPUS} clang-format -i {}
 
 .PHONY: changelog
-changelog: docs
+changelog:
 	@echo "Generating changelog..."
 	@$(eval NEXT_VERSION=$(shell test $(NEXT_VERSION) && echo $(NEXT_VERSION) || echo $(LAST_TAG) | awk -F. '{print $$1"."$$2+1".0"}'))
 	@test $NEXT_VERSION || (echo "NEXT_VERSION is not set"; exit 1)
 	@echo "NEXT_VERSION: $(LAST_TAG) -> $$NEXT_VERSION"
 	@git branch | grep -qs "* main" || (echo "This command should be run from main branch"; exit 1)
-	@git pull && git switch -c changelog_$(NEXT_VERSION) && git-chglog --next-tag $(NEXT_VERSION) -o CHANGELOG.md && git add CHANGELOG.md && git tag -a $(NEXT_VERSION) -m '$(NEXT_VERSION)' && git commit -m "add $(NEXT_VERSION) changelog" && git push --tags --set-upstream origin changelog_$(NEXT_VERSION) && git switch main && git branch -D changelog_$(NEXT_VERSION)
+	@git pull && git switch -c changelog_$(NEXT_VERSION) && git-chglog --next-tag $(NEXT_VERSION) -o CHANGELOG.md && make docs && git add . && git tag -a $(NEXT_VERSION) -m '$(NEXT_VERSION)' && git commit -m "add $(NEXT_VERSION) changelog" && git push --tags --set-upstream origin changelog_$(NEXT_VERSION) && git switch main && git branch -D changelog_$(NEXT_VERSION)
