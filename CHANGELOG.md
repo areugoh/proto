@@ -1,4 +1,14 @@
 
+<a name="v0.16.0"></a>
+## [v0.16.0](https://github.com/GreenSpaceNASA/proto/compare/v0.15.0...v0.16.0)
+
+> 2023-11-04
+
+### Change
+
+* **greenspace:** update service & documentation
+
+
 <a name="v0.15.0"></a>
 ## [v0.15.0](https://github.com/GreenSpaceNASA/proto/compare/v0.14.0...v0.15.0)
 
