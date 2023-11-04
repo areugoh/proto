@@ -26,8 +26,8 @@ service Bff {
 
 // Location
 message LocationResponse {
-    int32 longitude = 1;
-    int32 latitude = 2;
+    float longitude = 1;
+    float latitude = 2;
     string name = 3;
 }
 
