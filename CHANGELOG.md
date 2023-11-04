@@ -1,4 +1,14 @@
 
+<a name="v0.15.0"></a>
+## [v0.15.0](https://github.com/GreenSpaceNASA/proto/compare/v0.14.0...v0.15.0)
+
+> 2023-11-04
+
+### Change
+
+* **readme:** update client-go & main README.md
+
+
 <a name="v0.14.0"></a>
 ## [v0.14.0](https://github.com/GreenSpaceNASA/proto/compare/v0.13.0...v0.14.0)
 
