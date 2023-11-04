@@ -8,8 +8,8 @@ import "google/api/annotations.proto";
 import "google/protobuf/empty.proto";
 
 
-// GreenSpaceService is the service that provides all the information for NASA's GreenSpace app.
-service GreenSpaceService {
+// GreenSpace is the service that provides all the information for NASA's GreenSpace app.
+service GreenSpace {
     // GetAnimals returns the animals that are in danger in the coast as a stream.
     rpc GetAnimals(AnimalsRequest) returns (stream Animal) {};
     // GetCoast returns the nearest coast to the user location.

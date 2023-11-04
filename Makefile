@@ -113,6 +113,7 @@ clean/go:
 .PHONY: release/go
 release/go: proto
 	@echo "Publishing go client..."
+	@git switch main && git pull origin main && git fetch --tags
 	@rm -rf ${TMP_REPO_DIR} && mkdir -p ${TMP_REPO_DIR}
 	@git clone ${REPO}-go.git ${TMP_REPO_DIR}/client-go
 	@cd ${TMP_REPO_DIR}/client-go && git clean -fdx #&& git checkout main
