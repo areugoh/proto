@@ -1,4 +1,22 @@
 
+<a name="v0.14.0"></a>
+## [v0.14.0](https://github.com/GreenSpaceNASA/proto/compare/v0.13.0...v0.14.0)
+
+> 2023-11-04
+
+### Add
+
+* **docs:** add client-go docs
+
+### Change
+
+* **makefile:** update file structure & docs for client-go
+
+### Fix
+
+* **proto:** fix location types
+
+
 <a name="v0.13.0"></a>
 ## [v0.13.0](https://github.com/GreenSpaceNASA/proto/compare/v0.12.0...v0.13.0)
 
