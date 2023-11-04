@@ -28,26 +28,17 @@
 ## Services
 
 
-<a name="hoguera.platform.greenspace.api.v1.Bff"/>
+<a name="hoguera.platform.greenspace.api.v1.GreenSpace"/>
 
-### Bff
-BFF service
-
-| Method Name | Description |
-| ----------- | ------------|
-| `GetV1` <br /><br /> Request: [.google.protobuf.Empty](#google.protobuf.Empty) <br /> Response: [V1Response](#google.protobuf.Empty) | <para></para> |
-
-
-<a name="hoguera.platform.greenspace.api.v1.Internal"/>
-
-### Internal
-Internal service
+### GreenSpace
+GreenSpace is the service that provides all the information for NASA's GreenSpace app.
 
 | Method Name | Description |
 | ----------- | ------------|
-| `GetAnimals` <br /><br /> Request: [AnimalsRequest](#hoguera.platform.greenspace.api.v1.AnimalsRequest) <br /> Response: [Animal](#hoguera.platform.greenspace.api.v1.AnimalsRequest) | <para></para> |
-| `GetCoast` <br /><br /> Request: [CoastRequest](#hoguera.platform.greenspace.api.v1.CoastRequest) <br /> Response: [CoastResponse](#hoguera.platform.greenspace.api.v1.CoastRequest) | <para></para> |
-| `GetLocation` <br /><br /> Request: [LocationRequest](#hoguera.platform.greenspace.api.v1.LocationRequest) <br /> Response: [LocationResponse](#hoguera.platform.greenspace.api.v1.LocationRequest) | <para></para> |
+| `GetAnimals` <br /><br /> Request: [AnimalsRequest](#hoguera.platform.greenspace.api.v1.AnimalsRequest) <br /> Response: [Animal](#hoguera.platform.greenspace.api.v1.AnimalsRequest) | <para>GetAnimals returns the animals that are in danger in the coast as a stream.</para> |
+| `GetCoast` <br /><br /> Request: [CoastRequest](#hoguera.platform.greenspace.api.v1.CoastRequest) <br /> Response: [CoastResponse](#hoguera.platform.greenspace.api.v1.CoastRequest) | <para>GetCoast returns the nearest coast to the user location.</para> |
+| `GetLocation` <br /><br /> Request: [LocationRequest](#hoguera.platform.greenspace.api.v1.LocationRequest) <br /> Response: [LocationResponse](#hoguera.platform.greenspace.api.v1.LocationRequest) | <para>GetLocation returns the location of the user.</para> |
+| `GetV1` <br /><br /> Request: [.google.protobuf.Empty](#google.protobuf.Empty) <br /> Response: [V1Response](#google.protobuf.Empty) | <para>GetV1 is the BFF endpoint. It returns the location of the user, the nearest coast and the animals in danger.</para> |
 
  <!-- end services -->
  <!-- end files -->
@@ -64,7 +55,7 @@ Internal service
 <a name="hoguera.platform.greenspace.api.v1.Animal"/>
 
 ### Animal
-Animals
+Animals the animals that are in danger in the coast.
 
 
 #### Fields
@@ -81,7 +72,7 @@ Animals
 <a name="hoguera.platform.greenspace.api.v1.AnimalsRequest"/>
 
 ### AnimalsRequest
-*Description comment will be shown here (markdown supported)*
+AnimalsRequest the user location is required to get the nearest animals living in the coast.
 
 
 #### Fields
@@ -96,7 +87,7 @@ Animals
 <a name="hoguera.platform.greenspace.api.v1.CoastRequest"/>
 
 ### CoastRequest
-*Description comment will be shown here (markdown supported)*
+CoastRequest the user location is required to get the nearest coast.
 
 
 #### Fields
@@ -111,17 +102,17 @@ Animals
 <a name="hoguera.platform.greenspace.api.v1.CoastResponse"/>
 
 ### CoastResponse
-*Description comment will be shown here (markdown supported)*
+CoastResponse the nearest coast to the user location.
 
 
 #### Fields
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| name | [string](#string) |  | <para></para> |
-| condition | [Condition](#hoguera.platform.greenspace.api.v1.Condition) |  | <para></para> |
-| temperature | [float](#float) |  | <para></para> |
-| distance | [double](#double) |  | <para></para> |
+| name | [string](#string) |  | <para>The name of the coast. e.g. "Playa de la Concha"</para> |
+| condition | [Condition](#hoguera.platform.greenspace.api.v1.Condition) |  | <para>The condition of the water. e.g. "GOOD"</para> |
+| temperature | [float](#float) |  | <para>The temperature of the water in Celsius. e.g. 20</para> |
+| distance | [double](#double) |  | <para>The distance in kilometers to the coast. e.g. 4.1</para> |
 
 
 
@@ -129,7 +120,7 @@ Animals
 <a name="hoguera.platform.greenspace.api.v1.LocationRequest"/>
 
 ### LocationRequest
-*Description comment will be shown here (markdown supported)*
+LocationRequest the IP of the user is required to get the location.
 
 
 #### Fields
@@ -151,9 +142,9 @@ Location
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| longitude | [int32](#int32) |  | <para></para> |
-| latitude | [int32](#int32) |  | <para></para> |
-| name | [string](#string) |  | <para></para> |
+| longitude | [float](#float) |  | <para></para> |
+| latitude | [float](#float) |  | <para></para> |
+| name | [string](#string) |  | <para>The name of the location. e.g. "San Sebastian"</para> |
 
 
 
@@ -161,7 +152,9 @@ Location
 <a name="hoguera.platform.greenspace.api.v1.V1Response"/>
 
 ### V1Response
-BFF
+V1Response the response of the V1 endpoint. It contains the location of the user, the nearest coast and the animals
+in danger. It serves as a wrapper for the other responses. It is used to avoid multiple requests to the API and
+follow the BFF pattern.
 
 
 #### Fields
@@ -181,7 +174,7 @@ BFF
 <a name="hoguera.platform.greenspace.api.v1.Condition"/>
 
 ### Condition
-Coast
+Condition, the condition of the water. In house algorithm to define the condition.
 
 
 <details>
