@@ -13,12 +13,13 @@ LAST_TAG:=$(shell git describe --tags --abbrev=0 2>/dev/null || echo v0.0.0)
 
 export GO111MODULE=on
 
+PLATFORM_PREFIX=hoguera/platform
 # PROTO
 GOOGLEAPIS_PROTO=${SUBMODULES_DIR}/googleapis
 GOOGLEPROTOBUF_PROTO=${SUBMODULES_DIR}/protobuf/src
 PROTOC_GEN_VALIDATE_PROTO=${SUBMODULES_DIR}/protoc-gen-validate
 GOOGLE_OPENAPI_PROTO=${SUBMODULES_DIR}/gnostic/openapiv3
-PROTO_OPTION=-I. -I${SUBMODULES_DIR} -I${GOOGLEAPIS_PROTO} -I${GOOGLEPROTOBUF_PROTO} -I${PROTOC_GEN_VALIDATE_PROTO} -I${GOOGLE_OPENAPI_PROTO}
+PROTO_OPTION=-Iproto -I${SUBMODULES_DIR} -I${GOOGLEAPIS_PROTO} -I${GOOGLEPROTOBUF_PROTO} -I${PROTOC_GEN_VALIDATE_PROTO} -I${GOOGLE_OPENAPI_PROTO}
 PROTO_DOCS_OPTS=${PROTO_OPTION} \
 	--plugin=protoc-gen-doc=${BIN_DIR}/protoc-gen-doc
 
@@ -82,6 +83,7 @@ proto/% release/% clean/%:
 
 # GO
 PROTOC_GO_OPTS=${PROTO_OPTION} \
+	-I. \
 	--plugin=protoc-gen-go=${BIN_DIR}/protoc-gen-go \
 	--go_out=${GEN_GO_DIR} \
 	--plugin=protoc-gen-go-grpc=${BIN_DIR}/protoc-gen-go-grpc \
@@ -89,9 +91,11 @@ PROTOC_GO_OPTS=${PROTO_OPTION} \
 	--plugin=protoc-gen-validate=${BIN_DIR}/protoc-gen-validate-go \
 	--validate_out=${GEN_GO_DIR}
 PROTOC_GATEWAY_SPEC_OPT=${PROTO_OPTION} \
+	-I. \
 	--plugin=protoc-gen-openapi=${BIN_DIR}/protoc-gen-openapi \
 	--openapi_out=:${GEN_GO_DIR}
 PROTOC_GRPC_GATEWAY_OPTS=${PROTO_OPTION} \
+	-I. \
 	--plugin=protoc-gen-grpc-gateway=${BIN_DIR}/protoc-gen-grpc-gateway \
 	--grpc-gateway_out=logtostderr=true:${GEN_GO_DIR}
 
@@ -100,13 +104,13 @@ proto/go:
 	@echo "Generating go client from proto..."
 	@rm -rf ${GEN_GO_DIR} && mkdir -p ${GEN_GO_DIR}
 	# Standard grpc client for go
-	@find proto -name '*.proto' -print0 | xargs -0 -I{} -P${CPUS} protoc ${PROTOC_GO_OPTS} hoguera/platform/{}
+	@find proto -name '*.proto' -print0 | xargs -0 -I{} -P${CPUS} protoc ${PROTOC_GO_OPTS} ${PLATFORM_PREFIX}/{}
 	# Generate mocks
 	@find gen/go -name '*.pb.go' -print0 | xargs -0 -I{} -P${CPUS} bash -c "f={}; $(BIN_DIR)/mockgen -source="'$$f'" -package=\`grep '^package' "'$$f'" | head -1 | cut -d' ' -f2\` -destination=\`dirname "'$$f'"\`/mock_\`basename "'$$f'"\`"
 	# GRPC Gateway for go
-	@find proto -name '*.proto' -print0 | xargs -0 -I{} -P${CPUS} protoc ${PROTOC_GATEWAY_SPEC_OPT} hoguera/platform/{}
+	@find proto -name '*.proto' -print0 | xargs -0 -I{} -P${CPUS} protoc ${PROTOC_GATEWAY_SPEC_OPT} ${PLATFORM_PREFIX}/{}
 	# REST -> GRPC gateway for go
-	@find proto -name '*.proto' -print0 | xargs -0 -I{} -P${CPUS} protoc ${PROTOC_GRPC_GATEWAY_OPTS} hoguera/platform/{}
+	@find proto -name '*.proto' -print0 | xargs -0 -I{} -P${CPUS} protoc ${PROTOC_GRPC_GATEWAY_OPTS} ${PLATFORM_PREFIX}/{}
 	# Ensure can be build: mockgen can generate files with unused imports, so we run goimports to remove them
 	@find gen/go/ -name '*.pb.go' -print0 | xargs -0 -I{} -P${CPUS} $(BIN_DIR)/goimports -w {}
 
@@ -137,7 +141,7 @@ PROTOC_TS_OPT=${PROTO_OPTION} \
 	--plugin=protoc-gen-ts=${NODE_MODULES_BIN}/protoc-gen-ts \
 	--ts_out=grpc_js:${TYPESCRIPT_OUTPUT}
 TS_COMMAND=${NODE_MODULES_BIN}/grpc_tools_node_protoc \
-		   ${PROTOC_OPTION} \
+		   ${PROTO_OPTION} \
 		   --js_out=import_style=commonjs,binary:${TYPESCRIPT_OUTPUT} \
 		   --grpc_out=grpc_js:${TYPESCRIPT_OUTPUT} \
 		   --plugin=protoc-gen-grpc=${NODE_MODULES_BIN}/grpc_tools_node_protoc_plugin
@@ -148,9 +152,10 @@ proto/ts:
 	@echo "Generating typescript client from proto..."
 	@rm -rf $(TYPESCRIPT_OUTPUT) && mkdir -p $(TYPESCRIPT_OUTPUT)
 	@find proto -name '*.proto' -print0 | xargs -0 -I{} -P${CPUS} ${TS_COMMAND} {}
-	@mkdir validate && mv $(PROTOC_GEN_VALIDATE_PROTO)/validate/validate.proto validate
+	@rm -rf validate && mkdir validate && cp $(PROTOC_GEN_VALIDATE_PROTO)/validate/validate.proto validate
 	@$(TS_COMMAND) validate/validate.proto
 	@find proto -name '*.proto' -print0 | xargs -0 -I{} -P${CPUS} protoc ${PROTOC_TS_OPT} {}
+	# @find $(TYPESCRIPT_OUTPUT) -name '*.js' -print0 -name '*.d.ts' -print0 | xargs -0 -I{} -P${CPUS} sed -i -E ${REGEX_REPLACE} {}
 
 .PHONY: release/ts
 release/ts: proto/ts docs
@@ -176,7 +181,7 @@ dep/js:
 .PHONY: docs
 docs:
 	@echo "Generating docs..."
-	@find proto -name '*.proto' -printf '%h\0' | sort -zu | xargs -0 -I{} -P${CPUS} bash -c "d={}; protoc ${PROTO_DOCS_OPTS} --doc_opt=./scripts/markdown.tmpl,README.md:google/* --doc_out=hoguera/platform/"'$$d'" hoguera/platform/"'$$d'"/*.proto"
+	@find proto -name '*.proto' -printf '%h\0' | sort -zu | xargs -0 -I{} -P${CPUS} bash -c "d={}; protoc ${PROTO_DOCS_OPTS} --doc_opt=./scripts/markdown.tmpl,README.md:google/* --doc_out=${PLATFORM_PREFIX}/"'$$d'" ${PLATFORM_PREFIX}/"'$$d'"/*.proto"
 
 
 LINT_PLUGIN=${BIN_DIR}/protoc-gen-lint
