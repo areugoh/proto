@@ -35,9 +35,9 @@ help:
 	@echo "  proto/go      - Generate go client from proto"
 	@echo "  clean/go      - Clean go client"
 	@echo "  release/go    - Publish go client"
-	@echo "  proto/js      - Generate javascript client from proto"
-	@echo "  release/js    - Publish javascript client"
-	@echo "  dep/js        - Install javascript dependencies"
+	@echo "  proto/ts      - Generate typescript client from proto"
+	@echo "  release/ts    - Publish typescript client"
+	@echo "  dep/ts        - Install typescript dependencies"
 	@echo "  docs          - Generate docs"
 	@echo "  lint          - Lint proto"
 	@echo "  fmt           - Format proto (wip)"
@@ -130,48 +130,46 @@ release/go: proto
 	@$(eval NEXT_VERSION=$(shell test $(NEXT_VERSION) && echo $(NEXT_VERSION) || echo $(LAST_TAG)))
 	@cd ${TMP_REPO_DIR}/client-go && git add . && git commit -m "bump(version): $(NEXT_VERSION)" && git tag -a $(NEXT_VERSION) -m '$(NEXT_VERSION)' && git push --tags origin main
 
-# JS
-NODE_MODULES=$(PWD)/node_modules
-JAVASCRIPT_OUTPUT=gen/javascript
-PROTOC_JS_OPT=${PROTO_OPTION} \
-	--plugin=protoc-gen-grpc-web=${NODE_MODULES}/protoc-gen-grpc-web/bin/protoc-gen-grpc-web \
-	--grpc-web_out=import_style=commonjs,mode=grpcwebtext:${JAVASCRIPT_OUTPUT} \
-	--plugin=protoc-gen-js=${NODE_MODULES}/protoc-gen-js/bin/protoc-gen-js \
-	--js_out=import_style=commonjs,binary:${JAVASCRIPT_OUTPUT}
-PROTOC_JS_LIB_OPT=-I${SUBMODULES_DIR} -I${GOOGLEAPIS_PROTO} \
-	--plugin=protoc-gen-js=${NODE_MODULES}/protoc-gen-js/bin/protoc-gen-js \
-	--js_out=import_style=commonjs,binary:${JAVASCRIPT_OUTPUT}
+# TS
+NODE_MODULES_BIN=$(PWD)/node_modules/.bin
+TYPESCRIPT_OUTPUT=gen/typescript
+PROTOC_TS_OPT=${PROTO_OPTION} \
+	--plugin=protoc-gen-ts=${NODE_MODULES_BIN}/protoc-gen-ts \
+	--ts_out=grpc_js:${TYPESCRIPT_OUTPUT}
+TS_COMMAND=${NODE_MODULES_BIN}/grpc_tools_node_protoc \
+		   ${PROTOC_OPTION} \
+		   --js_out=import_style=commonjs,binary:${TYPESCRIPT_OUTPUT} \
+		   --grpc_out=grpc_js:${TYPESCRIPT_OUTPUT} \
+		   --plugin=protoc-gen-grpc=${NODE_MODULES_BIN}/grpc_tools_node_protoc_plugin
+REGEX_REPLACE='s|(\.\./)+google/|@areugoh/vendor-proto-ts/gen/google/|'
 
-.PHONY: proto/js
-proto/js:
-	@echo "Generating javascript client from proto..."
-	@rm -rf $(JAVASCRIPT_OUTPUT) && mkdir -p $(JAVASCRIPT_OUTPUT)
-	@find proto -name '*.proto' -print0 | xargs -0 -I{} -P${CPUS} protoc ${PROTOC_JS_OPT} {}
-	@find ${SUBMODULES_DIR}/googleapis/google/api -name '*.proto' -print0 | xargs -0 -I{} -P${CPUS} protoc ${PROTOC_JS_LIB_OPT} {}
-	#protoc -I${SUBMODULES_DIR} -I${GOOGLEAPIS_PROTO} \
-	#--plugin=protoc-gen-js=${NODE_MODULES}/protoc-gen-js/bin/protoc-gen-js \
-    #--js_out=import_style=commonjs,binary:${JAVASCRIPT_OUTPUT}  \
-    #--proto_path=${SUBMODULES_DIR}/googleapis/google/api \
-    #annotations.proto
+.PHONY: proto/ts
+proto/ts:
+	@echo "Generating typescript client from proto..."
+	@rm -rf $(TYPESCRIPT_OUTPUT) && mkdir -p $(TYPESCRIPT_OUTPUT)
+	@find proto -name '*.proto' -print0 | xargs -0 -I{} -P${CPUS} ${TS_COMMAND} {}
+	@mkdir validate && mv $(PROTOC_GEN_VALIDATE_PROTO)/validate/validate.proto validate
+	@$(TS_COMMAND) validate/validate.proto
+	@find proto -name '*.proto' -print0 | xargs -0 -I{} -P${CPUS} protoc ${PROTOC_TS_OPT} {}
 
-.PHONY: release/js
-release/js: proto/js docs
-	@echo "Publishing javascript client..."
+.PHONY: release/ts
+release/ts: proto/ts docs
+	@echo "Publishing typescript client..."
 	@git fetch --tags
 	@rm -rf ${TMP_REPO_DIR} && mkdir -p ${TMP_REPO_DIR}
-	@git clone ${REPO}-javascript.git ${TMP_REPO_DIR}/client-javascript
-	@cd ${TMP_REPO_DIR}/client-javascript&& git clean -fdx #&& git checkout main
-	@cp $(PWD)/scripts/javascript/*.* ${TMP_REPO_DIR}/client-javascript/
-	@cp -R $(PWD)/scripts/javascript/.github ${TMP_REPO_DIR}/client-javascript/
-	@cp $(PWD)/docs/README.md ${TMP_REPO_DIR}/client-javascript/README.md
-	@cp $(PWD)/CHANGELOG.md ${TMP_REPO_DIR}/client-javascript/CHANGELOG.md
-	@cp -R $(PWD)/gen/javascript/src ${TMP_REPO_DIR}/client-javascript
+	@git clone ${REPO}-typescript.git ${TMP_REPO_DIR}/client-typescript
+	@cd ${TMP_REPO_DIR}/client-typescript&& git clean -fdx #&& git checkout main
+	@cp $(PWD)/scripts/typescript/*.* ${TMP_REPO_DIR}/client-typescript/
+	@cp -R $(PWD)/scripts/typescript/.github ${TMP_REPO_DIR}/client-typescript/
+	@cp $(PWD)/docs/README.md ${TMP_REPO_DIR}/client-typescript/README.md
+	@cp $(PWD)/CHANGELOG.md ${TMP_REPO_DIR}/client-typescript/CHANGELOG.md
+	@cp -R $(PWD)/gen/typescript/src ${TMP_REPO_DIR}/client-typescript
 	@$(eval NEXT_VERSION=$(shell test $(NEXT_VERSION) && echo $(NEXT_VERSION) || echo $(LAST_TAG)))
-	@cd ${TMP_REPO_DIR}/client-javascript&& git add . && git commit -m "bump(version): $(NEXT_VERSION)" && git tag -a $(NEXT_VERSION) -m '$(NEXT_VERSION)' && git push --tags origin main
+	@cd ${TMP_REPO_DIR}/client-typescript&& git add . && git commit -m "bump(version): $(NEXT_VERSION)" && git tag -a $(NEXT_VERSION) -m '$(NEXT_VERSION)' && git push --tags origin main
 
-.PHONY: dep/js
+.PHONY: dep/ts
 dep/js:
-	@echo "Installing js dependencies..."
+	@echo "Installing typescript dependencies..."
 	@npm install
 
 # ALL
