@@ -1,39 +1,3 @@
-# Windows
-Thumbs.db
-desktop.ini
-
-# OS X
-.DS_Store
-.Spotlight-V100
-.Trashes
-._*
-
-.envrc
-coverage.txt
-vendor/
-bin/
-.idea/
-*.iml
-*.swp
-*.swo
-*.log
-*.out
-*.pid
-*.vscode
-*.vscode-test
-*.vscode-test-*
-*.vsix
-*.vsix.*
-*.vsixmanifest
-cmd/proto
-
-repo
-target
-tmp
-/bin/
-gen
-
-# Node.js
 # Logs
 logs
 *.log
@@ -164,7 +128,3 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
-
-# tmp directories to build proto dependencies
-validate
-google
