@@ -10,6 +10,8 @@ REPO:=$(shell test $(REPO) && echo $(REPO) || git ls-remote --get-url | rev | cu
 TMP_REPO_DIR=$(PWD)/repo
 GEN_GO_DIR=gen/go
 LAST_TAG:=$(shell git describe --tags --abbrev=0 2>/dev/null || echo v0.0.0)
+GIT_USERNAME:=$(shell git config user.name)
+GIT_EMAIL:=$(shell git config user.email)
 
 export GO111MODULE=on
 
@@ -29,23 +31,27 @@ help:
 	@echo "Usage: make <target>"
 	@echo ""
 	@echo "Targets:"
+	@echo "  dep               - Install dependencies"
 	@echo "  vendor            - Update vendor"
 	@echo "  plugin            - Build protoc plugins"
+	@echo ""
 	@echo "  proto             - Generate all of the proto clients"
 	@echo "  clean             - Clean all of the proto clients"
 	@echo "  release           - Publish all of the proto clients"
+	@echo ""
 	@echo "  proto/go          - Generate go client from proto"
 	@echo "  clean/go          - Clean go client"
 	@echo "  release/go        - Publish go client"
-	@echo "  proto/ts          - WIP Generate typescript client from proto"
 	@echo "  proto/nodejs      - Generate nodejs client from proto"
 	@echo "  clean/nodejs      - Clean nodejs client"
 	@echo "  release/nodejs    - Publish nodejs client"
-	@echo "  dep/npm           - Install npm dependencies"
-	@echo "  docs              - Generate docs"
+	@echo ""
 	@echo "  lint              - Lint proto"
 	@echo "  fmt               - Format proto (wip)"
+	@echo ""
+	@echo "  docs              - Generate docs"
 	@echo "  changelog         - Generate changelog"
+	@echo ""
 	@echo "  help              - Show this help message"
 
 .PHONY: vendor
@@ -124,7 +130,7 @@ release/go: proto
 	@git switch main && git pull origin main && git fetch --tags
 	@rm -rf ${TMP_REPO_DIR} && mkdir -p ${TMP_REPO_DIR}
 	@git clone ${REPO}-go.git ${TMP_REPO_DIR}/client-go
-	@cd ${TMP_REPO_DIR}/client-go && git clean -fdx #&& git checkout main
+	@cd ${TMP_REPO_DIR}/client-go && git config --global user.email $(GIT_EMAIL) && git config --global user.name $(GIT_USERNAME) && git clean -fdx #&& git checkout main
 	@cp $(PWD)/scripts/go/go.mod ${TMP_REPO_DIR}/client-go/go.mod
 	@cp $(PWD)/scripts/go/README.md ${TMP_REPO_DIR}/client-go/README.md
 	@cp $(PWD)/CHANGELOG.md ${TMP_REPO_DIR}/client-go/CHANGELOG.md
@@ -161,7 +167,7 @@ release/nodejs: proto/nodejs
 	@git switch main && git pull origin main && git fetch --tags
 	@rm -rf ${TMP_REPO_DIR} && mkdir -p ${TMP_REPO_DIR}
 	@git clone ${REPO}-nodejs.git ${TMP_REPO_DIR}/client-nodejs
-	@cd ${TMP_REPO_DIR}/client-nodejs && git clean -fdx #&& git checkout main
+	@cd ${TMP_REPO_DIR}/client-nodejs && git config --global user.email $(GIT_EMAIL) && git config --global user.name $(GIT_USERNAME) && git clean -fdx #&& git checkout main
 	@cp -R $(PWD)/scripts/nodejs/ ${TMP_REPO_DIR}/client-nodejs/
 	@cp -R $(PWD)/scripts/nodejs/.git* ${TMP_REPO_DIR}/client-nodejs/
 	@cp -R $(PWD)/scripts/nodejs/.npmrc ${TMP_REPO_DIR}/client-nodejs/.npmrc
