@@ -1,4 +1,14 @@
 
+<a name="v1.10.0"></a>
+## [v1.10.0](https://github.com/GreenSpaceNASA/proto/compare/v1.9.0...v1.10.0)
+
+> 2023-11-24
+
+### Fix
+
+* **makefile:** nit folder
+
+
 <a name="v1.9.0"></a>
 ## [v1.9.0](https://github.com/GreenSpaceNASA/proto/compare/v1.8.0...v1.9.0)
 
