@@ -9,6 +9,7 @@
 $ git switch main && git fetch --tags
 
 $ make plugin # if you need to build the plugins
+$ make dep # will install all of the needed dependencies
 
 $ make release # will create a new release in the client repositories
 # if you want to release for a specific client you can do

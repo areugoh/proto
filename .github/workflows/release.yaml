@@ -4,11 +4,16 @@ on:
   push:
     tags:
       - 'v**'
+  pull_request:
+    branches:
+      - main
+    types: [closed]
 permissions:
   contents: write
 
 jobs:
-  release-go:
+  release:
+    if: ${{contains(github.head_ref, 'changelog') || contains(github.ref_type, 'tag')}}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -29,44 +34,18 @@ jobs:
         with:
           go-version: '1.21'
 
-      - name: Install dependencies
-        run: go mod download
-      - name: Downloading plugins
-        run: make plugin
-
-      - name: Release
-        run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-          make release/go
-  release-nodejs:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          submodules: 'recursive'
-          fetch-tags: 'true'
-          fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Install protoc
-        uses: arduino/setup-protoc@v2
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Setup nodejs
         uses: actions/setup-node@v3
         with:
           node-version: '20.x'
 
       - name: Install dependencies
-        run: make dep/npm
+        run: make dep
       - name: Downloading plugins
         run: make plugin
 
       - name: Release
         run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-          make release/nodejs
+          git config user.name areugoh
+          git config user.email areugoh@github.com
+          make release
