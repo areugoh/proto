@@ -170,7 +170,7 @@ release/nodejs: proto/nodejs
 	@rm -rf ${TMP_REPO_DIR} && mkdir -p ${TMP_REPO_DIR}
 	@git clone ${REPO}-nodejs.git ${TMP_REPO_DIR}/client-nodejs
 	$(if $(GH_TOKEN),cd ${TMP_REPO_DIR}/client-nodejs && git config --global user.email $(GIT_EMAIL) && git config --global user.name $(GIT_USERNAME) && git remote set-url origin https://x-access-token:$(GH_TOKEN)@github.com/${GITHUB_ORG}/client-nodejs,@echo "GH_TOKEN is not set")
-	@cd ${TMP_REPO_DIR}/client-go && git clean -fdx #&& git checkout main
+	@cd ${TMP_REPO_DIR}/client-nodejs && git clean -fdx #&& git checkout main
 	@cp -R $(PWD)/scripts/nodejs/ ${TMP_REPO_DIR}/client-nodejs/
 	@cp -R $(PWD)/scripts/nodejs/.git* ${TMP_REPO_DIR}/client-nodejs/
 	@cp -R $(PWD)/scripts/nodejs/.npmrc ${TMP_REPO_DIR}/client-nodejs/.npmrc
