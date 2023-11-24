@@ -134,45 +134,6 @@ release/go: proto
 	@$(eval NEXT_VERSION=$(shell test $(NEXT_VERSION) && echo $(NEXT_VERSION) || echo $(LAST_TAG)))
 	@cd ${TMP_REPO_DIR}/client-go && git add . && git commit -m "bump(version): $(NEXT_VERSION)" && git tag -a $(NEXT_VERSION) -m '$(NEXT_VERSION)' && git push --tags origin main
 
-# TS
-TYPESCRIPT_OUTPUT=gen/typescript
-PROTOC_TS_OPT=${PROTO_OPTION} \
-	--plugin=protoc-gen-ts=${NODE_MODULES_BIN}/protoc-gen-ts \
-	--ts_out=grpc_js:${TYPESCRIPT_OUTPUT}
-TS_COMMAND=${NODE_MODULES_BIN}/grpc_tools_node_protoc \
-		   ${PROTO_OPTION} \
-		   --js_out=import_style=commonjs,binary:${TYPESCRIPT_OUTPUT} \
-		   --grpc_out=grpc_js:${TYPESCRIPT_OUTPUT} \
-		   --plugin=protoc-gen-grpc=${NODE_MODULES_BIN}/grpc_tools_node_protoc_plugin
-REGEX_REPLACE='s|(\.\./)+google/|@areugoh/vendor-proto-ts/gen/google/|'
-
-.PHONY: proto/ts
-proto/ts:
-	@echo "Generating typescript client from proto..."
-	@echo "WIP"
-	@rm -rf $(TYPESCRIPT_OUTPUT) && mkdir -p $(TYPESCRIPT_OUTPUT)
-	@find proto -name '*.proto' -print0 | xargs -0 -I{} -P${CPUS} ${TS_COMMAND} {}
-	@rm -rf validate && mkdir validate && cp $(PROTOC_GEN_VALIDATE_PROTO)/validate/validate.proto validate
-	@$(TS_COMMAND) validate/validate.proto
-	@find proto -name '*.proto' -print0 | xargs -0 -I{} -P${CPUS} protoc ${PROTOC_TS_OPT} {}
-	# @find $(TYPESCRIPT_OUTPUT) -name '*.js' -print0 -name '*.d.ts' -print0 | xargs -0 -I{} -P${CPUS} sed -i -E ${REGEX_REPLACE} {}
-
-.PHONY: release/ts
-release/ts: proto/ts
-	@echo "Publishing typescript client..."
-	@echo "WIP"
-	@git fetch --tags
-	# @rm -rf ${TMP_REPO_DIR} && mkdir -p ${TMP_REPO_DIR}
-	# @git clone ${REPO}-typescript.git ${TMP_REPO_DIR}/client-typescript
-	# @cd ${TMP_REPO_DIR}/client-typescript&& git clean -fdx #&& git checkout main
-	# @cp $(PWD)/scripts/typescript/*.* ${TMP_REPO_DIR}/client-typescript/
-	# @cp -R $(PWD)/scripts/typescript/.github ${TMP_REPO_DIR}/client-typescript/
-	# @cp $(PWD)/docs/README.md ${TMP_REPO_DIR}/client-typescript/README.md
-	# @cp $(PWD)/CHANGELOG.md ${TMP_REPO_DIR}/client-typescript/CHANGELOG.md
-	# @cp -R $(PWD)/gen/typescript/src ${TMP_REPO_DIR}/client-typescript
-	# @$(eval NEXT_VERSION=$(shell test $(NEXT_VERSION) && echo $(NEXT_VERSION) || echo $(LAST_TAG)))
-	# @cd ${TMP_REPO_DIR}/client-typescript&& git add . && git commit -m "bump(version): $(NEXT_VERSION)" && git tag -a $(NEXT_VERSION) -m '$(NEXT_VERSION)' && git push --tags origin main
-
 # NodeJS
 NODEJS_OUTPUT=gen/nodejs
 PROTOC_NODEJS_OPT=${PROTO_OPTION} \
