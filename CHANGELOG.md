@@ -1,4 +1,14 @@
 
+<a name="v1.4.0"></a>
+## [v1.4.0](https://github.com/GreenSpaceNASA/proto/compare/v1.3.0...v1.4.0)
+
+> 2023-11-24
+
+### Fix
+
+* **workflow:** [@actions](https://github.com/actions) user
+
+
 <a name="v1.3.0"></a>
 ## [v1.3.0](https://github.com/GreenSpaceNASA/proto/compare/v1.2.0...v1.3.0)
 
