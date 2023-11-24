@@ -52,7 +52,6 @@ help:
 vendor: go.sum .gitmodules
 	@echo "Updating vendor..."
 	@git submodule update --init
-	@go mod download
 	@go mod vendor
 
 .PHONY: plugin
@@ -169,7 +168,7 @@ release/nodejs: proto/nodejs
 	@cp $(PWD)/CHANGELOG.md ${TMP_REPO_DIR}/client-nodejs/CHANGELOG.md
 	@cp -R $(PWD)/gen/nodejs/* ${TMP_REPO_DIR}/client-nodejs
 	@$(eval NEXT_VERSION=$(shell test $(NEXT_VERSION) && echo $(NEXT_VERSION) || echo $(LAST_TAG)))
-	@cd ${TMP_REPO_DIR}/client-nodejs && git add . && git commit -m "bump(version): $(NEXT_VERSION)" && npm version $(NEXT_VERSION) && git tag -a $(NEXT_VERSION) -m '$(NEXT_VERSION)' && git push --tags origin main
+	@cd ${TMP_REPO_DIR}/client-nodejs && git add . && git commit -m "bump(version): $(NEXT_VERSION)" && npm version $(NEXT_VERSION) && git push --tags origin main
 
 .PHONY: clean/nodejs
 clean/nodejs:
@@ -177,10 +176,12 @@ clean/nodejs:
 	@rm -rf $(NODEJS_OUTPUT)
 	@rm -rf google validate
 
-.PHONY: dep/npm
-dep/npm:
-	@echo "Installing typescript dependencies..."
+.PHONY: dep
+dep:
+	@echo "Installing nodejs dependencies..."
 	@npm install
+	@echo "Installing go dependencies..."
+	@go mod download
 
 # ALL
 .PHONY: docs
