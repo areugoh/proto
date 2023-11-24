@@ -10,8 +10,6 @@ It's **automatically generated** from the [proto](https://github.com/areugoh/pro
 > **Note:** You can see the latest version [here](https://github.com/areugoh/client-go/tags).
 
 ```bash
-$ go get github.com/areugoh/client-go@vx.x.x
-# or if you already have it in your go.mod but you want to update it
 $ go get -u github.com/areugoh/client-go@vx.x.x
 ```
 

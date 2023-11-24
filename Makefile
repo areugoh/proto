@@ -1,5 +1,5 @@
 export
-CLIENTS=go
+CLIENTS=go nodejs
 
 # CONFIG
 CPUS=`getconf _NPROCESSORS_ONLN 2>/dev/null || echo 1`
@@ -13,6 +13,8 @@ LAST_TAG:=$(shell git describe --tags --abbrev=0 2>/dev/null || echo v0.0.0)
 
 export GO111MODULE=on
 
+PLATFORM_PREFIX=hoguera/platform
+NODE_MODULES_BIN=$(PWD)/node_modules/.bin
 # PROTO
 GOOGLEAPIS_PROTO=${SUBMODULES_DIR}/googleapis
 GOOGLEPROTOBUF_PROTO=${SUBMODULES_DIR}/protobuf/src
@@ -22,37 +24,29 @@ PROTO_OPTION=-I. -I${SUBMODULES_DIR} -I${GOOGLEAPIS_PROTO} -I${GOOGLEPROTOBUF_PR
 PROTO_DOCS_OPTS=${PROTO_OPTION} \
 	--plugin=protoc-gen-doc=${BIN_DIR}/protoc-gen-doc
 
-# GO
-PROTOC_GO_OPTS=${PROTO_OPTION} \
-	--plugin=protoc-gen-go=${BIN_DIR}/protoc-gen-go \
-	--go_out=${GEN_GO_DIR} \
-	--plugin=protoc-gen-go-grpc=${BIN_DIR}/protoc-gen-go-grpc \
-	--go-grpc_out=require_unimplemented_servers=false:${GEN_GO_DIR} \
-	--plugin=protoc-gen-validate=${BIN_DIR}/protoc-gen-validate-go \
-	--validate_out=${GEN_GO_DIR}
-PROTOC_GATEWAY_SPEC_OPT=${PROTO_OPTION} \
-	--plugin=protoc-gen-openapi=${BIN_DIR}/protoc-gen-openapi \
-	--openapi_out=:${GEN_GO_DIR}
-PROTOC_GRPC_GATEWAY_OPTS=${PROTO_OPTION} \
-	--plugin=protoc-gen-grpc-gateway=${BIN_DIR}/protoc-gen-grpc-gateway \
-	--grpc-gateway_out=logtostderr=true:${GEN_GO_DIR}
-
 .PHONY: help
 help:
 	@echo "Usage: make <target>"
 	@echo ""
 	@echo "Targets:"
-	@echo "  vendor        - Update vendor"
-	@echo "  plugin        - Build protoc plugins"
-	@echo "  proto         - Generate proto"
-	@echo "  proto/go      - Generate go client from proto"
-	@echo "  clean/go      - Clean go client"
-	@echo "  release/go    - Publish go client"
-	@echo "  docs          - Generate docs"
-	@echo "  lint          - Lint proto"
-	@echo "  fmt           - Format proto"
-	@echo "  changelog     - Generate changelog"
-	@echo "  help          - Show this help message"
+	@echo "  vendor            - Update vendor"
+	@echo "  plugin            - Build protoc plugins"
+	@echo "  proto             - Generate all of the proto clients"
+	@echo "  clean             - Clean all of the proto clients"
+	@echo "  release           - Publish all of the proto clients"
+	@echo "  proto/go          - Generate go client from proto"
+	@echo "  clean/go          - Clean go client"
+	@echo "  release/go        - Publish go client"
+	@echo "  proto/ts          - WIP Generate typescript client from proto"
+	@echo "  proto/nodejs      - Generate nodejs client from proto"
+	@echo "  clean/nodejs      - Clean nodejs client"
+	@echo "  release/nodejs    - Publish nodejs client"
+	@echo "  dep/npm           - Install npm dependencies"
+	@echo "  docs              - Generate docs"
+	@echo "  lint              - Lint proto"
+	@echo "  fmt               - Format proto (wip)"
+	@echo "  changelog         - Generate changelog"
+	@echo "  help              - Show this help message"
 
 .PHONY: vendor
 vendor: go.sum .gitmodules
@@ -90,18 +84,33 @@ release: $(foreach var, $(CLIENTS), release/$(var))
 proto/% release/% clean/%:
 	@:
 
+# GO
+PROTOC_GO_OPTS=${PROTO_OPTION} \
+	--plugin=protoc-gen-go=${BIN_DIR}/protoc-gen-go \
+	--go_out=${GEN_GO_DIR} \
+	--plugin=protoc-gen-go-grpc=${BIN_DIR}/protoc-gen-go-grpc \
+	--go-grpc_out=require_unimplemented_servers=false:${GEN_GO_DIR} \
+	--plugin=protoc-gen-validate=${BIN_DIR}/protoc-gen-validate-go \
+	--validate_out=${GEN_GO_DIR}
+PROTOC_GATEWAY_SPEC_OPT=${PROTO_OPTION} \
+	--plugin=protoc-gen-openapi=${BIN_DIR}/protoc-gen-openapi \
+	--openapi_out=:${GEN_GO_DIR}
+PROTOC_GRPC_GATEWAY_OPTS=${PROTO_OPTION} \
+	--plugin=protoc-gen-grpc-gateway=${BIN_DIR}/protoc-gen-grpc-gateway \
+	--grpc-gateway_out=logtostderr=true:${GEN_GO_DIR}
+
 .PHONY: proto/go
 proto/go:
 	@echo "Generating go client from proto..."
 	@rm -rf ${GEN_GO_DIR} && mkdir -p ${GEN_GO_DIR}
 	# Standard grpc client for go
-	@find proto -name '*.proto' -print0 | xargs -0 -I{} -P${CPUS} protoc ${PROTOC_GO_OPTS} hoguera/platform/{}
+	@find proto -name '*.proto' -print0 | xargs -0 -I{} -P${CPUS} protoc ${PROTOC_GO_OPTS} ${PLATFORM_PREFIX}/{}
 	# Generate mocks
 	@find gen/go -name '*.pb.go' -print0 | xargs -0 -I{} -P${CPUS} bash -c "f={}; $(BIN_DIR)/mockgen -source="'$$f'" -package=\`grep '^package' "'$$f'" | head -1 | cut -d' ' -f2\` -destination=\`dirname "'$$f'"\`/mock_\`basename "'$$f'"\`"
 	# GRPC Gateway for go
-	@find proto -name '*.proto' -print0 | xargs -0 -I{} -P${CPUS} protoc ${PROTOC_GATEWAY_SPEC_OPT} hoguera/platform/{}
+	@find proto -name '*.proto' -print0 | xargs -0 -I{} -P${CPUS} protoc ${PROTOC_GATEWAY_SPEC_OPT} ${PLATFORM_PREFIX}/{}
 	# REST -> GRPC gateway for go
-	@find proto -name '*.proto' -print0 | xargs -0 -I{} -P${CPUS} protoc ${PROTOC_GRPC_GATEWAY_OPTS} hoguera/platform/{}
+	@find proto -name '*.proto' -print0 | xargs -0 -I{} -P${CPUS} protoc ${PROTOC_GRPC_GATEWAY_OPTS} ${PLATFORM_PREFIX}/{}
 	# Ensure can be build: mockgen can generate files with unused imports, so we run goimports to remove them
 	@find gen/go/ -name '*.pb.go' -print0 | xargs -0 -I{} -P${CPUS} $(BIN_DIR)/goimports -w {}
 
@@ -125,10 +134,59 @@ release/go: proto
 	@$(eval NEXT_VERSION=$(shell test $(NEXT_VERSION) && echo $(NEXT_VERSION) || echo $(LAST_TAG)))
 	@cd ${TMP_REPO_DIR}/client-go && git add . && git commit -m "bump(version): $(NEXT_VERSION)" && git tag -a $(NEXT_VERSION) -m '$(NEXT_VERSION)' && git push --tags origin main
 
+# NodeJS
+NODEJS_OUTPUT=gen/nodejs
+PROTOC_NODEJS_OPT=${PROTO_OPTION} \
+	--js_out=import_style=commonjs,binary:${NODEJS_OUTPUT} \
+	--grpc_out=grpc_js:${NODEJS_OUTPUT}
+NODEJS_COMMAND=${NODE_MODULES_BIN}/grpc_tools_node_protoc \
+	${PROTOC_NODEJS_OPT}
+.PHONY: proto/nodejs
+proto/nodejs: clean/nodejs
+	@echo "Generating nodejs client from proto..."
+	@rm -rf $(NODEJS_OUTPUT) && mkdir -p $(NODEJS_OUTPUT)
+	@find proto -name '*.proto' -print0 | xargs -0 -I{} -P${CPUS} ${NODEJS_COMMAND} {}
+	@echo "Generating nodejs vendor..."
+	@mkdir -p google/protobuf && cp $(GOOGLEPROTOBUF_PROTO)/google/protobuf/*.proto google/protobuf
+	@mkdir -p google/api && cp $(GOOGLEAPIS_PROTO)/google/api/*.proto google/api
+	@mkdir -p google/rpc && cp $(GOOGLEAPIS_PROTO)/google/rpc/*.proto google/rpc
+	@mkdir -p google/type && cp $(GOOGLEAPIS_PROTO)/google/type/*.proto google/type
+	@mkdir -p google/longrunning && cp $(GOOGLEAPIS_PROTO)/google/longrunning/*.proto google/longrunning
+	@mkdir validate && cp $(PROTOC_GEN_VALIDATE_PROTO)/validate/validate.proto validate
+	@find google -name '*.proto' -print0 | xargs -0 -I{} -P${CPUS} ${NODEJS_COMMAND} {} 2>/dev/null || true
+	@find validate -name '*.proto' -print0 | xargs -0 -I{} -P${CPUS} ${NODEJS_COMMAND} {} 2>/dev/null || true
+
+.PHONY: release/nodejs
+release/nodejs: proto/nodejs
+	@echo "Publishing nodejs client..."
+	@git switch main && git pull origin main && git fetch --tags
+	@rm -rf ${TMP_REPO_DIR} && mkdir -p ${TMP_REPO_DIR}
+	@git clone ${REPO}-nodejs.git ${TMP_REPO_DIR}/client-nodejs
+	@cd ${TMP_REPO_DIR}/client-nodejs && git clean -fdx #&& git checkout main
+	@cp -R $(PWD)/scripts/nodejs/ ${TMP_REPO_DIR}/client-nodejs/
+	@cp -R $(PWD)/scripts/nodejs/.git* ${TMP_REPO_DIR}/client-nodejs/
+	@cp -R $(PWD)/scripts/nodejs/.npmrc ${TMP_REPO_DIR}/client-nodejs/.npmrc
+	@cp $(PWD)/CHANGELOG.md ${TMP_REPO_DIR}/client-nodejs/CHANGELOG.md
+	@cp -R $(PWD)/gen/nodejs/* ${TMP_REPO_DIR}/client-nodejs
+	@$(eval NEXT_VERSION=$(shell test $(NEXT_VERSION) && echo $(NEXT_VERSION) || echo $(LAST_TAG)))
+	@cd ${TMP_REPO_DIR}/client-nodejs && git add . && git commit -m "bump(version): $(NEXT_VERSION)" && npm version $(NEXT_VERSION) && git tag -a $(NEXT_VERSION) -m '$(NEXT_VERSION)' && git push --tags origin main
+
+.PHONY: clean/nodejs
+clean/nodejs:
+	@echo "Cleaning nodejs client..."
+	@rm -rf $(NODEJS_OUTPUT)
+	@rm -rf google validate
+
+.PHONY: dep/npm
+dep/npm:
+	@echo "Installing typescript dependencies..."
+	@npm install
+
+# ALL
 .PHONY: docs
 docs:
 	@echo "Generating docs..."
-	@find proto -name '*.proto' -printf '%h\0' | sort -zu | xargs -0 -I{} -P${CPUS} bash -c "d={}; protoc ${PROTO_DOCS_OPTS} --doc_opt=./scripts/markdown.tmpl,README.md:google/* --doc_out=hoguera/platform/"'$$d'" hoguera/platform/"'$$d'"/*.proto"
+	@find proto -name '*.proto' -printf '%h\0' | sort -zu | xargs -0 -I{} -P${CPUS} bash -c "d={}; protoc ${PROTO_DOCS_OPTS} --doc_opt=./scripts/markdown.tmpl,README.md:google/* --doc_out=${PLATFORM_PREFIX}/"'$$d'" ${PLATFORM_PREFIX}/"'$$d'"/*.proto"
 
 
 LINT_PLUGIN=${BIN_DIR}/protoc-gen-lint
