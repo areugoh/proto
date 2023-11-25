@@ -1,4 +1,147 @@
 
+<a name="v1.10.0"></a>
+## [v1.10.0](https://github.com/GreenSpaceNASA/proto/compare/v1.9.0...v1.10.0)
+
+> 2023-11-24
+
+### Fix
+
+* **makefile:** nit folder
+
+
+<a name="v1.9.0"></a>
+## [v1.9.0](https://github.com/GreenSpaceNASA/proto/compare/v1.8.0...v1.9.0)
+
+> 2023-11-24
+
+### Fix
+
+* **workflow:** [@actions](https://github.com/actions) user
+
+
+<a name="v1.8.0"></a>
+## [v1.8.0](https://github.com/GreenSpaceNASA/proto/compare/v1.7.0...v1.8.0)
+
+> 2023-11-24
+
+### Fix
+
+* **workflow:** [@actions](https://github.com/actions) user
+
+
+<a name="v1.7.0"></a>
+## [v1.7.0](https://github.com/GreenSpaceNASA/proto/compare/v1.6.0...v1.7.0)
+
+> 2023-11-24
+
+### Fix
+
+* **workflow:** [@actions](https://github.com/actions) user
+
+
+<a name="v1.6.0"></a>
+## [v1.6.0](https://github.com/GreenSpaceNASA/proto/compare/v1.5.0...v1.6.0)
+
+> 2023-11-24
+
+### Fix
+
+* **workflow:** [@actions](https://github.com/actions) user
+
+
+<a name="v1.5.0"></a>
+## [v1.5.0](https://github.com/GreenSpaceNASA/proto/compare/v1.4.0...v1.5.0)
+
+> 2023-11-24
+
+### Fix
+
+* **workflow:** [@actions](https://github.com/actions) user
+
+
+<a name="v1.4.0"></a>
+## [v1.4.0](https://github.com/GreenSpaceNASA/proto/compare/v1.3.0...v1.4.0)
+
+> 2023-11-24
+
+### Fix
+
+* **workflow:** [@actions](https://github.com/actions) user
+
+
+<a name="v1.3.0"></a>
+## [v1.3.0](https://github.com/GreenSpaceNASA/proto/compare/v1.2.0...v1.3.0)
+
+> 2023-11-24
+
+### Fix
+
+* **workflow:** [@actions](https://github.com/actions) user
+
+
+<a name="v1.2.0"></a>
+## [v1.2.0](https://github.com/GreenSpaceNASA/proto/compare/v1.1.0...v1.2.0)
+
+> 2023-11-24
+
+### Fix
+
+* **ci:** workflow
+
+
+<a name="v1.1.0"></a>
+## [v1.1.0](https://github.com/GreenSpaceNASA/proto/compare/0.0.2...v1.1.0)
+
+> 2023-11-24
+
+### Add
+
+* **nodejs:** add nodejs-client
+
+### Change
+
+* **workflow:** add nodejs release job
+
+### Delete
+
+* **ts:** delete ts integration from now
+
+
+<a name="0.0.2"></a>
+## [0.0.2](https://github.com/GreenSpaceNASA/proto/compare/v1.0.0...0.0.2)
+
+> 2023-11-22
+
+### Add
+
+* **javascript:** add js build and scripts
+
+### Bump
+
+* **submodules:** update submodules
+* **version:** 0.0.2
+
+### Change
+
+* **makefile:** update platform prefix & flags
+
+### Change
+
+* **docs:** update documentation
+* **gitignore:** add node files
+* **ts:** refactor from plain js to ts
+
+### Fix
+
+* **cache:** with .gitignore
+
+
+<a name="v1.0.0"></a>
+## [v1.0.0](https://github.com/GreenSpaceNASA/proto/compare/v0.18.0...v1.0.0)
+
+> 2023-11-04
+
+
 <a name="v0.18.0"></a>
 ## [v0.18.0](https://github.com/GreenSpaceNASA/proto/compare/v0.17.0...v0.18.0)
 
