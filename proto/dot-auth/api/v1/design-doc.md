@@ -1,4 +1,7 @@
 ## Webauthn, cross-platform key
+
+> Description of the payloads on [rfc6749](https://datatracker.ietf.org/doc/html/rfc6749)
+
 ### Register
 
 ```plantuml
@@ -31,7 +34,7 @@ U -> F: action triggered
 
 
 activate F
-F -> DA: GET /authorize \nwith prompt=create, namespace=<appname>
+F -> DA: GET /authorize \nwith prompt=create
 deactivate F
 
 
@@ -75,8 +78,11 @@ deactivate R
 DA -> DA: update challengeSession
 DA --> DAS
 deactivate DA
-DA -> F: OP Session \nwith PoA
+DAS -> DA: GET /authorize \nwith session
 deactivate DAS
+activate DA
+DA --> F: with PoA
+deactivate DA
 ```
 
 ### Login
