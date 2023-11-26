@@ -1,0 +1,5 @@
+syntax = "proto3";
+
+package hoguera.platform.dot-auth.api.v1;
+
+option go_package = "dot-auth/api/v1;key";
