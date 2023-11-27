@@ -2,7 +2,7 @@
 
 > Description of the payloads on [rfc6749](https://datatracker.ietf.org/doc/html/rfc6749)
 
-### Components
+### IAM-roots service
 
 ```plantuml
 @startuml structure-details
@@ -19,6 +19,22 @@ rectangle iam-roots #line.dashed {
     BFF -d-> WA
 }
 ```
+
+#### BFF (Backend For Frontend)
+
+Service that handles the user interaction, it is the only service that can interact with the user. It's configure to
+allow GRPC and REST calls.
+
+#### Token
+
+Service that handles the authorization. if the user is authenticated, it will return a token that can be used to access
+the resources. If the user is not authenticated, it will return a redirect to the `iam-leaves` screen, triggering the
+webauthn flow to either sign in or sign up the user.
+
+#### Webauthn
+
+Service that handles the registration and authentication of the user. FIDO or Passkey are the only supported authenticator
+methods at the moment. If another method is required, it will live in a different service.
 
 ### Register
 
@@ -143,10 +159,19 @@ activate IAMR
 IAMR -> IAMR: construct cookie
 IAMR -> IAML: 302 /signin
 deactivate IAMR
-
-
 activate IAML
 
+
+IAML <-> U: fill login details
+IAML -> IAMR: POST /login/webauthn/start \nwith user_info
+activate IAMR
+IAMR -> R: get user info
+activate R
+R --> IAMR
+deactivate R
+IAMR -> IAMR: create challengeSession
+IAMR -> IAML: challenge ID \nwith PublicKey
+deactivate IAMR
 
 
 IAML -> IAML: credential creation
