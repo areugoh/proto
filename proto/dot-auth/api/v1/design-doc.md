@@ -2,6 +2,24 @@
 
 > Description of the payloads on [rfc6749](https://datatracker.ietf.org/doc/html/rfc6749)
 
+### Components
+
+```plantuml
+@startuml structure-details
+skinparam monochome false
+skinparam BoxPadding 10
+skinparam defaultTextAlignment center
+
+rectangle iam-roots #line.dashed {
+    node "BFF" as BFF
+    node "Token \n(authorize service)" as T
+    node "Webauthn \n(registration service)" as WA
+
+    BFF -d-> T
+    BFF -d-> WA
+}
+```
+
 ### Register
 
 ```plantuml
@@ -15,11 +33,11 @@ actor User as U
 box Client #f6f6f6
 participant "frontend\n(namespace)" as F
 control "authenticator" as A
-participant "dot-auth-screen\n(login.TBD.com)" as DAS
+participant "iam-roots-screen\n(account.TBD.com)" as IAML
 end box
 
 box Server #f6f6f6
-participant "dot-auth\n(TBD)" as DA
+participant "iam-roots\n(TBD)" as IAMR
 database "repository" as R
 end box
 
@@ -34,55 +52,55 @@ U -> F: action triggered
 
 
 activate F
-F -> DA: GET /authorize \nwith prompt=create
+F -> IAMR: GET /authorize \nwith prompt=create
 deactivate F
 
 
-activate DA
-DA -> DA: construct cookie
-DA -> DAS: 302 /signup
-deactivate DA
+activate IAMR
+IAMR -> IAMR: construct cookie
+IAMR -> IAML: 302 /signup
+deactivate IAMR
 
 
-activate DAS
-U <-> DAS: fill registration details
-DAS -> DA: POST /registation/webauthn/start \nwith user_info
+activate IAML
+U <-> IAML: fill registration details
+IAML -> IAMR: POST /registation/webauthn/start \nwith user_info
 
-activate DA
-DA -> R: Register user_info
+activate IAMR
+IAMR -> R: Register user_info
 activate R
-R --> DA
+R --> IAMR
 deactivate R
-DA -> DA: create challengeSession
-DA -> DAS: challenge ID \nwith PublicKey
-deactivate DA
+IAMR -> IAMR: create challengeSession
+IAMR -> IAML: challenge ID \nwith PublicKey
+deactivate IAMR
 
-DAS -> DAS: credential creation
-DAS -> A: verification
+IAML -> IAML: credential creation
+IAML -> A: verification
 activate A
 A <-> U: gesture
-A --> DAS: with attestation
+A --> IAML: with attestation
 deactivate A
 
-DAS -> DA: POST /registration/webauthn/finish \nwith authenticatiorAttestation, user_key
-activate DA
-DA -> R: get user info
+IAML -> IAMR: POST /registration/webauthn/finish \nwith authenticatiorAttestation, user_key
+activate IAMR
+IAMR -> R: get user info
 activate R
-R --> DA
+R --> IAMR
 deactivate R
-DA -> DA: get challengeSession
-DA -> R: Update user_info \nwith credentail
+IAMR -> IAMR: get challengeSession
+IAMR -> R: Update user_info \nwith credentail
 activate R
-R --> DA
+R --> IAMR
 deactivate R
-DA -> DA: update challengeSession
-DA --> DAS
-deactivate DA
-DAS -> DA: GET /authorize \nwith session
-deactivate DAS
-activate DA
-DA --> F: with PoA
-deactivate DA
+IAMR -> IAMR: update challengeSession
+IAMR --> IAML
+deactivate IAMR
+IAML -> IAMR: GET /authorize \nwith session
+deactivate IAML
+activate IAMR
+IAMR --> F: with PoA
+deactivate IAMR
 ```
 
 ### Login
@@ -98,11 +116,11 @@ actor User as U
 box Client #f6f6f6
 participant "frontend\n(namespace)" as F
 control "authenticator" as A
-participant "dot-auth-screen\n(login.TBD.com)" as DAS
+participant "iam-leaves \n(account.TBD.com)" as IAML
 end box
 
 box Server #f6f6f6
-participant "dot-auth\n(TBD)" as DA
+participant "iam-roots \n(TBD)" as IAMR
 database "repository" as R
 end box
 
@@ -117,28 +135,28 @@ U -> F: action triggered
 
 
 activate F
-F -> DA: GET /authorize \nwithnamespace=<appname>
+F -> IAMR: GET /authorize \nwithnamespace=<appname>
 deactivate F
 
 
-activate DA
-DA -> DA: construct cookie
-DA -> DAS: 302 /signin
-deactivate DA
+activate IAMR
+IAMR -> IAMR: construct cookie
+IAMR -> IAML: 302 /signin
+deactivate IAMR
 
 
-activate DAS
+activate IAML
 
 
 
-DAS -> DAS: credential creation
-DAS -> A: verification
+IAML -> IAML: credential creation
+IAML -> A: verification
 activate A
 A <-> U: gesture
-A --> DAS: with attestation
+A --> IAML: with attestation
 deactivate A
 
 
 
-deactivate DAS
+deactivate IAML
 ```
