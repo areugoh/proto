@@ -33,7 +33,7 @@ actor User as U
 box Client #f6f6f6
 participant "frontend\n(namespace)" as F
 control "authenticator" as A
-participant "iam-roots-screen\n(account.TBD.com)" as IAML
+participant "iam-leaves-screen\n(account.TBD.com)" as IAML
 end box
 
 box Server #f6f6f6
@@ -116,7 +116,7 @@ actor User as U
 box Client #f6f6f6
 participant "frontend\n(namespace)" as F
 control "authenticator" as A
-participant "iam-leaves \n(account.TBD.com)" as IAML
+participant "iam-leaves-screen \n(account.TBD.com)" as IAML
 end box
 
 box Server #f6f6f6
