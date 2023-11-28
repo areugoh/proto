@@ -12,8 +12,8 @@ skinparam defaultTextAlignment center
 
 rectangle iam-roots #line.dashed {
     node "BFF" as BFF
-    node "Token \n(authorize service)" as T
-    node "Webauthn \n(registration service)" as WA
+    node "Token \n(authorization service)" as T
+    node "Webauthn \n(authentication service)" as WA
 
     BFF -d-> T
     BFF -d-> WA
@@ -29,12 +29,24 @@ allow GRPC and REST calls.
 
 Service that handles the authorization. if the user is authenticated, it will return a token that can be used to access
 the resources. If the user is not authenticated, it will return a redirect to the `iam-leaves` screen, triggering the
-webauthn flow to either sign in or sign up the user.
+webauthn flow to either sign in or sign up the user. The token is a JWT token that contains the user information and
+the permissions that the user has. The token is signed with a private key that is only known by the `iam-roots` service.
+The following are the expected actions on the token service:
+
+- `authorize`
+- `token/refresh`
+- `token/revoke`
+- `token/validate`
+- `token/verify`
 
 #### Webauthn
 
 Service that handles the registration and authentication of the user. FIDO or Passkey are the only supported authenticator
-methods at the moment. If another method is required, it will live in a different service.
+methods at the moment. If another method is required, it will live in a different service. The following are the expected
+actions on the webauthn service:
+
+- `challenge`
+- `registration`
 
 ### Register
 
@@ -117,9 +129,13 @@ deactivate IAML
 activate IAMR
 IAMR --> F: with PoA
 deactivate IAMR
+
+note over U
+User is authenticated
+end note
 ```
 
-### Login
+### Sign in
 
 ```plantuml
 @startuml registration-details
@@ -162,8 +178,8 @@ deactivate IAMR
 activate IAML
 
 
-IAML <-> U: fill login details
-IAML -> IAMR: POST /login/webauthn/start \nwith user_info
+IAML <-> U: fill sign in details
+IAML -> IAMR: POST /challenge/webauthn/start \nwith user_info
 activate IAMR
 IAMR -> R: get user info
 activate R
@@ -182,6 +198,24 @@ A --> IAML: with attestation
 deactivate A
 
 
+IAML -> IAMR: POST /challenge/webauthn/finish \nwith authenticatiorAttestation, user_key
+activate IAMR
+IAMR -> R: get user info
+activate R
+R --> IAMR
+deactivate R
+IAMR -> IAMR: get challengeSession
+IAMR -> IAMR: update challengeSession
+IAMR --> IAML
+deactivate IAMR
 
+IAML -> IAMR: GET /authorize \nwith session
 deactivate IAML
+activate IAMR
+IAMR --> F: with PoA
+deactivate IAMR
+
+note over U
+User is authenticated
+end note
 ```
