@@ -1,8 +1,8 @@
-## Webauthn, cross-platform key
+# IAM-roots
 
-> Description of the payloads on [rfc6749](https://datatracker.ietf.org/doc/html/rfc6749)
+[toc]
 
-### IAM-roots service
+## Overview
 
 ```plantuml
 @startuml structure-details
@@ -14,18 +14,20 @@ rectangle iam-roots #line.dashed {
     node "BFF" as BFF
     node "Token \n(authorization service)" as T
     node "Webauthn \n(authentication service)" as WA
+    node "Profile \n(user service)" as P
 
     BFF -d-> T
     BFF -d-> WA
+    BFF -d-> P
 }
 ```
 
-#### BFF (Backend For Frontend)
+### BFF (Backend For Frontend)
 
 Service that handles the user interaction, it is the only service that can interact with the user. It's configure to
 allow GRPC and REST calls.
 
-#### Token
+### Token
 
 Service that handles the authorization. if the user is authenticated, it will return a token that can be used to access
 the resources. If the user is not authenticated, it will return a redirect to the `iam-leaves` screen, triggering the
@@ -39,7 +41,7 @@ The following are the expected actions on the token service:
 - `token/validate`
 - `token/verify`
 
-#### Webauthn
+### Webauthn
 
 Service that handles the registration and authentication of the user. FIDO or Passkey are the only supported authenticator
 methods at the moment. If another method is required, it will live in a different service. The following are the expected
@@ -47,6 +49,20 @@ actions on the webauthn service:
 
 - `challenge`
 - `registration`
+
+### Profile
+
+Service that handles the user information.
+The following are the expected actions on the profile service:
+
+- `user/registration`
+- `user/update info`
+- `user/delete`
+- `user/get info`
+
+## Webauthn, cross-platform key
+
+> Description of the payloads on [rfc6749](https://datatracker.ietf.org/doc/html/rfc6749)
 
 ### Register
 
@@ -127,7 +143,7 @@ deactivate IAMR
 IAML -> IAMR: GET /authorize \nwith session
 deactivate IAML
 activate IAMR
-IAMR --> F: with PoA
+IAMR --> F: with access_token, id_token, (opt refresh_token)
 deactivate IAMR
 
 note over U
@@ -212,7 +228,7 @@ deactivate IAMR
 IAML -> IAMR: GET /authorize \nwith session
 deactivate IAML
 activate IAMR
-IAMR --> F: with PoA
+IAMR --> F: with access_token, id_token, (opt refresh_token)
 deactivate IAMR
 
 note over U
