@@ -60,7 +60,7 @@ The following are the expected actions on the profile service:
 - `user/delete`
 - `user/get info`
 
-## Webauthn, cross-platform key
+## Webauthn/Token, cross-platform flow
 
 > Description of the payloads on [rfc6749](https://datatracker.ietf.org/doc/html/rfc6749)
 
