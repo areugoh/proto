@@ -62,7 +62,10 @@ vendor: go.sum .gitmodules
 	@go mod vendor
 
 .PHONY: plugin
-plugin: plugin/lint
+plugin: plugin/gen plugin/lint
+
+.PHONY: plugin/gen
+plugin/gen:
 	@echo "Building protoc plugins..."
 	@rm -rf $(BIN_DIR) && mkdir -p $(BIN_DIR) && touch $(BIN_DIR)/.dummy
 	@GOBIN=${BIN_DIR} go install -v github.com/googleapis/api-linter/cmd/api-linter@v1.59.0
@@ -203,7 +206,7 @@ LINT_PLUGIN=${BIN_DIR}/protoc-gen-lint
 .PHONY: lint
 lint:
 	@echo "Linting..."
-	@find proto -type f -name "*.proto" | xargs | (read p; protoc $(PROTO_OPTION) --plugin=$(LINT_PLUGIN) --lint_out=. $$p)
+	@find $(PLATFORM_PREFIX)/proto/ -type f -name "*.proto" | xargs | (read p; protoc $(PROTO_OPTION) --plugin=$(LINT_PLUGIN) --lint_out=. $$p)
 
 .PHONY: fmt
 fmt:
