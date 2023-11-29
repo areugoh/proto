@@ -1,4 +1,32 @@
 
+<a name="v1.11.0"></a>
+## [v1.11.0](https://github.com/GreenSpaceNASA/proto/compare/v1.10.0...v1.11.0)
+
+> 2023-11-29
+
+### Add
+
+* **dot-auth:** bones
+* **dot-auth:** design-doc first draft
+* **dot-auth:** bones
+* **dot-auth:** add masic structure for auth service
+* **iam-roots:** registration poc
+
+### Change
+
+* **dot-auth:** design doc token generation endpoint
+* **iam:** add description on design doc
+* **iam:** rename folder & nit name
+* **iam:** rename services & add basic structure
+* **iam-roots:** add profile service
+* **iam-roots:** add minor description on each services
+
+### Fix
+
+* **iam-roots:** nit
+* **makefile:** fix linting and plugin missing
+
+
 <a name="v1.10.0"></a>
 ## [v1.10.0](https://github.com/GreenSpaceNASA/proto/compare/v1.9.0...v1.10.0)
 
