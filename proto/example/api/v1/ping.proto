@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package hoguera.platform.example.api.v1;
+
+option go_package = "example/api/v1;ping";
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+
+
+service Ping {
+  rpc Ping(google.protobuf.Empty) returns (PingResponse) {
+    option (google.api.http) = {
+      get: "/v1/ping"
+    };
+  }
+}
+
+message PingResponse {
+  string message = 1;
+}
