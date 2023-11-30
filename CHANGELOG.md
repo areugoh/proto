@@ -1,4 +1,14 @@
 
+<a name="v1.12.0"></a>
+## [v1.12.0](https://github.com/GreenSpaceNASA/proto/compare/v1.11.0...v1.12.0)
+
+> 2023-11-30
+
+### Add
+
+* **example:** add example ping pong for template
+
+
 <a name="v1.11.0"></a>
 ## [v1.11.0](https://github.com/GreenSpaceNASA/proto/compare/v1.10.0...v1.11.0)
 
