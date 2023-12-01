@@ -101,9 +101,6 @@ PROTOC_GO_OPTS=${PROTO_OPTION} \
 	--go-grpc_out=require_unimplemented_servers=false:${GEN_GO_DIR} \
 	--plugin=protoc-gen-validate=${BIN_DIR}/protoc-gen-validate-go \
 	--validate_out=${GEN_GO_DIR}
-PROTOC_GATEWAY_SPEC_OPT=${PROTO_OPTION} \
-	--plugin=protoc-gen-openapi=${BIN_DIR}/protoc-gen-openapi \
-	--openapi_out=:${GEN_GO_DIR}
 PROTOC_GRPC_GATEWAY_OPTS=${PROTO_OPTION} \
 	--plugin=protoc-gen-grpc-gateway=${BIN_DIR}/protoc-gen-grpc-gateway \
 	--grpc-gateway_out=logtostderr=true:${GEN_GO_DIR}
@@ -116,8 +113,6 @@ proto/go:
 	@find proto -name '*.proto' -print0 | xargs -0 -I{} -P${CPUS} protoc ${PROTOC_GO_OPTS} ${PLATFORM_PREFIX}/{}
 	# Generate mocks
 	@find gen/go -name '*.pb.go' -print0 | xargs -0 -I{} -P${CPUS} bash -c "f={}; $(BIN_DIR)/mockgen -source="'$$f'" -package=\`grep '^package' "'$$f'" | head -1 | cut -d' ' -f2\` -destination=\`dirname "'$$f'"\`/mock_\`basename "'$$f'"\`"
-	# GRPC Gateway for go
-	@find proto -name '*.proto' -print0 | xargs -0 -I{} -P${CPUS} protoc ${PROTOC_GATEWAY_SPEC_OPT} ${PLATFORM_PREFIX}/{}
 	# REST -> GRPC gateway for go
 	@find proto -name '*.proto' -print0 | xargs -0 -I{} -P${CPUS} protoc ${PROTOC_GRPC_GATEWAY_OPTS} ${PLATFORM_PREFIX}/{}
 	# Ensure can be build: mockgen can generate files with unused imports, so we run goimports to remove them
@@ -201,6 +196,19 @@ docs:
 	@echo "Generating docs..."
 	@find proto -name '*.proto' -printf '%h\0' | sort -zu | xargs -0 -I{} -P${CPUS} bash -c "d={}; protoc ${PROTO_DOCS_OPTS} --doc_opt=./scripts/markdown.tmpl,README.md:google/* --doc_out=${PLATFORM_PREFIX}/"'$$d'" ${PLATFORM_PREFIX}/"'$$d'"/*.proto"
 
+PROTOC_GATEWAY_SPEC_OPT=${PROTO_OPTION} \
+	--plugin=protoc-gen-openapi=${BIN_DIR}/protoc-gen-openapi
+OPENAPI_GEN_DIR=gen/openapi
+GHPAGES_GEN_DIR=gen/ghpages
+.PHONY: openapi
+openapi:
+	@echo "Generating openapi..."
+	@rm -rf ${OPENAPI_GEN_DIR} && mkdir -p ${OPENAPI_GEN_DIR}
+	@rm -rf ${GHPAGES_GEN_DIR} && mkdir -p ${GHPAGES_GEN_DIR}
+	@find proto -name '*.proto' -printf '%h\0' | sort -zu | xargs -0 -I{} -P${CPUS} bash -c "d={}; protoc ${PROTOC_GATEWAY_SPEC_OPT} --openapi_out=fq_schema_naming=true,default_response=false:${OPENAPI_GEN_DIR}/"'$$d'" ${PLATFORM_PREFIX}/"'$$d'"/*.proto"
+	@find ${OPENAPI_GEN_DIR} -name '*.yaml' -printf '%h\0' | sort -zu | xargs -0 -I{} -P${CPUS} bash -c "d={}; $(NODE_MODULES_BIN)/redocly build-docs "'$$d'"/*.yaml -o ${GHPAGES_GEN_DIR}/"'$$d'"/index.html
+
+
 
 LINT_PLUGIN=${BIN_DIR}/protoc-gen-lint
 .PHONY: lint
@@ -220,4 +228,4 @@ changelog:
 	@test $NEXT_VERSION || (echo "NEXT_VERSION is not set"; exit 1)
 	@echo "NEXT_VERSION: $(LAST_TAG) -> $$NEXT_VERSION"
 	@git branch | grep -qs "* main" || (echo "This command should be run from main branch"; exit 1)
-	@git pull && git switch -c changelog_$(NEXT_VERSION) && git-chglog --next-tag $(NEXT_VERSION) -o CHANGELOG.md && make docs && git add . && git tag -a $(NEXT_VERSION) -m '$(NEXT_VERSION)' && git commit -m "add $(NEXT_VERSION) changelog" && git push --tags --set-upstream origin changelog_$(NEXT_VERSION) && git switch main && git branch -D changelog_$(NEXT_VERSION)
+	@git pull && git switch -c changelog_$(NEXT_VERSION) && git-chglog --next-tag $(NEXT_VERSION) -o CHANGELOG.md && make docs && make openapi && git add . && git tag -a $(NEXT_VERSION) -m '$(NEXT_VERSION)' && git commit -m "add $(NEXT_VERSION) changelog" && git push --tags --set-upstream origin changelog_$(NEXT_VERSION) && git switch main && git branch -D changelog_$(NEXT_VERSION)
