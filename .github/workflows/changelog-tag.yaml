@@ -36,14 +36,16 @@ jobs:
           go install github.com/git-chglog/git-chglog/cmd/git-chglog@latest
           make plugin
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Building Github Pages
         run: |
           npm i
           make openapi
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./gen/openapi/proto
 
       - name: Building new version
         run: make changelog
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./gen/openapi/proto
