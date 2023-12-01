@@ -1,4 +1,43 @@
 
+<a name="v1.15.0"></a>
+## [v1.15.0](https://github.com/GreenSpaceNASA/proto/compare/v1.14.0...v1.15.0)
+
+> 2023-12-01
+
+### Fix
+
+* **ci:** pipeline steps on gh-pages publish
+
+### Revert
+
+* **ci:** gh-pages
+
+
+<a name="v1.14.0"></a>
+## [v1.14.0](https://github.com/GreenSpaceNASA/proto/compare/v1.13.0...v1.14.0)
+
+> 2023-12-01
+
+### Fix
+
+* **ci:** token on gh-pages publish
+
+
+<a name="v1.13.0"></a>
+## [v1.13.0](https://github.com/GreenSpaceNASA/proto/compare/v1.12.0...v1.13.0)
+
+> 2023-12-01
+
+### Change
+
+* **makefile:** add openapi -> gh actions for REST API
+
+### Fix
+
+* **makefile:** fix pipeline
+* **makefile:** fix missing folders
+
+
 <a name="v1.12.0"></a>
 ## [v1.12.0](https://github.com/GreenSpaceNASA/proto/compare/v1.11.0...v1.12.0)
 
