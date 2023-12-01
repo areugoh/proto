@@ -199,14 +199,13 @@ docs:
 PROTOC_GATEWAY_SPEC_OPT=${PROTO_OPTION} \
 	--plugin=protoc-gen-openapi=${BIN_DIR}/protoc-gen-openapi
 OPENAPI_GEN_DIR=gen/openapi
-GHPAGES_GEN_DIR=gen/ghpages
 .PHONY: openapi
 openapi:
 	@echo "Generating openapi..."
 	@rm -rf ${OPENAPI_GEN_DIR} && mkdir -p ${OPENAPI_GEN_DIR}
-	@rm -rf ${GHPAGES_GEN_DIR} && mkdir -p ${GHPAGES_GEN_DIR}
 	@find proto -name '*.proto' -printf '%h\0' | sort -zu | xargs -0 -I{} -P${CPUS} bash -c "d={}; mkdir -p ${OPENAPI_GEN_DIR}/"'$$d'" && protoc ${PROTOC_GATEWAY_SPEC_OPT} --openapi_out=fq_schema_naming=true,default_response=false:${OPENAPI_GEN_DIR}/"'$$d'" ${PLATFORM_PREFIX}/"'$$d'"/*.proto"
-	@find ${OPENAPI_GEN_DIR} -name '*.yaml' -printf '%h\0' | sort -zu | xargs -0 -I{} -P${CPUS} bash -c "d={}; mkdir -p ${GHPAGES_GEN_DIR}/"'$$d'" && $(NODE_MODULES_BIN)/redocly build-docs "'$$d'"/*.yaml -o ${GHPAGES_GEN_DIR}/"'$$d'"/index.html
+	@find ${OPENAPI_GEN_DIR} -name '*.yaml' -printf '%h\0' | sort -zu | xargs -0 -I{} -P${CPUS} bash -c "d={}; $(NODE_MODULES_BIN)/redocly build-docs "'$$d'"/*.yaml -o "'$$d'"/index.html"
+	@rm -rf ${OPENAPI_GEN_DIR}/**/*.yaml
 
 
 
@@ -228,4 +227,4 @@ changelog:
 	@test $NEXT_VERSION || (echo "NEXT_VERSION is not set"; exit 1)
 	@echo "NEXT_VERSION: $(LAST_TAG) -> $$NEXT_VERSION"
 	@git branch | grep -qs "* main" || (echo "This command should be run from main branch"; exit 1)
-	@git pull && git switch -c changelog_$(NEXT_VERSION) && git-chglog --next-tag $(NEXT_VERSION) -o CHANGELOG.md && make docs && make openapi && git add . && git tag -a $(NEXT_VERSION) -m '$(NEXT_VERSION)' && git commit -m "add $(NEXT_VERSION) changelog" && git push --tags --set-upstream origin changelog_$(NEXT_VERSION) && git switch main && git branch -D changelog_$(NEXT_VERSION)
+	@git pull && git switch -c changelog_$(NEXT_VERSION) && git-chglog --next-tag $(NEXT_VERSION) -o CHANGELOG.md && make docs && git add . && git tag -a $(NEXT_VERSION) -m '$(NEXT_VERSION)' && git commit -m "add $(NEXT_VERSION) changelog" && git push --tags --set-upstream origin changelog_$(NEXT_VERSION) && git switch main && git branch -D changelog_$(NEXT_VERSION)
