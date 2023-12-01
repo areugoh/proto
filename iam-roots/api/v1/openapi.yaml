@@ -1,0 +1,142 @@
+# Generated with protoc-gen-openapi
+# https://github.com/google/gnostic/tree/master/cmd/protoc-gen-openapi
+
+openapi: 3.0.3
+info:
+    title: Webauthn API
+    version: 0.0.1
+paths:
+    /registration/webauthn/finish:
+        post:
+            tags:
+                - Webauthn
+            operationId: Webauthn_FinishRegistration
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/hoguera.platform.iamroots.api.v1.FinishRegistrationRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/hoguera.platform.iamroots.api.v1.FinishRegistrationResponse'
+    /registration/webauthn/start:
+        post:
+            tags:
+                - Webauthn
+            operationId: Webauthn_StartRegistration
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/hoguera.platform.iamroots.api.v1.StartRegistrationResquest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/hoguera.platform.iamroots.api.v1.StartRegistrationResponse'
+components:
+    schemas:
+        hoguera.platform.iamroots.api.v1.AttestationResponse:
+            type: object
+            properties:
+                clientDataJson:
+                    type: string
+                attestationObject:
+                    type: string
+        hoguera.platform.iamroots.api.v1.AuthenticatorSelection:
+            type: object
+            properties:
+                authenticatorAttachment:
+                    type: string
+                requireResidentKey:
+                    type: boolean
+                userVerification:
+                    type: string
+        hoguera.platform.iamroots.api.v1.FinishRegistrationRequest:
+            type: object
+            properties:
+                email:
+                    type: string
+                id:
+                    type: string
+                rawId:
+                    type: string
+                    format: bytes
+                type:
+                    type: string
+                transports:
+                    type: array
+                    items:
+                        type: string
+                response:
+                    $ref: '#/components/schemas/hoguera.platform.iamroots.api.v1.AttestationResponse'
+        hoguera.platform.iamroots.api.v1.FinishRegistrationResponse:
+            type: object
+            properties:
+                status:
+                    type: string
+        hoguera.platform.iamroots.api.v1.PuKeyCredParams:
+            type: object
+            properties:
+                type:
+                    type: string
+                alg:
+                    type: integer
+                    format: int32
+        hoguera.platform.iamroots.api.v1.PublicKey:
+            type: object
+            properties:
+                challenge:
+                    type: string
+                    format: bytes
+                rp:
+                    $ref: '#/components/schemas/hoguera.platform.iamroots.api.v1.ReplyingParty'
+                user:
+                    $ref: '#/components/schemas/hoguera.platform.iamroots.api.v1.User'
+                pubKeyCredParams:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/hoguera.platform.iamroots.api.v1.PuKeyCredParams'
+                authenticatorSelection:
+                    $ref: '#/components/schemas/hoguera.platform.iamroots.api.v1.AuthenticatorSelection'
+                timeout:
+                    type: integer
+                    format: int32
+                attestation:
+                    type: string
+        hoguera.platform.iamroots.api.v1.ReplyingParty:
+            type: object
+            properties:
+                id:
+                    type: string
+                name:
+                    type: string
+        hoguera.platform.iamroots.api.v1.StartRegistrationResponse:
+            type: object
+            properties:
+                publicKey:
+                    $ref: '#/components/schemas/hoguera.platform.iamroots.api.v1.PublicKey'
+        hoguera.platform.iamroots.api.v1.StartRegistrationResquest:
+            type: object
+            properties:
+                email:
+                    type: string
+        hoguera.platform.iamroots.api.v1.User:
+            type: object
+            properties:
+                id:
+                    type: string
+                name:
+                    type: string
+                displayName:
+                    type: string
+tags:
+    - name: Webauthn

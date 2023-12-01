@@ -1,0 +1,83 @@
+# Generated with protoc-gen-openapi
+# https://github.com/google/gnostic/tree/master/cmd/protoc-gen-openapi
+
+openapi: 3.0.3
+info:
+    title: GreenSpace API
+    description: GreenSpace is the service that provides all the information for NASA's GreenSpace app.
+    version: 0.0.1
+paths:
+    /api/v1:
+        get:
+            tags:
+                - GreenSpace
+            description: GetV1 is the BFF endpoint. It returns the location of the user, the nearest coast and the animals in danger.
+            operationId: GreenSpace_GetV1
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/hoguera.platform.greenspace.api.v1.V1Response'
+components:
+    schemas:
+        hoguera.platform.greenspace.api.v1.Animal:
+            type: object
+            properties:
+                name:
+                    type: string
+                inDanger:
+                    type: boolean
+                description:
+                    type: string
+            description: Animals the animals that are in danger in the coast.
+        hoguera.platform.greenspace.api.v1.CoastResponse:
+            type: object
+            properties:
+                name:
+                    type: string
+                    description: The name of the coast. e.g. "Playa de la Concha"
+                condition:
+                    type: integer
+                    description: The condition of the water. e.g. "GOOD"
+                    format: enum
+                temperature:
+                    type: number
+                    description: The temperature of the water in Celsius. e.g. 20
+                    format: float
+                distance:
+                    type: number
+                    description: The distance in kilometers to the coast. e.g. 4.1
+                    format: double
+            description: CoastResponse the nearest coast to the user location.
+        hoguera.platform.greenspace.api.v1.LocationResponse:
+            type: object
+            properties:
+                longitude:
+                    type: number
+                    format: float
+                latitude:
+                    type: number
+                    format: float
+                name:
+                    type: string
+                    description: The name of the location. e.g. "San Sebastian"
+            description: Location
+        hoguera.platform.greenspace.api.v1.V1Response:
+            type: object
+            properties:
+                location:
+                    $ref: '#/components/schemas/hoguera.platform.greenspace.api.v1.LocationResponse'
+                nearestAquaticLocation:
+                    $ref: '#/components/schemas/hoguera.platform.greenspace.api.v1.CoastResponse'
+                animals:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/hoguera.platform.greenspace.api.v1.Animal'
+            description: |-
+                V1Response the response of the V1 endpoint. It contains the location of the user, the nearest coast and the animals
+                 in danger. It serves as a wrapper for the other responses. It is used to avoid multiple requests to the API and
+                 follow the BFF pattern.
+tags:
+    - name: GreenSpace
