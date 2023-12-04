@@ -1,4 +1,14 @@
 
+<a name="v1.16.0"></a>
+## [v1.16.0](https://github.com/GreenSpaceNASA/proto/compare/v1.15.0...v1.16.0)
+
+> 2023-12-04
+
+### Fix
+
+* **iam-roots:** prefix endpoint
+
+
 <a name="v1.15.0"></a>
 ## [v1.15.0](https://github.com/GreenSpaceNASA/proto/compare/v1.14.0...v1.15.0)
 
