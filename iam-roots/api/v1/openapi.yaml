@@ -6,7 +6,7 @@ info:
     title: Webauthn API
     version: 0.0.1
 paths:
-    /registration/webauthn/finish:
+    /api/v1/registration/webauthn/finish:
         post:
             tags:
                 - Webauthn
@@ -24,7 +24,7 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/hoguera.platform.iamroots.api.v1.FinishRegistrationResponse'
-    /registration/webauthn/start:
+    /api/v1/registration/webauthn/start:
         post:
             tags:
                 - Webauthn
