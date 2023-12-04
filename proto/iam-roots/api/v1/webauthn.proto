@@ -12,13 +12,13 @@ import "hoguera/platform/proto/iam-roots/api/v1/profile.proto";
 service Webauthn {
     rpc StartRegistration(StartRegistrationResquest) returns (StartRegistrationResponse) {
         option (google.api.http) = {
-            post: "/registration/webauthn/start"
+            post: "/api/v1/registration/webauthn/start"
             body: "*"
         };
     }
     rpc FinishRegistration(FinishRegistrationRequest) returns (FinishRegistrationResponse) {
         option (google.api.http) = {
-            post: "/registration/webauthn/finish"
+            post: "/api/v1/registration/webauthn/finish"
             body: "*"
         };
     }
