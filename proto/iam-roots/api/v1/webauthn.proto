@@ -4,24 +4,13 @@ package hoguera.platform.iamroots.api.v1;
 
 option go_package = "iam-roots/api/v1;iamroots";
 
-import "google/api/annotations.proto";
 import "google/api/field_behavior.proto";
 import "hoguera/platform/proto/iam-roots/api/v1/profile.proto";
 
 
 service Webauthn {
-    rpc StartRegistration(StartRegistrationResquest) returns (StartRegistrationResponse) {
-        option (google.api.http) = {
-            post: "/registration/webauthn/start"
-            body: "*"
-        };
-    }
-    rpc FinishRegistration(FinishRegistrationRequest) returns (FinishRegistrationResponse) {
-        option (google.api.http) = {
-            post: "/registration/webauthn/finish"
-            body: "*"
-        };
-    }
+    rpc StartRegistration(StartRegistrationResquest) returns (StartRegistrationResponse);
+    rpc FinishRegistration(FinishRegistrationRequest) returns (FinishRegistrationResponse);
 }
 
 message StartRegistrationResquest {

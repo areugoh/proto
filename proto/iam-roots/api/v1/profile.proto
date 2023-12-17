@@ -5,6 +5,10 @@ package hoguera.platform.iamroots.api.v1;
 option go_package = "iam-roots/api/v1;iamroots";
 
 
+service UserAccount {
+    rpc GetProfile(User) returns (User);
+}
+
 message User {
     string id = 1;
     string name = 2;
