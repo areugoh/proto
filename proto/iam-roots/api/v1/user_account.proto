@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package hoguera.platform.iamroots.api.v1;
+
+option go_package = "iam-roots/api/v1;iamroots";
+
+
+service UserAccount {
+    rpc GetUserAccount(GetUserAccountRequest) returns (GetUserAccountResponse);
+    rpc InsertUserAccount(InsertUserAccountRequest) returns (InsertUserAccountResponse);
+    rpc DeleteUserAccount(DeleteUserAccountRequest) returns (DeleteUserAccountResponse);
+}
+
+message User {
+    string id = 1;
+    string name = 2;
+    string display_name = 3;
+}
