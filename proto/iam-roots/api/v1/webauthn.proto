@@ -5,12 +5,13 @@ package hoguera.platform.iamroots.api.v1;
 option go_package = "iam-roots/api/v1;iamroots";
 
 import "google/api/field_behavior.proto";
-import "hoguera/platform/proto/iam-roots/api/v1/profile.proto";
+import "hoguera/platform/proto/iam-roots/api/v1/user_account.proto";
 
 
 service Webauthn {
     rpc StartRegistration(StartRegistrationResquest) returns (StartRegistrationResponse);
     rpc FinishRegistration(FinishRegistrationRequest) returns (FinishRegistrationResponse);
+    rpc RevokeConnection(RevokeConnectionRequest) returns (RevokeConnectionResponse);
 }
 
 message StartRegistrationResquest {
@@ -63,4 +64,13 @@ message AuthenticatorSelection {
     string authenticator_attachment = 1;
     bool require_resident_key = 2;
     string user_verification = 3;
+}
+
+message RevokeConnectionRequest {
+    string email = 1;
+    string id = 2;
+}
+
+message RevokeConnectionResponse {
+    string status = 1;
 }
