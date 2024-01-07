@@ -6,13 +6,15 @@ option go_package = "iam-roots/api/v1;iamroots";
 
 
 service UserAccount {
-    rpc GetUserAccount(GetUserAccountRequest) returns (GetUserAccountResponse);
-    rpc InsertUserAccount(InsertUserAccountRequest) returns (InsertUserAccountResponse);
-    rpc DeleteUserAccount(DeleteUserAccountRequest) returns (DeleteUserAccountResponse);
+    rpc GetUserInfo(GetUserInfoRequest) returns (GetUserInfoResponse);
+    rpc InsertUserInfo(InsertUserInfoRequest) returns (InsertUserInfoResponse);
+    rpc DeleteUserInfo(DeleteUserInfoRequest) returns (DeleteUserInfoResponse);
 }
 
-message User {
+message GetUserInfoRequest {
     string id = 1;
-    string name = 2;
-    string display_name = 3;
+}
+
+message GetUserInfoResponse {
+
 }
