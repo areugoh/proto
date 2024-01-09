@@ -1,5 +1,5 @@
 export
-CLIENTS=go nodejs
+CLIENTS=go nodejs rust
 
 # CONFIG
 CPUS=`getconf _NPROCESSORS_ONLN 2>/dev/null || echo 1`
@@ -183,12 +183,31 @@ clean/nodejs:
 	@rm -rf $(NODEJS_OUTPUT)
 	@rm -rf google validate
 
+# Rust
+RUST_OUTPUT=gen/rust
+PROTOC_RUST_OPTS=${PROTO_OPTION} \
+	--plugin=protoc-gen-grpc=`which grpc_rust_plugin` \
+	--rust_out=experimental-codegen=enabled,kernel=cpp:${RUST_OUTPUT}
+.PHONY: proto/rust
+proto/rust:
+	@echo "Generating rust client from proto..."
+	@rm -rf $(RUST_OUTPUT) && mkdir -p $(RUST_OUTPUT)
+	@find proto -name '*.proto' -print0 | xargs -0 -I{} -P${CPUS} protoc ${PROTOC_RUST_OPTS} {}
+
+.PHONY: clean/rust
+clean/rust:
+	@echo "Cleaning rust client..."
+	@rm -rf $(RUST_OUTPUT)
+
 .PHONY: dep
 dep:
 	@echo "Installing nodejs dependencies..."
 	@npm install
 	@echo "Installing go dependencies..."
 	@go mod download
+	@echo "Installing rust dependencies..."
+	@cargo install protobuf-codegen
+	@cargo install grpcio-compiler
 
 # ALL
 .PHONY: docs
