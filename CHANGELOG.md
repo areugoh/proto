@@ -1,4 +1,14 @@
 
+<a name="v1.19.0"></a>
+## [v1.19.0](https://github.com/GreenSpaceNASA/proto/compare/v1.18.0...v1.19.0)
+
+> 2024-01-13
+
+### Fix
+
+* **ci:** cargo on release
+
+
 <a name="v1.18.0"></a>
 ## [v1.18.0](https://github.com/GreenSpaceNASA/proto/compare/v1.17.0...v1.18.0)
 
