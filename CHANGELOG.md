@@ -1,4 +1,15 @@
 
+<a name="v1.17.0"></a>
+## [v1.17.0](https://github.com/GreenSpaceNASA/proto/compare/v1.16.0...v1.17.0)
+
+> 2024-01-13
+
+### Feat
+
+* **rust:** add rust release
+* **rust:** add rust with grpc-rs & tonic to check performance
+
+
 <a name="v1.16.0"></a>
 ## [v1.16.0](https://github.com/GreenSpaceNASA/proto/compare/v1.15.0...v1.16.0)
 
