@@ -46,6 +46,9 @@ help:
 	@echo "  proto/nodejs      - Generate nodejs client from proto"
 	@echo "  clean/nodejs      - Clean nodejs client"
 	@echo "  release/nodejs    - Publish nodejs client"
+	@echo "  proto/rust        - Generate rust client from proto"
+	@echo "  clean/rust        - Clean rust client"
+	@echo "  release/rust      - Publish rust client"
 	@echo ""
 	@echo "  lint              - Lint proto"
 	@echo "  fmt               - Format proto (wip)"
@@ -134,7 +137,7 @@ release/go: proto
 	@cp $(PWD)/scripts/go/go.mod ${TMP_REPO_DIR}/client-go/go.mod
 	@cp $(PWD)/scripts/go/README.md ${TMP_REPO_DIR}/client-go/README.md
 	@cp $(PWD)/CHANGELOG.md ${TMP_REPO_DIR}/client-go/CHANGELOG.md
-	@cp -R $(PWD)/gen/go/* ${TMP_REPO_DIR}/client-go
+	@cp -R $(PWD)/$(GEN_GO_DIR)/* ${TMP_REPO_DIR}/client-go
 	@rm -rf ${TMP_REPO_DIR}/client-go/**openapi**.*
 	@$(eval NEXT_VERSION=$(shell test $(NEXT_VERSION) && echo $(NEXT_VERSION) || echo $(LAST_TAG)))
 	@cd ${TMP_REPO_DIR}/client-go && git add . && git commit -m "bump(version): $(NEXT_VERSION)" && git tag -a $(NEXT_VERSION) -m '$(NEXT_VERSION)' && git push --tags origin main
@@ -173,7 +176,7 @@ release/nodejs: proto/nodejs
 	@cp -R $(PWD)/scripts/nodejs/.git* ${TMP_REPO_DIR}/client-nodejs/
 	@cp -R $(PWD)/scripts/nodejs/.npmrc ${TMP_REPO_DIR}/client-nodejs/.npmrc
 	@cp $(PWD)/CHANGELOG.md ${TMP_REPO_DIR}/client-nodejs/CHANGELOG.md
-	@cp -R $(PWD)/gen/nodejs/* ${TMP_REPO_DIR}/client-nodejs
+	@cp -R $(PWD)/$(NODEJS_OUTPUT)/* ${TMP_REPO_DIR}/client-nodejs
 	@$(eval NEXT_VERSION=$(shell test $(NEXT_VERSION) && echo $(NEXT_VERSION) || echo $(LAST_TAG)))
 	@cd ${TMP_REPO_DIR}/client-nodejs && git add . && git commit -m "bump(version): $(NEXT_VERSION)" && npm version $(NEXT_VERSION) && git push --tags origin main
 
@@ -193,6 +196,22 @@ proto/rust:
 	@echo "Generating rust client from proto..."
 	@rm -rf $(RUST_OUTPUT) && mkdir -p $(RUST_OUTPUT)
 	@find proto -name '*.proto' -print0 | xargs -0 -I{} -P${CPUS} protoc ${PROTOC_RUST_OPTS} {}
+
+.PHONY: release/rust
+release/rust: proto/rust
+	@echo "Publishing rust client..."
+	@git switch main && git pull origin main && git fetch --tags
+	@rm -rf ${TMP_REPO_DIR} && mkdir -p ${TMP_REPO_DIR}
+	@git clone ${REPO}-rust.git ${TMP_REPO_DIR}/client-rust
+	$(if $(GH_TOKEN),cd ${TMP_REPO_DIR}/client-rust && git config --global user.email $(GIT_EMAIL) && git config --global user.name $(GIT_USERNAME) && git remote set-url origin https://x-access-token:$(GH_TOKEN)@github.com/${GITHUB_ORG}/client-rust,@echo "GH_TOKEN is not set")
+	@cd ${TMP_REPO_DIR}/client-rust && git clean -fdx #&& git checkout main
+	@cp -R $(PWD)/scripts/rust/ ${TMP_REPO_DIR}/client-rust/
+	@cp -R $(PWD)/scripts/rust/.git* ${TMP_REPO_DIR}/client-rust/
+	@cp $(PWD)/CHANGELOG.md ${TMP_REPO_DIR}/client-rust/CHANGELOG.md
+	@mkdir -p ${TMP_REPO_DIR}/client-rust/src
+	@cp -R $(PWD)/$(RUST_OUTPUT)/* ${TMP_REPO_DIR}/client-rust/src
+	@$(eval NEXT_VERSION=$(shell test $(NEXT_VERSION) && echo $(NEXT_VERSION) || echo $(LAST_TAG)))
+	@cd ${TMP_REPO_DIR}/client-rust && git add . && git commit -m "bump(version): $(NEXT_VERSION)" && git tag -a $(NEXT_VERSION) -m '$(NEXT_VERSION)' && git push --tags origin main
 
 .PHONY: clean/rust
 clean/rust:

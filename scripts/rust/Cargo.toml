@@ -1,0 +1,9 @@
+[package]
+name = "client-rust"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+prost-types = "0.12.3"
+tonic = "0.10.2"
+tonic-types = "0.10.2"
