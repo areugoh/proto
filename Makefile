@@ -206,10 +206,9 @@ release/rust: proto/rust
 	$(if $(GH_TOKEN),cd ${TMP_REPO_DIR}/client-rust && git config --global user.email $(GIT_EMAIL) && git config --global user.name $(GIT_USERNAME) && git remote set-url origin https://x-access-token:$(GH_TOKEN)@github.com/${GITHUB_ORG}/client-rust,@echo "GH_TOKEN is not set")
 	@cd ${TMP_REPO_DIR}/client-rust && git clean -fdx #&& git checkout main
 	@cp -R $(PWD)/scripts/rust/ ${TMP_REPO_DIR}/client-rust/
-	@cp -R $(PWD)/scripts/rust/.git* ${TMP_REPO_DIR}/client-rust/
 	@cp $(PWD)/CHANGELOG.md ${TMP_REPO_DIR}/client-rust/CHANGELOG.md
 	@mkdir -p ${TMP_REPO_DIR}/client-rust/src
-	@cp -R $(PWD)/$(RUST_OUTPUT)/* ${TMP_REPO_DIR}/client-rust/src
+	@cp -R $(PWD)/$(RUST_OUTPUT)/proto/* ${TMP_REPO_DIR}/client-rust/src
 	@$(eval NEXT_VERSION=$(shell test $(NEXT_VERSION) && echo $(NEXT_VERSION) || echo $(LAST_TAG)))
 	@cd ${TMP_REPO_DIR}/client-rust && git add . && git commit -m "bump(version): $(NEXT_VERSION)" && git tag -a $(NEXT_VERSION) -m '$(NEXT_VERSION)' && git push --tags origin main
 
