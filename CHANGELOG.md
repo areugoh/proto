@@ -1,4 +1,14 @@
 
+<a name="v1.18.0"></a>
+## [v1.18.0](https://github.com/GreenSpaceNASA/proto/compare/v1.17.0...v1.18.0)
+
+> 2024-01-13
+
+### Build
+
+* **deps:** bump golang.org/x/crypto from 0.14.0 to 0.17.0
+
+
 <a name="v1.17.0"></a>
 ## [v1.17.0](https://github.com/GreenSpaceNASA/proto/compare/v1.16.0...v1.17.0)
 
