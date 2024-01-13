@@ -40,6 +40,9 @@ jobs:
         with:
           node-version: '20.x'
 
+      - name: Setup cargo
+        uses: dtolnay/rust-toolchain@v1
+
       - name: Install dependencies
         run: make dep
       - name: Downloading plugins
