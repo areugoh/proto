@@ -10,9 +10,11 @@ REPO:=$(shell test $(REPO) && echo $(REPO) || git ls-remote --get-url | rev | cu
 TMP_REPO_DIR=$(PWD)/repo
 GEN_GO_DIR=gen/go
 LAST_TAG:=$(shell git describe --tags --abbrev=0 2>/dev/null || echo v0.0.0)
+PSEUDO_VERSION:=$(shell git rev-parse --short HEAD | awk -v LAST_TAG=$(LAST_TAG) '{print LAST_TAG"-pre."$$1}')
 GIT_USERNAME:=$(shell git config user.name)
 GIT_EMAIL:=$(shell git config user.email)
 GITHUB_ORG:=areugoh
+GIT_CLIENT_BASE_BRANCH=main
 
 export GO111MODULE=on
 
@@ -39,6 +41,7 @@ help:
 	@echo "  proto             - Generate all of the proto clients"
 	@echo "  clean             - Clean all of the proto clients"
 	@echo "  release           - Publish all of the proto clients"
+	@echo "  release-pseudo    - Publish all of the proto clients with pseudo version"
 	@echo ""
 	@echo "  proto/go          - Generate go client from proto"
 	@echo "  clean/go          - Clean go client"
@@ -57,6 +60,25 @@ help:
 	@echo "  changelog         - Generate changelog"
 	@echo ""
 	@echo "  help              - Show this help message"
+
+.PHONY: pseudo/version
+pseudo/version:
+	@echo $(PSEUDO_VERSION)
+
+define BODY
+Your pseudo version `$(PSEUDO_VERSION)` is ready to use!
+Follow the instructions in the README.md of each client to use it.
+
+- :hamster: *GO*: https://github.com/areugoh/client-go/releases/tag/$(PSEUDO_VERSION)
+- :crab: *RUST*: https://github.com/areugoh/client-rust/releases/tag/$(PSEUDO_VERSION)
+- :penguin: *NODEJS*: https://github.com/areugoh/client-nodejs/tree/$(PSEUDO_VERSION)
+
+> :warning: **WARNING**: This version is not stable and can be changed at any time.
+> To recreate this version, remove the `pseudo-version` label from the PR and add it again.
+endef
+.PHONY: pseudo/md
+pseudo/md:
+	@echo "$$BODY"
 
 .PHONY: vendor
 vendor: go.sum .gitmodules
@@ -88,12 +110,13 @@ plugin/lint:
 	@GOBIN=${BIN_DIR} go install -v github.com/ckaznocha/protoc-gen-lint@v0.3.0
 
 # PROTOC
-.PHONY: proto clean release
+.PHONY: proto clean release release-pseudo
 proto: $(foreach var, $(CLIENTS), proto/$(var))
 clean: $(foreach var, $(CLIENTS), clean/$(var))
 release: $(foreach var, $(CLIENTS), release/$(var))
+release-pseudo: $(foreach var, $(CLIENTS), release-pseudo/$(var))
 
-proto/% release/% clean/%:
+proto/% release/% clean/% release-pseudo/%:
 	@:
 
 # GO
@@ -129,10 +152,10 @@ clean/go:
 .PHONY: release/go
 release/go: proto
 	@echo "Publishing go client..."
-	@git switch main && git pull origin main && git fetch --tags
+	$(if $PSEUDO, @git fetch --tags,@git switch $(GIT_CLIENT_BASE_BRANCH) && git pull origin $(GIT_CLIENT_BASE_BRANCH) && git fetch --tags)
 	@rm -rf ${TMP_REPO_DIR} && mkdir -p ${TMP_REPO_DIR}
-	@git clone ${REPO}-go.git ${TMP_REPO_DIR}/client-go
-	$(if $(GH_TOKEN),cd ${TMP_REPO_DIR}/client-go && git config --global user.email $(GIT_EMAIL) && git config --global user.name $(GIT_USERNAME) && git remote set-url origin https://x-access-token:$(GH_TOKEN)@github.com/${GITHUB_ORG}/client-go,@echo "GH_TOKEN is not set")
+	@$(if $(GH_TOKEN),git clone https://$(GH_TOKEN)@github.com/${GITHUB_ORG}/client-go ${TMP_REPO_DIR}/client-go,git clone ${REPO}-go.git ${TMP_REPO_DIR}/client-go)
+	$(if $(GH_TOKEN),cd ${TMP_REPO_DIR}/client-go && git remote set-url origin https://x-access-token:$(GH_TOKEN)@github.com/${GITHUB_ORG}/client-go && git config --global user.email $(GIT_EMAIL) && git config --global user.name $(GIT_USERNAME),@echo "GH_TOKEN is not set")
 	@cd ${TMP_REPO_DIR}/client-go && git clean -fdx #&& git checkout main
 	@cp $(PWD)/scripts/go/go.mod ${TMP_REPO_DIR}/client-go/go.mod
 	@cp $(PWD)/scripts/go/README.md ${TMP_REPO_DIR}/client-go/README.md
@@ -140,7 +163,13 @@ release/go: proto
 	@cp -R $(PWD)/$(GEN_GO_DIR)/* ${TMP_REPO_DIR}/client-go
 	@rm -rf ${TMP_REPO_DIR}/client-go/**openapi**.*
 	@$(eval NEXT_VERSION=$(shell test $(NEXT_VERSION) && echo $(NEXT_VERSION) || echo $(LAST_TAG)))
-	@cd ${TMP_REPO_DIR}/client-go && git add . && git commit -m "bump(version): $(NEXT_VERSION)" && git tag -a $(NEXT_VERSION) -m '$(NEXT_VERSION)' && git push --tags origin main
+	@$(eval RELEASE_BRANCH=$(shell test $(PSEUDO) && echo $(PSEUDO_VERSION) || echo $(GIT_CLIENT_BASE_BRANCH)))
+	@cd ${TMP_REPO_DIR}/client-go && git add . && git commit -m "bump(version): $(NEXT_VERSION)" && git tag -a $(NEXT_VERSION) -m '$(NEXT_VERSION)' && git push --tags origin $(GIT_CLIENT_BASE_BRANCH):$(RELEASE_BRANCH)
+
+.PHONY: release-pseudo/go
+release-pseudo/go:
+	@NEXT_VERSION=$(PSEUDO_VERSION) make release/go PSEUDO=true
+	@echo $(PSEUDO_VERSION)
 
 # NodeJS
 NODEJS_OUTPUT=gen/nodejs
@@ -167,9 +196,9 @@ proto/nodejs: clean/nodejs
 .PHONY: release/nodejs
 release/nodejs: proto/nodejs
 	@echo "Publishing nodejs client..."
-	@git switch main && git pull origin main && git fetch --tags
+	$(if $PSEUDO, @git fetch --tags,@git switch $(GIT_CLIENT_BASE_BRANCH) && git pull origin $(GIT_CLIENT_BASE_BRANCH) && git fetch --tags)
 	@rm -rf ${TMP_REPO_DIR} && mkdir -p ${TMP_REPO_DIR}
-	@git clone ${REPO}-nodejs.git ${TMP_REPO_DIR}/client-nodejs
+	@$(if $(GH_TOKEN),git clone https://$(GH_TOKEN)@github.com/${GITHUB_ORG}/client-nodejs ${TMP_REPO_DIR}/client-nodejs,git clone ${REPO}-nodejs.git ${TMP_REPO_DIR}/client-nodejs)
 	$(if $(GH_TOKEN),cd ${TMP_REPO_DIR}/client-nodejs && git config --global user.email $(GIT_EMAIL) && git config --global user.name $(GIT_USERNAME) && git remote set-url origin https://x-access-token:$(GH_TOKEN)@github.com/${GITHUB_ORG}/client-nodejs,@echo "GH_TOKEN is not set")
 	@cd ${TMP_REPO_DIR}/client-nodejs && git clean -fdx #&& git checkout main
 	@cp -R $(PWD)/scripts/nodejs/ ${TMP_REPO_DIR}/client-nodejs/
@@ -178,7 +207,13 @@ release/nodejs: proto/nodejs
 	@cp $(PWD)/CHANGELOG.md ${TMP_REPO_DIR}/client-nodejs/CHANGELOG.md
 	@cp -R $(PWD)/$(NODEJS_OUTPUT)/* ${TMP_REPO_DIR}/client-nodejs
 	@$(eval NEXT_VERSION=$(shell test $(NEXT_VERSION) && echo $(NEXT_VERSION) || echo $(LAST_TAG)))
-	@cd ${TMP_REPO_DIR}/client-nodejs && git add . && git commit -m "bump(version): $(NEXT_VERSION)" && npm version $(NEXT_VERSION) && git push --tags origin main
+	@$(eval RELEASE_BRANCH=$(shell test $(PSEUDO) && echo $(PSEUDO_VERSION) || echo $(GIT_CLIENT_BASE_BRANCH)))
+	@cd ${TMP_REPO_DIR}/client-nodejs && git add . && git commit -m "bump(version): $(NEXT_VERSION)" && npm version $(NEXT_VERSION) && git push --tags origin $(GIT_CLIENT_BASE_BRANCH):$(RELEASE_BRANCH)
+
+.PHONY: release-pseudo/nodejs
+release-pseudo/nodejs:
+	@NEXT_VERSION=$(PSEUDO_VERSION) make release/nodejs PSEUDO=true
+	@echo $(PSEUDO_VERSION)
 
 .PHONY: clean/nodejs
 clean/nodejs:
@@ -200,9 +235,9 @@ proto/rust:
 .PHONY: release/rust
 release/rust: proto/rust
 	@echo "Publishing rust client..."
-	@git switch main && git pull origin main && git fetch --tags
+	$(if $PSEUDO, @git fetch --tags,@git switch $(GIT_CLIENT_BASE_BRANCH) && git pull origin $(GIT_CLIENT_BASE_BRANCH) && git fetch --tags)
 	@rm -rf ${TMP_REPO_DIR} && mkdir -p ${TMP_REPO_DIR}
-	@git clone ${REPO}-rust.git ${TMP_REPO_DIR}/client-rust
+	@$(if $(GH_TOKEN),git clone https://$(GH_TOKEN)@github.com/${GITHUB_ORG}/client-rust ${TMP_REPO_DIR}/client-rust,git clone ${REPO}-rust.git ${TMP_REPO_DIR}/client-rust)
 	$(if $(GH_TOKEN),cd ${TMP_REPO_DIR}/client-rust && git config --global user.email $(GIT_EMAIL) && git config --global user.name $(GIT_USERNAME) && git remote set-url origin https://x-access-token:$(GH_TOKEN)@github.com/${GITHUB_ORG}/client-rust,@echo "GH_TOKEN is not set")
 	@cd ${TMP_REPO_DIR}/client-rust && git clean -fdx #&& git checkout main
 	@cp -R $(PWD)/scripts/rust/ ${TMP_REPO_DIR}/client-rust/
@@ -210,7 +245,13 @@ release/rust: proto/rust
 	@mkdir -p ${TMP_REPO_DIR}/client-rust/src
 	@cp -R $(PWD)/$(RUST_OUTPUT)/proto/* ${TMP_REPO_DIR}/client-rust/src
 	@$(eval NEXT_VERSION=$(shell test $(NEXT_VERSION) && echo $(NEXT_VERSION) || echo $(LAST_TAG)))
-	@cd ${TMP_REPO_DIR}/client-rust && git add . && git commit -m "bump(version): $(NEXT_VERSION)" && git tag -a $(NEXT_VERSION) -m '$(NEXT_VERSION)' && git push --tags origin main
+	@$(eval RELEASE_BRANCH=$(shell test $(PSEUDO) && echo $(PSEUDO_VERSION) || echo $(GIT_CLIENT_BASE_BRANCH)))
+	@cd ${TMP_REPO_DIR}/client-rust && git add . && git commit -m "bump(version): $(NEXT_VERSION)" && git tag -a $(NEXT_VERSION) -m '$(NEXT_VERSION)' && git push --tags origin $(GIT_CLIENT_BASE_BRANCH):$(RELEASE_BRANCH)
+
+.PHONY: release-pseudo/rust
+release-pseudo/rust:
+	@NEXT_VERSION=$(PSEUDO_VERSION) make release/rust PSEUDO=true
+	@echo $(PSEUDO_VERSION)
 
 .PHONY: clean/rust
 clean/rust:
