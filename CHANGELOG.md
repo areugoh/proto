@@ -1,4 +1,18 @@
 
+<a name="v1.21.0"></a>
+## [v1.21.0](https://github.com/GreenSpaceNASA/proto/compare/v1.20.0...v1.21.0)
+
+> 2024-01-14
+
+### Feat
+
+* **ci:** split ci & update makefile with pseudo
+
+### Fix
+
+* **ci:** changelog pipeline
+
+
 <a name="v1.20.0"></a>
 ## [v1.20.0](https://github.com/GreenSpaceNASA/proto/compare/v1.19.0...v1.20.0)
 
