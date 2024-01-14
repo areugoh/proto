@@ -1,11 +1,11 @@
-#Generate a new tag and changelog
-name: "Proto version"
+name: "Release new version"
 on:
   workflow_dispatch:
     inputs:
-      NEXT_VERSION:
+      next_version:
         description: 'Next version to be released in all of the protobuf clients'
         required: false
+        type: string
 permissions:
   contents: write
 
@@ -37,6 +37,4 @@ jobs:
           make plugin
 
       - name: Building new version
-        env:
-          NEXT_VERSION: ${NEXT_VERSION}
-        run: make changelog
+        run: NEXT_VERSION=${{github.event.inputs.next_version}} make changelog

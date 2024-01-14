@@ -1,4 +1,3 @@
-#Generate a new tag and changelog
 name: "Generate openapi docs"
 on:
   push:
