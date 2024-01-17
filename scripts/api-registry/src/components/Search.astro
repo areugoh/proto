@@ -1,0 +1,23 @@
+---
+function search() {
+    return {
+        search: "",
+        open: false,
+        items: ["Bitcoin", "Ethereum", "Siacoin"],
+
+        get filteredItems() {
+            return this.items.filter((i) =>
+                i.toLowerCase().startsWith(this.search.toLowerCase()),
+            );
+        },
+    };
+}
+---
+
+<input
+    x-on:click="open = !open"
+    type="search"
+    x-model="search"
+    placeholder="Search Here..."
+    class="grow py-3 px-4 w-1/2 rounded shadow font-thin focus:outline-none focus:shadow-lg focus:shadow-slate-200 duration-100 shadow-gray-100"
+/>
