@@ -1,9 +1,30 @@
 import { defineConfig } from 'astro/config';
-import tailwind from "@astrojs/tailwind";
-
-import preact from "@astrojs/preact";
+import starlight from '@astrojs/starlight';
+import tailwind from '@astrojs/tailwind';
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [tailwind(), preact()]
+    integrations: [
+        starlight({
+            title: "Hoguera's Docs",
+            social: {
+                github: 'https://github.com/areugoh/proto',
+            },
+            sidebar: [
+                {
+                    label: 'Guides',
+                    items: [
+                        // Each item here is one entry in the navigation menu.
+                        { label: 'Example Guide', link: '/guides/example/' },
+                    ],
+                },
+                {
+                    label: 'Reference',
+                    autogenerate: { directory: 'reference' },
+                },
+            ],
+            customCss: ['./src/tailwind.css'],
+        }),
+        tailwind({ applyBaseStyles: false }),
+    ],
 });
