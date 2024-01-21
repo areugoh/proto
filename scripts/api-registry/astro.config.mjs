@@ -12,15 +12,19 @@ export default defineConfig({
             },
             sidebar: [
                 {
-                    label: 'Guides',
-                    items: [
-                        // Each item here is one entry in the navigation menu.
-                        { label: 'Example Guide', link: '/guides/example/' },
-                    ],
+                    label: 'Design documents',
+                    autogenerate: { directory: 'design' },
+                    collapsed: true,
                 },
                 {
-                    label: 'Reference',
-                    autogenerate: { directory: 'reference' },
+                    label: 'Protobuf',
+                    autogenerate: { directory: 'protobuf' },
+                    collapsed: true,
+                },
+                {
+                    label: 'OpenAPI',
+                    autogenerate: { directory: 'openapi' },
+                    collapsed: true,
                 },
             ],
             customCss: ['./src/tailwind.css'],

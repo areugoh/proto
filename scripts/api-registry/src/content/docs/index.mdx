@@ -1,6 +1,6 @@
 ---
 title: Welcome to Hoguera's Docs
-description: Get
+description: Hoguera's documentation registry for the Design documents, Protobuf and REST Full API definitions.
 template: splash
 hero:
   title: |
@@ -13,17 +13,17 @@ hero:
     >
       Hoguera
     </span>
-  tagline: Oficial documentation registry for Protobuf and REST Full API.
-  image:
-    file: ../../assets/houston.webp
+  tagline: Official documentation registry for the Design documents, Protobuf and REST Full API definitions.
   actions:
-    - text: Protobuf
-      link: /guides/example/
+    - text: Design
+      link: /design
       icon: open-book
       variant: primary
-    - text: Restfull API
-      link: /guides/example
-      icon: open-book
+    - text: Protobuf
+      link: /protobuf
+      variant: secondary
+    - text: OpenAPI
+      link: /openapi
       variant: secondary
 ---
 
@@ -32,16 +32,19 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 ## Clients
 
 <CardGrid stagger>
-	<Card title="Update content" icon="pencil">
+	<Card
+    title="Golang"
+    icon="pencil">
 		Edit `src/content/docs/index.mdx` to see this page change.
 	</Card>
-	<Card title="Add new content" icon="add-document">
+	<Card
+    title="Rust"
+    icon="add-document">
 		Add Markdown or MDX files to `src/content/docs` to create new pages.
 	</Card>
-	<Card title="Configure your site" icon="setting">
+	<Card
+    title="Node"
+    icon="setting">
 		Edit your `sidebar` and other config in `astro.config.mjs`.
-	</Card>
-	<Card title="Read the docs" icon="open-book">
-		Learn more in [the Starlight Docs](https://starlight.astro.build/).
 	</Card>
 </CardGrid>
