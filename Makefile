@@ -19,6 +19,7 @@ GIT_CLIENT_BASE_BRANCH=main
 export GO111MODULE=on
 
 PLATFORM_PREFIX=hoguera/platform
+DOC_REGISTRY_DIR=scripts/doc-registry/src/content/docs
 NODE_MODULES_BIN=$(PWD)/node_modules/.bin
 # PROTO
 GOOGLEAPIS_PROTO=${SUBMODULES_DIR}/googleapis
@@ -273,7 +274,7 @@ dep:
 .PHONY: docs
 docs:
 	@echo "Generating docs..."
-	@find proto -name '*.proto' -printf '%h\0' | sort -zu | xargs -0 -I{} -P${CPUS} bash -c "d={}; protoc ${PROTO_DOCS_OPTS} --doc_opt=./scripts/markdown.tmpl,README.md:google/* --doc_out=${PLATFORM_PREFIX}/"'$$d'" ${PLATFORM_PREFIX}/"'$$d'"/*.proto"
+	@find proto -name '*.proto' -printf '%h\0' | sort -zu | xargs -0 -I{} -P${CPUS} bash -c "d={}; protoc ${PROTO_DOCS_OPTS} --doc_opt=./scripts/markdown.tmpl,index.md:google/* --doc_out=${DOC_REGISTRY_DIR}/protobuf/"'$$d'" ${PLATFORM_PREFIX}/"'$$d'"/*.proto"
 
 PROTOC_GATEWAY_SPEC_OPT=${PROTO_OPTION} \
 	--plugin=protoc-gen-openapi=${BIN_DIR}/protoc-gen-openapi
@@ -284,6 +285,8 @@ openapi:
 	@rm -rf ${OPENAPI_GEN_DIR} && mkdir -p ${OPENAPI_GEN_DIR}
 	@find proto -name '*.proto' -printf '%h\0' | sort -zu | xargs -0 -I{} -P${CPUS} bash -c "d={}; mkdir -p ${OPENAPI_GEN_DIR}/"'$$d'" && protoc ${PROTOC_GATEWAY_SPEC_OPT} --openapi_out=fq_schema_naming=true,default_response=false:${OPENAPI_GEN_DIR}/"'$$d'" ${PLATFORM_PREFIX}/"'$$d'"/*.proto"
 	@find ${OPENAPI_GEN_DIR} -name '*.yaml' -printf '%h\0' | sort -zu | xargs -0 -I{} -P${CPUS} bash -c "d={}; $(NODE_MODULES_BIN)/redocly build-docs "'$$d'"/*.yaml -o "'$$d'"/index.html"
+	# @rm -rf $(PWD)/scripts/api-registry/src/data/openapi && mkdir -p $(PWD)/scripts/api-registry/src/data/openapi
+	# @cp -R ${OPENAPI_GEN_DIR} $(PWD)/scripts/api-registry/src/data/openapi
 	@rm -rf ${OPENAPI_GEN_DIR}/**/*.yaml
 
 

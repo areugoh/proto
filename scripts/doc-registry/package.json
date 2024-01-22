@@ -19,5 +19,9 @@
     "preview": "astro preview",
     "astro": "astro"
   },
-  "type": "module"
+  "type": "module",
+  "devDependencies": {
+    "@akebifiky/remark-simple-plantuml": "^1.0.2",
+    "unist-util-visit": "^5.0.0"
+  }
 }

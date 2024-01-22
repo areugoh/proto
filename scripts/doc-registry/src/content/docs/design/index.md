@@ -1,4 +1,4 @@
 ---
-title: Design documents
+title: How TOs
 description: Design document registry
 ---

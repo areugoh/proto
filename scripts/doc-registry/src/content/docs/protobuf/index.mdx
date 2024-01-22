@@ -1,0 +1,118 @@
+---
+title: Setup
+description: ""
+---
+
+import RustIcon from '../../../icons/Rust.astro';
+import GolangIcon from '../../../icons/Golang.astro';
+import NodejsIcon from '../../../icons/Nodejs.astro';
+
+## <GolangIcon slot="icon" class="w-20 h-20 text-golang mb-4 mt-1"/> Golang
+
+This repository contains the client libraries for the [areugoh](https://github.com/areugoh) services.
+It's **automatically generated** from the [proto](https://github.com/areugoh/proto) repository.
+
+### Installation
+
+> **Note:** You can see the latest version [here](https://github.com/areugoh/client-go/tags).
+
+```bash
+$ go get -u github.com/areugoh/client-go@vx.x.x
+```
+
+### Usage
+
+```go
+package main
+
+import (
+    "fmt"
+    "log"
+
+    // inporting greenspace namespace as an example
+    pb "github.com/areugoh/client-go/greenspace/api/v1"
+)
+
+func main() {
+    // ... create client ...
+
+    // create a new request
+    req := &pb.CoastRequest{
+        Location: &pb.LocationResponse{
+            Longitude: 35.4729335,
+            Latitude:  139.6146366,
+            Name:      "Yokohama",
+        },
+    }
+
+    // send the request to the server
+    res, err := client.GetCoast(ctx, req)
+    if err != nil {
+        log.Fatalf("Failed to create greenspace: %v", err)
+    }
+
+    // print the response
+    fmt.Println(res)
+}
+```
+
+## <RustIcon slot="icon" class="w-20 h-20 text-rust mb-4 mt-1"/> Rust
+
+This repository contains the client libraries for the [areugoh](https://github.com/areugoh) services.
+It's **automatically generated** from the [proto](https://github.com/areugoh/proto) repository.
+
+### Installation
+
+> **Note:** You can see the latest version [here](https://github.com/areugoh/client-rust/tags).
+
+```bash
+$ cargo add --git ssh://git@github.com:areugoh/client-rust.git --tag v1.0.0
+```
+
+Your Cargo file should looks like this with `workspaces`:
+
+```toml
+[package]
+name = "example"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+client-rust = { git = "ssh://git@github.com:areugoh/client-rust.git", tag = "v1.0.0" }
+
+[workspace]
+members = [ "client-rust" ]
+```
+
+## <NodejsIcon slot="icon" class="w-20 h-20 text-nodejs mb-4 mt-1"/> Nodejs
+
+This repository contains the client libraries for the [areugoh](https://github.com/areugoh) services.
+It's **automatically generated** from the [proto](https://github.com/areugoh/proto) repository.
+
+### Installation
+
+Update your `~/.npmrc` file to include the following line.
+
+```bash
+# ~/.npmrc
+registry=https://registry.npmjs.org/
+@areugoh:registry=https://npm.pkg.github.com/
+//npm.pkg.github.com/:_authToken=<MD_TO_REQUEST_TOKEN>
+```
+Then install the package.
+
+```bash
+$ npm install @areugoh/client-nodejs@latest
+```
+
+### Usage
+
+```javascript
+import { credentials } from "@grpc/grpc-js";
+import { GreenSpaceClient } from '@areugoh/client-nodejs/proto/greenspace/api/v1/mobile_grpc_pb';
+
+const client = new GreenSpaceClient('localhost:50051', credentials.createInsecure());
+// ...
+```
+
+For more detailed example check [grpc_tools_node_protoc_ts client.js](https://github.com/agreatfool/grpc_tools_node_protoc_ts/blob/v5.0.0/examples/src/grpcjs/client.ts).

@@ -1,4 +1,4 @@
 ---
-title: OpenAPI definitions
+title: Setup
 description: OpenAPI contracts
 ---

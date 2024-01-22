@@ -2,11 +2,14 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import tailwind from '@astrojs/tailwind';
 
+import simplePlantUML from '@akebifiky/remark-simple-plantuml';
+
+
 // https://astro.build/config
 export default defineConfig({
     integrations: [
         starlight({
-            title: "Hoguera's Docs",
+            title: "Hoguera Docs",
             social: {
                 github: 'https://github.com/areugoh/proto',
             },
@@ -28,7 +31,14 @@ export default defineConfig({
                 },
             ],
             customCss: ['./src/tailwind.css'],
+            lastUpdated: true,
+
         }),
         tailwind({ applyBaseStyles: false }),
     ],
+    markdown: {
+        remarkPlugins: [
+            simplePlantUML,
+        ],
+    },
 });

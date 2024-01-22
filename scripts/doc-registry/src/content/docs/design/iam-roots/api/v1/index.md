@@ -1,11 +1,7 @@
 ---
-title: IAM-roots
+title: IAM Roots
 description: example
 ---
-# IAM-roots
-
-[toc]
-
 ## Overview
 
 ```plantuml
