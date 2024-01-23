@@ -22,6 +22,7 @@
   "type": "module",
   "devDependencies": {
     "@akebifiky/remark-simple-plantuml": "^1.0.2",
+    "remark-emoji": "^4.0.1",
     "unist-util-visit": "^5.0.0"
   }
 }

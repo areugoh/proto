@@ -3,6 +3,7 @@ import starlight from '@astrojs/starlight';
 import tailwind from '@astrojs/tailwind';
 
 import simplePlantUML from '@akebifiky/remark-simple-plantuml';
+import remarkEmoji from 'remark-emoji';
 
 
 // https://astro.build/config
@@ -29,6 +30,11 @@ export default defineConfig({
                     autogenerate: { directory: 'openapi' },
                     collapsed: true,
                 },
+                {
+                    label: 'Tutorials',
+                    autogenerate: { directory: 'tutorials' },
+                    collapsed: true,
+                },
             ],
             customCss: ['./src/tailwind.css'],
             lastUpdated: true,
@@ -39,6 +45,10 @@ export default defineConfig({
     markdown: {
         remarkPlugins: [
             simplePlantUML,
+            remarkEmoji,
         ],
+        shikiConfig: {
+            theme: 'github-dark',
+        },
     },
 });
