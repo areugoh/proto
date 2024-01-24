@@ -1,4 +1,35 @@
 
+<a name="v1.22.0"></a>
+## [v1.22.0](https://github.com/GreenSpaceNASA/proto/compare/v1.21.0...v1.22.0)
+
+> 2024-01-24
+
+### Change
+
+* **api-registry:** add basic structure
+* **api-registry:** to use starlight
+* **doc:** update readme & PR message
+* **doc-registry:** restructure docs
+* **doc-registry:** re-arange docs
+* **doc-registry:** update documentation
+* **doc-registry:** style & plantuml
+* **makefile:** update docs generation
+* **workflow:** md template
+
+### Dep
+
+* **dump:** update deps
+
+### Feat
+
+* **api-registry:** recreate astro + tailwind + preact
+* **scripts:** astro landing search for openapi
+
+### Fix
+
+* **makefile:** docs output dir
+
+
 <a name="v1.21.0"></a>
 ## [v1.21.0](https://github.com/GreenSpaceNASA/proto/compare/v1.20.0...v1.21.0)
 
