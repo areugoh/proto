@@ -14,7 +14,20 @@ export default defineConfig({
             social: {
                 github: 'https://github.com/areugoh/proto',
             },
+            editLink: {
+                baseUrl: 'https://github.com/areugoh/proto/edit/main/scripts/doc-registry/',
+            },
             sidebar: [
+                {
+                    label: 'SDK',
+                    autogenerate: { directory: 'sdk' },
+                    collapsed: false,
+                },
+                {
+                    label: 'Start here',
+                    autogenerate: { directory: 'start', collapsed: true },
+                    collapsed: false,
+                },
                 {
                     label: 'Design documents',
                     autogenerate: { directory: 'design' },
@@ -23,16 +36,24 @@ export default defineConfig({
                 {
                     label: 'Protobuf',
                     autogenerate: { directory: 'protobuf' },
+                    badge: {
+                        text: 'Auto',
+                        variant: 'note',
+                    },
                     collapsed: true,
                 },
                 {
                     label: 'OpenAPI',
                     autogenerate: { directory: 'openapi' },
                     collapsed: true,
+                    badge: {
+                        text: 'Auto',
+                        variant: 'note',
+                    },
                 },
                 {
-                    label: 'Tutorials',
-                    autogenerate: { directory: 'tutorials' },
+                    label: 'Guides',
+                    autogenerate: { directory: 'guides' },
                     collapsed: true,
                 },
             ],

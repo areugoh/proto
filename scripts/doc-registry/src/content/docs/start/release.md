@@ -1,6 +1,11 @@
 ---
-title: Automation
-description: Description of the automation process
+title: Release process
+description: Description of the automation for the release process
+sidebar:
+  order: 2
+  badge:
+    text: OPS
+    variant: success
 ---
 
 ## Proto platform
