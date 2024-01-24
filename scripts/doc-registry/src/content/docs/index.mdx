@@ -1,0 +1,60 @@
+---
+title: Welcome to Hoguera's Docs
+description: Hoguera's documentation registry for the Design documents, Protobuf and REST Full API definitions.
+template: splash
+hero:
+  title: |
+    Welcome to
+    <span
+      class="font-black text-transparent
+        bg-clip-text bg-gradient-to-b
+        from-accent-700 to-accent-400
+        dark:from-accent-500 dark:to-accent-200"
+    >
+      Hoguera
+    </span>
+  tagline: Official documentation registry for the Design documents, Protobuf and REST Full API definitions.
+  actions:
+    - text: Docs
+      link: /start
+      icon: open-book
+      variant: primary
+    - text: SDKs
+      link: /sdk
+      variant: minimal
+      icon: right-arrow
+---
+
+import { CardGrid } from '@astrojs/starlight/components';
+import Card from '../../components/Card.astro';
+
+import RustIcon from '../../icons/Rust.astro';
+import GolangIcon from '../../icons/Golang.astro';
+import NodejsIcon from '../../icons/Nodejs.astro';
+
+<CardGrid stagger>
+    <Card
+    title="Golang"
+    className="hover:border-golang dark:hover:border-golang hover:shadow-golang/60"
+    url="https://github.com/areugoh/client-go"
+    subtitle="Client & Server">
+        <GolangIcon slot="icon" class="w-20 h-20 text-golang mb-4 mt-1"/>
+    </Card>
+
+    <Card
+    title="Rust"
+    className="hover:border-rust dark:hover:border-rust hover:shadow-rust/60"
+    url="https://github.com/areugoh/client-rust"
+    subtitle="Client & Server">
+        <RustIcon slot="icon" class="w-12 h-12 text-rust"/>
+    </Card>
+
+    <Card
+    title="Nodejs"
+    className="hover:border-nodejs dark:hover:border-nodejs hover:shadow-nodejs/60"
+    url="https://github.com/areugoh/client-nodejs"
+    subtitle="Client & Server">
+        <NodejsIcon slot="icon" class="w-12 h-12 text-nodejs"/>
+    </Card>
+
+</CardGrid>
