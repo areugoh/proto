@@ -19,13 +19,13 @@ export default defineConfig({
             },
             sidebar: [
                 {
-                    label: 'SDK',
-                    autogenerate: { directory: 'sdk' },
+                    label: 'Start here',
+                    autogenerate: { directory: 'start', collapsed: true },
                     collapsed: false,
                 },
                 {
-                    label: 'Start here',
-                    autogenerate: { directory: 'start', collapsed: true },
+                    label: 'SDK',
+                    autogenerate: { directory: 'sdk' },
                     collapsed: false,
                 },
                 {
@@ -35,7 +35,7 @@ export default defineConfig({
                 },
                 {
                     label: 'Protobuf',
-                    autogenerate: { directory: 'protobuf' },
+                    autogenerate: { directory: 'proto' },
                     badge: {
                         text: 'Auto',
                         variant: 'note',
