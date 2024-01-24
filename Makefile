@@ -279,7 +279,7 @@ dep:
 .PHONY: docs
 docs:
 	@echo "Generating docs..."
-	@${find} proto -name '*.proto' -printf '%h\0' | sort -zu | xargs -0 -I{} -P${CPUS} bash -c "d={}; mkdir -p scripts/doc-registry/src/content/docs/"'$$d'" && protoc ${PROTO_DOCS_OPTS} --doc_opt=./scripts/markdown.tmpl,index.md:google/* --doc_out=${DOC_REGISTRY_DIR}/protobuf/"'$$d'" ${PLATFORM_PREFIX}/"'$$d'"/*.proto"
+	@${find} proto -name '*.proto' -printf '%h\0' | sort -zu | xargs -0 -I{} -P${CPUS} bash -c "d={}; mkdir -p scripts/doc-registry/src/content/docs/"'$$d'" && protoc ${PROTO_DOCS_OPTS} --doc_opt=./scripts/markdown.tmpl,index.md:google/* --doc_out=${DOC_REGISTRY_DIR}/"'$$d'" ${PLATFORM_PREFIX}/"'$$d'"/*.proto"
 	@rm -rf scripts/doc-registry/src/content/docs/{}
 
 PROTOC_GATEWAY_SPEC_OPT=${PROTO_OPTION} \
