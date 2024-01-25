@@ -1,6 +1,8 @@
 ---
 title: Reference
 ---
+import path from 'path';
+
 {{/* ------  Overall Reference ------ */}}
 {{range .Files}}
 {{$file_name := .Name}}[{{.Name}}](#{{.Name}})
@@ -22,8 +24,6 @@ title: Reference
 ## Services
 {{range .Files}}
 {{range .Services}}
-<a name="{{.FullName}}"/>
-
 ### {{.Name}}
 
 {{- if .Description}}
@@ -42,15 +42,14 @@ title: Reference
 
 {{range .Files}}
 {{$file_name := .Name}}
-<a name="{{.Name}}"/>
+<a name="{{.Name}}"></a>
 
-## {{.Name}}
+<!-- FILENAME -->
+## {path.parse("{{.Name}}").base}
 {{.Description}}
 
 {{/* ------  Messages ------ */}}
 {{- range .Messages}}
-<a name="{{.FullName}}"/>
-
 ### {{.LongName}}
 
 {{- if .Description}}
@@ -81,7 +80,7 @@ title: Reference
 
 {{/* ------  Enums ------ */}}
 {{range .Enums}}
-<a name="{{.FullName}}"/>
+<a name="{{.FullName}}"></a>
 
 ### {{.LongName}}
 
@@ -112,7 +111,7 @@ title: Reference
 {{end}} <!-- end enums -->
 
 {{if .HasExtensions}}
-<a name="{{$file_name}}-extensions"/>
+<a name="{{$file_name}}-extensions"></a>
 
 ### File-level Extensions
 | Extension | Type | Base | Number | Description |
