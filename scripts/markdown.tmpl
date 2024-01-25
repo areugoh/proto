@@ -45,7 +45,7 @@ import path from 'path';
 <a name="{{.Name}}"></a>
 
 {/* FILENAME */}
-## {path.parse("{{.Name}}").base}
+<h2 id="{path.parse("{{.Name}}").base}">{path.parse("{{.Name}}").base}</h2>
 {{.Description}}
 
 {{/* ------  Messages ------ */}}
