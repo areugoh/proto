@@ -37,14 +37,14 @@ import path from 'path';
 {{range .Methods -}}
 | `{{.Name}}` <br /><br /> Request: [{{.RequestLongType}}](#{{.RequestFullType}}) <br /> Response: [{{.ResponseLongType}}](#{{.RequestFullType}}) | {{para .Description | replace "|" "\\|"}} |
 {{end}}
-{{end}} <!-- end services -->
-{{end}} <!-- end files -->
+{{end}} {/* end services */}
+{{end}} {/* end files */}
 
 {{range .Files}}
 {{$file_name := .Name}}
 <a name="{{.Name}}"></a>
 
-<!-- FILENAME -->
+{/* FILENAME */}
 ## {path.parse("{{.Name}}").base}
 {{.Description}}
 
@@ -108,7 +108,7 @@ import path from 'path';
 {{end}}
 {{end}}
 
-{{end}} <!-- end enums -->
+{{end}} {/* end enums */}
 
 {{if .HasExtensions}}
 <a name="{{$file_name}}-extensions"></a>
@@ -119,6 +119,6 @@ import path from 'path';
 {{range .Extensions -}}
   | {{.Name}} | {{.LongType}} | {{.ContainingLongType}} | {{.Number}} | {{para .Description | replace "|" "\\|"}}{{if .DefaultValue}} Default: `{{.DefaultValue}}`{{end}} |
 {{end}}
-{{end}} <!-- end HasExtensions -->
+{{end}} {/* end HasExtensions */}
 
 {{end}}
