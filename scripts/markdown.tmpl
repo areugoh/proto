@@ -2,7 +2,6 @@
 title: Reference
 ---
 import path from 'path';
-
 {{/* ------  Overall Reference ------ */}}
 {{range .Files}}
 {{$file_name := .Name}}[{{.Name}}](#{{.Name}})
@@ -45,7 +44,7 @@ import path from 'path';
 <a name="{{.Name}}"></a>
 
 {/* FILENAME */}
-<h2 id="{path.parse("{{.Name}}").base}">{path.parse("{{.Name}}").base}</h2>
+<h2>{path.parse("{{.Name}}").base}</h2>
 {{.Description}}
 
 {{/* ------  Messages ------ */}}
@@ -107,9 +106,7 @@ import path from 'path';
   | {{.Name}} | {{.Number}} | {{para .Description | replace "|" "\\|"}} |
 {{end}}
 {{end}}
-
 {{end}} {/* end enums */}
-
 {{if .HasExtensions}}
 <a name="{{$file_name}}-extensions"></a>
 
@@ -120,5 +117,4 @@ import path from 'path';
   | {{.Name}} | {{.LongType}} | {{.ContainingLongType}} | {{.Number}} | {{para .Description | replace "|" "\\|"}}{{if .DefaultValue}} Default: `{{.DefaultValue}}`{{end}} |
 {{end}}
 {{end}} {/* end HasExtensions */}
-
 {{end}}
