@@ -1,4 +1,14 @@
 
+<a name="v1.23.0"></a>
+## [v1.23.0](https://github.com/GreenSpaceNASA/proto/compare/v1.22.4...v1.23.0)
+
+> 2024-01-25
+
+### Change
+
+* **doc-registry:** remove custom warning
+
+
 <a name="v1.22.4"></a>
 ## [v1.22.4](https://github.com/GreenSpaceNASA/proto/compare/v1.22.3...v1.22.4)
 
