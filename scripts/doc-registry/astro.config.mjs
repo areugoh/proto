@@ -4,6 +4,7 @@ import tailwind from '@astrojs/tailwind';
 
 import simplePlantUML from '@akebifiky/remark-simple-plantuml';
 import remarkEmoji from 'remark-emoji';
+import remarkGfm from 'remark-gfm';
 
 
 // https://astro.build/config
@@ -67,6 +68,7 @@ export default defineConfig({
         remarkPlugins: [
             simplePlantUML,
             remarkEmoji,
+            remarkGfm,
         ],
         shikiConfig: {
             theme: 'github-dark',
