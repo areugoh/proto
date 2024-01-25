@@ -1,4 +1,44 @@
 
+<a name="v1.22.4"></a>
+## [v1.22.4](https://github.com/GreenSpaceNASA/proto/compare/v1.22.3...v1.22.4)
+
+> 2024-01-25
+
+### Fix
+
+* **markdown:** template
+
+
+<a name="v1.22.3"></a>
+## [v1.22.3](https://github.com/GreenSpaceNASA/proto/compare/v1.22.2...v1.22.3)
+
+> 2024-01-25
+
+### Fix
+
+* **markdown:** mdx template toc
+
+
+<a name="v1.22.2"></a>
+## [v1.22.2](https://github.com/GreenSpaceNASA/proto/compare/v1.22.1...v1.22.2)
+
+> 2024-01-25
+
+### Fix
+
+* **markdown:** template
+
+
+<a name="v1.22.1"></a>
+## [v1.22.1](https://github.com/GreenSpaceNASA/proto/compare/v1.22.0...v1.22.1)
+
+> 2024-01-25
+
+### Fix
+
+* **markdown:** template as mdx
+
+
 <a name="v1.22.0"></a>
 ## [v1.22.0](https://github.com/GreenSpaceNASA/proto/compare/v1.21.0...v1.22.0)
 
