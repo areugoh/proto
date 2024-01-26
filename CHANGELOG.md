@@ -1,4 +1,170 @@
 
+<a name="v1.23.2"></a>
+## [v1.23.2](https://github.com/GreenSpaceNASA/proto/compare/v1.23.1...v1.23.2)
+
+> 2024-01-26
+
+### Change
+
+* **doc-registry:** add CD & update docs
+
+
+<a name="v1.23.1"></a>
+## [v1.23.1](https://github.com/GreenSpaceNASA/proto/compare/v1.23.0...v1.23.1)
+
+> 2024-01-26
+
+### Fix
+
+* **markdown:** template
+
+
+<a name="v1.23.0"></a>
+## [v1.23.0](https://github.com/GreenSpaceNASA/proto/compare/v1.22.4...v1.23.0)
+
+> 2024-01-25
+
+### Change
+
+* **doc-registry:** remove custom warning
+
+
+<a name="v1.22.4"></a>
+## [v1.22.4](https://github.com/GreenSpaceNASA/proto/compare/v1.22.3...v1.22.4)
+
+> 2024-01-25
+
+### Fix
+
+* **markdown:** template
+
+
+<a name="v1.22.3"></a>
+## [v1.22.3](https://github.com/GreenSpaceNASA/proto/compare/v1.22.2...v1.22.3)
+
+> 2024-01-25
+
+### Fix
+
+* **markdown:** mdx template toc
+
+
+<a name="v1.22.2"></a>
+## [v1.22.2](https://github.com/GreenSpaceNASA/proto/compare/v1.22.1...v1.22.2)
+
+> 2024-01-25
+
+### Fix
+
+* **markdown:** template
+
+
+<a name="v1.22.1"></a>
+## [v1.22.1](https://github.com/GreenSpaceNASA/proto/compare/v1.22.0...v1.22.1)
+
+> 2024-01-25
+
+### Fix
+
+* **markdown:** template as mdx
+
+
+<a name="v1.22.0"></a>
+## [v1.22.0](https://github.com/GreenSpaceNASA/proto/compare/v1.21.0...v1.22.0)
+
+> 2024-01-24
+
+### Change
+
+* **api-registry:** add basic structure
+* **api-registry:** to use starlight
+* **doc:** update readme & PR message
+* **doc-registry:** restructure docs
+* **doc-registry:** re-arange docs
+* **doc-registry:** update documentation
+* **doc-registry:** style & plantuml
+* **makefile:** update docs generation
+* **workflow:** md template
+
+### Dep
+
+* **dump:** update deps
+
+### Feat
+
+* **api-registry:** recreate astro + tailwind + preact
+* **scripts:** astro landing search for openapi
+
+### Fix
+
+* **makefile:** docs output dir
+
+
+<a name="v1.21.0"></a>
+## [v1.21.0](https://github.com/GreenSpaceNASA/proto/compare/v1.20.0...v1.21.0)
+
+> 2024-01-14
+
+### Feat
+
+* **ci:** split ci & update makefile with pseudo
+
+### Fix
+
+* **ci:** changelog pipeline
+
+
+<a name="v1.20.0"></a>
+## [v1.20.0](https://github.com/GreenSpaceNASA/proto/compare/v1.19.0...v1.20.0)
+
+> 2024-01-13
+
+### Fix
+
+* **ci:** rust and ci errors
+
+
+<a name="v1.19.0"></a>
+## [v1.19.0](https://github.com/GreenSpaceNASA/proto/compare/v1.18.0...v1.19.0)
+
+> 2024-01-13
+
+### Fix
+
+* **ci:** cargo on release
+
+
+<a name="v1.18.0"></a>
+## [v1.18.0](https://github.com/GreenSpaceNASA/proto/compare/v1.17.0...v1.18.0)
+
+> 2024-01-13
+
+### Build
+
+* **deps:** bump golang.org/x/crypto from 0.14.0 to 0.17.0
+
+
+<a name="v1.17.0"></a>
+## [v1.17.0](https://github.com/GreenSpaceNASA/proto/compare/v1.16.0...v1.17.0)
+
+> 2024-01-13
+
+### Feat
+
+* **rust:** add rust release
+* **rust:** add rust with grpc-rs & tonic to check performance
+
+
+<a name="v1.16.0"></a>
+## [v1.16.0](https://github.com/GreenSpaceNASA/proto/compare/v1.15.0...v1.16.0)
+
+> 2023-12-04
+
+### Fix
+
+* **iam-roots:** prefix endpoint
+
+
 <a name="v1.15.0"></a>
 ## [v1.15.0](https://github.com/GreenSpaceNASA/proto/compare/v1.14.0...v1.15.0)
 

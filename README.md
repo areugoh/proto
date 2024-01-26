@@ -1,20 +1,13 @@
 # Proto
+> :books: **More information**: visit the Docs Registry
 
 ## Release
 
-> **Warning:** Make sure you merged the changelog_* branch into main before releasing
+1. Run [Release new version](https://github.com/areugoh/proto/actions/workflows/changelog-tag.yaml) workflow.
+   1. Provide a new version or let the workflow determine the next minor version.
+2. Create and approve a new PR with the changelog file from the release branch with the `changelog_vM.m.p` format.
+3. Merge the PR to the main branch.
 
-```bash
-# Make sure you are in main branch and you have the latest changes
-$ git switch main && git fetch --tags
+## Pseudo version
 
-$ make plugin # if you need to build the plugins
-$ make dep # will install all of the needed dependencies
-
-$ make release # will create a new release in the client repositories
-# if you want to release for a specific client you can do
-$ make release/go
-
-# if you want to release for a specific version you can do
-$ NEXT_VERSION=vx.x.x make release
-```
+Any PR with the `pseudo-version` label will trigger a pseudo version release.

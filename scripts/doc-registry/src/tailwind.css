@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+Add additional Tailwind styles to this file, for example with @layer:
+https://tailwindcss.com/docs/adding-custom-styles#using-css-and-layer
+*/
+
+.header:where(.astro-vrdttmbt) {
+    @apply backdrop-filter backdrop-blur-sm bg-opacity-50 bg-white dark:bg-black dark:bg-opacity-50;
+}
+
+.site-title, .social-icons>a {
+    @apply text-black dark:text-white;
+}
+
+.site-title {
+    @apply scale-100 hover:scale-105 transition-transform duration-200;
+}
+
+[data-has-hero] .header:where(.astro-vrdttmbt) {
+    @apply backdrop-filter backdrop-blur-lg bg-transparent dark:bg-transparent border-transparent;
+}
+
+[data-has-hero] .page {
+    @apply  bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(0,163,108,0.15),rgba(255,255,255,0))];
+}
+
+:where(.astro-3ii7xxms)[aria-current=page] {
+    @apply dark:text-black text-white;
+}
+
+.sidebar-pane {
+    @apply bg-white dark:bg-gray-900 dark:border-gray-800;
+}

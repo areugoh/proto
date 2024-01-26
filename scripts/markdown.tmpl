@@ -1,8 +1,12 @@
-# Documentation
-<a name="top"/>
-
-{{/* ------  Overall Reference ------ */}}
-## Reference
+---
+{{$title := ""}}{{$len := len .Files}}
+{{range $index, $el := .Files}}
+{{$baseName := $el.Name | splitList "/" | last | splitList "." | first | title }}
+{{if eq (add $index 1) $len}}{{$title = (print $title $baseName "")}}{{else}}{{$title = (print $title $baseName ", ")}}{{end}}
+{{end}}
+title: {{$title}}
+---
+<!-- ------  Overall Reference ------ -->
 {{range .Files}}
 {{$file_name := .Name}}[{{.Name}}](#{{.Name}})
 <details>
@@ -19,12 +23,10 @@
 </details>
 {{end}}
 
-{{/* ------  Service and Methods ------ */}}
+<!-- ------  Service and Methods ------ -->
 ## Services
 {{range .Files}}
 {{range .Services}}
-<a name="{{.FullName}}"/>
-
 ### {{.Name}}
 
 {{- if .Description}}
@@ -38,21 +40,20 @@
 {{range .Methods -}}
 | `{{.Name}}` <br /><br /> Request: [{{.RequestLongType}}](#{{.RequestFullType}}) <br /> Response: [{{.ResponseLongType}}](#{{.RequestFullType}}) | {{para .Description | replace "|" "\\|"}} |
 {{end}}
-{{end}} <!-- end services -->
-{{end}} <!-- end files -->
+{{end}}
+{{end}}
 
 {{range .Files}}
 {{$file_name := .Name}}
-<a name="{{.Name}}"/>
-<p align="right"><a href="#top">Top</a></p>
+<a name="{{.Name}}"></a>
 
-## {{.Name}}
+<!-- ------  Filename ------ -->
+## {{ .Name | splitList "/" | last | title }}
 {{.Description}}
 
-{{/* ------  Messages ------ */}}
+<!-- ------  Messages ------ -->
 {{- range .Messages}}
-<a name="{{.FullName}}"/>
-
+<a name="{{.FullName}}"></a>
 ### {{.LongName}}
 
 {{- if .Description}}
@@ -81,9 +82,9 @@
 
 {{- end}}
 
-{{/* ------  Enums ------ */}}
+<!-- ------  Enums ------ -->
 {{range .Enums}}
-<a name="{{.FullName}}"/>
+<a name="{{.FullName}}"></a>
 
 ### {{.LongName}}
 
@@ -110,11 +111,9 @@
   | {{.Name}} | {{.Number}} | {{para .Description | replace "|" "\\|"}} |
 {{end}}
 {{end}}
-
-{{end}} <!-- end enums -->
-
+{{end}}
 {{if .HasExtensions}}
-<a name="{{$file_name}}-extensions"/>
+<a name="{{$file_name}}-extensions"></a>
 
 ### File-level Extensions
 | Extension | Type | Base | Number | Description |
@@ -122,6 +121,5 @@
 {{range .Extensions -}}
   | {{.Name}} | {{.LongType}} | {{.ContainingLongType}} | {{.Number}} | {{para .Description | replace "|" "\\|"}}{{if .DefaultValue}} Default: `{{.DefaultValue}}`{{end}} |
 {{end}}
-{{end}} <!-- end HasExtensions -->
-
+{{end}}
 {{end}}

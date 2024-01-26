@@ -1,8 +1,18 @@
-# Documentation
-<a name="top"/>
+---
 
 
-## Reference
+
+
+
+
+
+
+
+
+
+title: Error, Profile, Webauthn
+---
+<!-- ------  Overall Reference ------ -->
 
 [hoguera/platform/proto/iam-roots/api/v1/error.proto](#hoguera/platform/proto/iam-roots/api/v1/error.proto)
 <details>
@@ -53,15 +63,13 @@
 </details>
 
 
-
+<!-- ------  Service and Methods ------ -->
 ## Services
 
- <!-- end services -->
-
- <!-- end services -->
 
 
-<a name="hoguera.platform.iamroots.api.v1.Webauthn"/>
+
+
 
 ### Webauthn
 *Description comment will be shown here*
@@ -71,20 +79,19 @@
 | `StartRegistration` <br /><br /> Request: [StartRegistrationResquest](#hoguera.platform.iamroots.api.v1.StartRegistrationResquest) <br /> Response: [StartRegistrationResponse](#hoguera.platform.iamroots.api.v1.StartRegistrationResquest) | <para></para> |
 | `FinishRegistration` <br /><br /> Request: [FinishRegistrationRequest](#hoguera.platform.iamroots.api.v1.FinishRegistrationRequest) <br /> Response: [FinishRegistrationResponse](#hoguera.platform.iamroots.api.v1.FinishRegistrationRequest) | <para></para> |
 
- <!-- end services -->
- <!-- end files -->
 
 
 
-<a name="hoguera/platform/proto/iam-roots/api/v1/error.proto"/>
-<p align="right"><a href="#top">Top</a></p>
-
-## hoguera/platform/proto/iam-roots/api/v1/error.proto
 
 
+<a name="hoguera/platform/proto/iam-roots/api/v1/error.proto"></a>
 
-<a name="hoguera.platform.iamroots.api.v1.PreconditionErrorDetail"/>
+<!-- ------  Filename ------ -->
+## Error.Proto
 
+
+<!-- ------  Messages ------ -->
+<a name="hoguera.platform.iamroots.api.v1.PreconditionErrorDetail"></a>
 ### PreconditionErrorDetail
 PreconditionErrorDetail is the error detail for precondition errors.
 
@@ -92,9 +99,9 @@ PreconditionErrorDetail is the error detail for precondition errors.
 
 
 
+<!-- ------  Enums ------ -->
 
-
-<a name="hoguera.platform.iamroots.api.v1.PreconditionErrorDetail.GenericErrorType"/>
+<a name="hoguera.platform.iamroots.api.v1.PreconditionErrorDetail.GenericErrorType"></a>
 
 ### PreconditionErrorDetail.GenericErrorType
 Error type for Generic
@@ -108,8 +115,7 @@ Error type for Generic
 
 
 
-
-<a name="hoguera.platform.iamroots.api.v1.PreconditionErrorDetail.TokenErrorType"/>
+<a name="hoguera.platform.iamroots.api.v1.PreconditionErrorDetail.TokenErrorType"></a>
 
 ### PreconditionErrorDetail.TokenErrorType
 Error type for Token
@@ -123,8 +129,7 @@ Error type for Token
 
 
 
-
-<a name="hoguera.platform.iamroots.api.v1.PreconditionErrorDetail.UserErrorType"/>
+<a name="hoguera.platform.iamroots.api.v1.PreconditionErrorDetail.UserErrorType"></a>
 
 ### PreconditionErrorDetail.UserErrorType
 Error type for User
@@ -140,8 +145,7 @@ Error type for User
 
 
 
-
-<a name="hoguera.platform.iamroots.api.v1.PreconditionErrorDetail.WebauthnErrorType"/>
+<a name="hoguera.platform.iamroots.api.v1.PreconditionErrorDetail.WebauthnErrorType"></a>
 
 ### PreconditionErrorDetail.WebauthnErrorType
 Error type for Webauthn
@@ -165,21 +169,17 @@ Error type for Webauthn
 </details>
 
 
- <!-- end enums -->
-
- <!-- end HasExtensions -->
 
 
 
-<a name="hoguera/platform/proto/iam-roots/api/v1/profile.proto"/>
-<p align="right"><a href="#top">Top</a></p>
+<a name="hoguera/platform/proto/iam-roots/api/v1/profile.proto"></a>
 
-## hoguera/platform/proto/iam-roots/api/v1/profile.proto
+<!-- ------  Filename ------ -->
+## Profile.Proto
 
 
-
-<a name="hoguera.platform.iamroots.api.v1.User"/>
-
+<!-- ------  Messages ------ -->
+<a name="hoguera.platform.iamroots.api.v1.User"></a>
 ### User
 *Description comment will be shown here (markdown supported)*
 
@@ -196,22 +196,19 @@ Error type for Webauthn
 
 
 
-
- <!-- end enums -->
-
- <!-- end HasExtensions -->
+<!-- ------  Enums ------ -->
 
 
 
-<a name="hoguera/platform/proto/iam-roots/api/v1/webauthn.proto"/>
-<p align="right"><a href="#top">Top</a></p>
 
-## hoguera/platform/proto/iam-roots/api/v1/webauthn.proto
+<a name="hoguera/platform/proto/iam-roots/api/v1/webauthn.proto"></a>
+
+<!-- ------  Filename ------ -->
+## Webauthn.Proto
 
 
-
-<a name="hoguera.platform.iamroots.api.v1.AttestationResponse"/>
-
+<!-- ------  Messages ------ -->
+<a name="hoguera.platform.iamroots.api.v1.AttestationResponse"></a>
 ### AttestationResponse
 *Description comment will be shown here (markdown supported)*
 
@@ -226,8 +223,7 @@ Error type for Webauthn
 
 
 
-<a name="hoguera.platform.iamroots.api.v1.AuthenticatorSelection"/>
-
+<a name="hoguera.platform.iamroots.api.v1.AuthenticatorSelection"></a>
 ### AuthenticatorSelection
 *Description comment will be shown here (markdown supported)*
 
@@ -243,8 +239,7 @@ Error type for Webauthn
 
 
 
-<a name="hoguera.platform.iamroots.api.v1.FinishRegistrationRequest"/>
-
+<a name="hoguera.platform.iamroots.api.v1.FinishRegistrationRequest"></a>
 ### FinishRegistrationRequest
 *Description comment will be shown here (markdown supported)*
 
@@ -263,8 +258,7 @@ Error type for Webauthn
 
 
 
-<a name="hoguera.platform.iamroots.api.v1.FinishRegistrationResponse"/>
-
+<a name="hoguera.platform.iamroots.api.v1.FinishRegistrationResponse"></a>
 ### FinishRegistrationResponse
 *Description comment will be shown here (markdown supported)*
 
@@ -278,8 +272,7 @@ Error type for Webauthn
 
 
 
-<a name="hoguera.platform.iamroots.api.v1.PuKeyCredParams"/>
-
+<a name="hoguera.platform.iamroots.api.v1.PuKeyCredParams"></a>
 ### PuKeyCredParams
 *Description comment will be shown here (markdown supported)*
 
@@ -294,8 +287,7 @@ Error type for Webauthn
 
 
 
-<a name="hoguera.platform.iamroots.api.v1.PublicKey"/>
-
+<a name="hoguera.platform.iamroots.api.v1.PublicKey"></a>
 ### PublicKey
 *Description comment will be shown here (markdown supported)*
 
@@ -315,8 +307,7 @@ Error type for Webauthn
 
 
 
-<a name="hoguera.platform.iamroots.api.v1.ReplyingParty"/>
-
+<a name="hoguera.platform.iamroots.api.v1.ReplyingParty"></a>
 ### ReplyingParty
 *Description comment will be shown here (markdown supported)*
 
@@ -331,8 +322,7 @@ Error type for Webauthn
 
 
 
-<a name="hoguera.platform.iamroots.api.v1.StartRegistrationResponse"/>
-
+<a name="hoguera.platform.iamroots.api.v1.StartRegistrationResponse"></a>
 ### StartRegistrationResponse
 *Description comment will be shown here (markdown supported)*
 
@@ -346,8 +336,7 @@ Error type for Webauthn
 
 
 
-<a name="hoguera.platform.iamroots.api.v1.StartRegistrationResquest"/>
-
+<a name="hoguera.platform.iamroots.api.v1.StartRegistrationResquest"></a>
 ### StartRegistrationResquest
 *Description comment will be shown here (markdown supported)*
 
@@ -362,9 +351,7 @@ Error type for Webauthn
 
 
 
+<!-- ------  Enums ------ -->
 
- <!-- end enums -->
-
- <!-- end HasExtensions -->
 
 

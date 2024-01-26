@@ -1,8 +1,12 @@
-# Documentation
-<a name="top"/>
+---
 
 
-## Reference
+
+
+
+title: Mobile
+---
+<!-- ------  Overall Reference ------ -->
 
 [hoguera/platform/proto/greenspace/api/v1/mobile.proto](#hoguera/platform/proto/greenspace/api/v1/mobile.proto)
 <details>
@@ -24,11 +28,9 @@
 </details>
 
 
-
+<!-- ------  Service and Methods ------ -->
 ## Services
 
-
-<a name="hoguera.platform.greenspace.api.v1.GreenSpace"/>
 
 ### GreenSpace
 GreenSpace is the service that provides all the information for NASA's GreenSpace app.
@@ -40,20 +42,19 @@ GreenSpace is the service that provides all the information for NASA's GreenSpac
 | `GetLocation` <br /><br /> Request: [LocationRequest](#hoguera.platform.greenspace.api.v1.LocationRequest) <br /> Response: [LocationResponse](#hoguera.platform.greenspace.api.v1.LocationRequest) | <para>GetLocation returns the location of the user.</para> |
 | `GetV1` <br /><br /> Request: [.google.protobuf.Empty](#google.protobuf.Empty) <br /> Response: [V1Response](#google.protobuf.Empty) | <para>GetV1 is the BFF endpoint. It returns the location of the user, the nearest coast and the animals in danger.</para> |
 
- <!-- end services -->
- <!-- end files -->
 
 
 
-<a name="hoguera/platform/proto/greenspace/api/v1/mobile.proto"/>
-<p align="right"><a href="#top">Top</a></p>
-
-## hoguera/platform/proto/greenspace/api/v1/mobile.proto
 
 
+<a name="hoguera/platform/proto/greenspace/api/v1/mobile.proto"></a>
 
-<a name="hoguera.platform.greenspace.api.v1.Animal"/>
+<!-- ------  Filename ------ -->
+## Mobile.Proto
 
+
+<!-- ------  Messages ------ -->
+<a name="hoguera.platform.greenspace.api.v1.Animal"></a>
 ### Animal
 Animals the animals that are in danger in the coast.
 
@@ -69,8 +70,7 @@ Animals the animals that are in danger in the coast.
 
 
 
-<a name="hoguera.platform.greenspace.api.v1.AnimalsRequest"/>
-
+<a name="hoguera.platform.greenspace.api.v1.AnimalsRequest"></a>
 ### AnimalsRequest
 AnimalsRequest the user location is required to get the nearest animals living in the coast.
 
@@ -84,8 +84,7 @@ AnimalsRequest the user location is required to get the nearest animals living i
 
 
 
-<a name="hoguera.platform.greenspace.api.v1.CoastRequest"/>
-
+<a name="hoguera.platform.greenspace.api.v1.CoastRequest"></a>
 ### CoastRequest
 CoastRequest the user location is required to get the nearest coast.
 
@@ -99,8 +98,7 @@ CoastRequest the user location is required to get the nearest coast.
 
 
 
-<a name="hoguera.platform.greenspace.api.v1.CoastResponse"/>
-
+<a name="hoguera.platform.greenspace.api.v1.CoastResponse"></a>
 ### CoastResponse
 CoastResponse the nearest coast to the user location.
 
@@ -117,8 +115,7 @@ CoastResponse the nearest coast to the user location.
 
 
 
-<a name="hoguera.platform.greenspace.api.v1.LocationRequest"/>
-
+<a name="hoguera.platform.greenspace.api.v1.LocationRequest"></a>
 ### LocationRequest
 LocationRequest the IP of the user is required to get the location.
 
@@ -132,8 +129,7 @@ LocationRequest the IP of the user is required to get the location.
 
 
 
-<a name="hoguera.platform.greenspace.api.v1.LocationResponse"/>
-
+<a name="hoguera.platform.greenspace.api.v1.LocationResponse"></a>
 ### LocationResponse
 Location
 
@@ -149,8 +145,7 @@ Location
 
 
 
-<a name="hoguera.platform.greenspace.api.v1.V1Response"/>
-
+<a name="hoguera.platform.greenspace.api.v1.V1Response"></a>
 ### V1Response
 V1Response the response of the V1 endpoint. It contains the location of the user, the nearest coast and the animals
 in danger. It serves as a wrapper for the other responses. It is used to avoid multiple requests to the API and
@@ -169,9 +164,9 @@ follow the BFF pattern.
 
 
 
+<!-- ------  Enums ------ -->
 
-
-<a name="hoguera.platform.greenspace.api.v1.Condition"/>
+<a name="hoguera.platform.greenspace.api.v1.Condition"></a>
 
 ### Condition
 Condition, the condition of the water. In house algorithm to define the condition.
@@ -193,8 +188,5 @@ Condition, the condition of the water. In house algorithm to define the conditio
 </details>
 
 
- <!-- end enums -->
-
- <!-- end HasExtensions -->
 
 

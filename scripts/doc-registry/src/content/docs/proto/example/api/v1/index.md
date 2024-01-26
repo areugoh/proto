@@ -1,8 +1,12 @@
-# Documentation
-<a name="top"/>
+---
 
 
-## Reference
+
+
+
+title: Ping
+---
+<!-- ------  Overall Reference ------ -->
 
 [hoguera/platform/proto/example/api/v1/ping.proto](#hoguera/platform/proto/example/api/v1/ping.proto)
 <details>
@@ -17,11 +21,9 @@
 </details>
 
 
-
+<!-- ------  Service and Methods ------ -->
 ## Services
 
-
-<a name="hoguera.platform.example.api.v1.Ping"/>
 
 ### Ping
 *Description comment will be shown here*
@@ -30,20 +32,19 @@
 | ----------- | ------------|
 | `Ping` <br /><br /> Request: [.google.protobuf.Empty](#google.protobuf.Empty) <br /> Response: [PingResponse](#google.protobuf.Empty) | <para></para> |
 
- <!-- end services -->
- <!-- end files -->
 
 
 
-<a name="hoguera/platform/proto/example/api/v1/ping.proto"/>
-<p align="right"><a href="#top">Top</a></p>
-
-## hoguera/platform/proto/example/api/v1/ping.proto
 
 
+<a name="hoguera/platform/proto/example/api/v1/ping.proto"></a>
 
-<a name="hoguera.platform.example.api.v1.PingResponse"/>
+<!-- ------  Filename ------ -->
+## Ping.Proto
 
+
+<!-- ------  Messages ------ -->
+<a name="hoguera.platform.example.api.v1.PingResponse"></a>
 ### PingResponse
 *Description comment will be shown here (markdown supported)*
 
@@ -58,9 +59,7 @@
 
 
 
+<!-- ------  Enums ------ -->
 
- <!-- end enums -->
-
- <!-- end HasExtensions -->
 
 
