@@ -2,11 +2,7 @@
 
 - [ ] Feature
 - [ ] Bugfix
-- [ ] Tests
 - [ ] Documentation
-- [ ] Release
-- [ ] CI/CD
-- [ ] Refactor
 - [ ] Other
 
 ## What does this PR do?

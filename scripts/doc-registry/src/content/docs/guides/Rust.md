@@ -6,8 +6,8 @@ sidebar:
     text: WIP
     variant: caution
 ---
-:::caution
-Refer to the <a href="/start/#-rust">setup</a> section for the setup instructions.
+:::tip[Setup]
+Refer to the <a href="/start/#-rust">setup</a> section to start using the Rust client.
 :::
 
 ## Server
