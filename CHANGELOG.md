@@ -1,4 +1,14 @@
 
+<a name="v1.23.1"></a>
+## [v1.23.1](https://github.com/GreenSpaceNASA/proto/compare/v1.23.0...v1.23.1)
+
+> 2024-01-26
+
+### Fix
+
+* **markdown:** template
+
+
 <a name="v1.23.0"></a>
 ## [v1.23.0](https://github.com/GreenSpaceNASA/proto/compare/v1.22.4...v1.23.0)
 
