@@ -1,4 +1,4 @@
-name: "Publish doc registry"
+name: "Publish doc registry in Vercel"
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
@@ -6,11 +6,17 @@ on:
   push:
     tags:
       - 'v**'
+  pull_request:
+    branches:
+      - main
+    types:
+      - closed
 permissions:
   contents: write
 
 jobs:
-  openapi:
+  starlight:
+    if: ${{contains(github.head_ref, 'changelog') || contains(github.ref_type, 'tag')}}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository

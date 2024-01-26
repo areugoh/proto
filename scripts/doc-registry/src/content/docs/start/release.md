@@ -36,12 +36,12 @@ Any PR with the `pseudo-version` label will trigger a pseudo version release. Th
 The version will be in the format of `vM.m.p-pre.<sha>`, where `<sha>` is the short SHA of the commit.
 
 If the pseudo version is successfully released, the workflow will comment on the PR with the pseudo version links of
-all the clients, [Example](/design/examples/pseudo-version/).
+all the clients, [Example](/start/examples/pseudo-version/).
 
 ### OpenAPI
 
 As part of the BFF, we need to generate an OpenAPI spec for the REST API.
 A new version of the documentation will be generated on every new tag with `vM.m.p` format.
-The documentation will be available in [gh-pages](https://areugoh.github.io/proto), where you could search for any server in the proto library.
+The documentation will be available in [gh-pages](/openapi/), where you could search for any server in the proto library.
 
 We only generate the documentation for the latest version so you won't be able to search for any of the previous or pseudo versions.

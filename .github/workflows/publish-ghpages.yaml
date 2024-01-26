@@ -1,14 +1,19 @@
-name: "Generate openapi docs"
+name: "Publish openapi definitions in ghpages"
 on:
   push:
     tags:
       - 'v**'
+  pull_request:
+    branches:
+      - main
+    types:
+      - closed
 permissions:
   contents: write
 
 jobs:
   openapi:
-    if: ${{!contains(github.head_ref, 'changelog')}}
+    if: ${{contains(github.head_ref, 'changelog') || contains(github.ref_type, 'tag')}}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
