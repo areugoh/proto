@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+package hoguera.platform.iamroots.api.v1.iamrootsapi;
+
+option go_package = "iam-roots/api/v1/iamrootsapi;iamrootsapi";
+
+import "google/api/annotations.proto";
+import "hoguera/platform/proto/iam-roots/api/v1/webauthn.proto";
+
+service IamRootsApi {
+    rpc StartWebauthnRegistration(StartWebauthnRegistrationRequest) returns (StartWebauthnRegistrationResponse) {
+        option (google.api.http) = {
+            post: "/registration/webauthn/start"
+            body: "*"
+        };
+    }
+    rpc FinishWebauthnRegistration(FinishWebauthnRegistrationRequest) returns (FinishWebauthnRegistrationResponse) {
+        option (google.api.http) = {
+            post: "/registration/webauthn/finish"
+            body: "*"
+        };
+    }
+}
+
+
+message StartWebauthnRegistrationRequest {
+    string email = 1;
+}
+
+message StartWebauthnRegistrationResponse {
+    hoguera.platform.iamroots.api.v1.PublicKey public_key = 1;
+}
+
+message FinishWebauthnRegistrationRequest {
+    string email = 1;
+    string id = 2;
+    bytes raw_id = 3;
+    string type = 4;
+    repeated string transports = 5;
+    hoguera.platform.iamroots.api.v1.AttestationResponse response = 6;
+}
+
+message FinishWebauthnRegistrationResponse {
+    string status = 1;
+}
