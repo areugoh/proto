@@ -9,7 +9,9 @@ sidebar:
 ---
 
 ## Proto platform
-> :package: **Repository**: [https://github.com/areugoh/proto](https://github.com/areugoh/proto)
+:::note[Repository]
+[https://github.com/areugoh/proto](https://github.com/areugoh/proto)
+:::
 
 ### Release
 
