@@ -17,6 +17,7 @@ permissions:
 jobs:
   starlight:
     if: ${{contains(github.head_ref, 'changelog') || contains(github.ref_type, 'tag')}}
+    environment: production
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
