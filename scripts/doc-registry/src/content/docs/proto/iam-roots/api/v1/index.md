@@ -10,9 +10,23 @@
 
 
 
-title: Error, Profile, Webauthn
+
+
+
+title: Account_management, Error, User_account, Webauthn
 ---
 <!-- ------  Overall Reference ------ -->
+
+[hoguera/platform/proto/iam-roots/api/v1/account_management.proto](#hoguera/platform/proto/iam-roots/api/v1/account_management.proto)
+<details>
+<summary>Click to show</summary>
+
+### Messages
+
+### Enums
+
+
+</details>
 
 [hoguera/platform/proto/iam-roots/api/v1/error.proto](#hoguera/platform/proto/iam-roots/api/v1/error.proto)
 <details>
@@ -30,11 +44,17 @@ title: Error, Profile, Webauthn
 
 </details>
 
-[hoguera/platform/proto/iam-roots/api/v1/profile.proto](#hoguera/platform/proto/iam-roots/api/v1/profile.proto)
+[hoguera/platform/proto/iam-roots/api/v1/user_account.proto](#hoguera/platform/proto/iam-roots/api/v1/user_account.proto)
 <details>
 <summary>Click to show</summary>
 
 ### Messages
+  - [DeleteUserInfoRequest](#hoguera.platform.iamroots.api.v1.DeleteUserInfoRequest)
+  - [DeleteUserInfoResponse](#hoguera.platform.iamroots.api.v1.DeleteUserInfoResponse)
+  - [GetUserInfoRequest](#hoguera.platform.iamroots.api.v1.GetUserInfoRequest)
+  - [GetUserInfoResponse](#hoguera.platform.iamroots.api.v1.GetUserInfoResponse)
+  - [InsertUserInfoRequest](#hoguera.platform.iamroots.api.v1.InsertUserInfoRequest)
+  - [InsertUserInfoResponse](#hoguera.platform.iamroots.api.v1.InsertUserInfoResponse)
   - [User](#hoguera.platform.iamroots.api.v1.User)
 
 ### Enums
@@ -54,8 +74,10 @@ title: Error, Profile, Webauthn
   - [PuKeyCredParams](#hoguera.platform.iamroots.api.v1.PuKeyCredParams)
   - [PublicKey](#hoguera.platform.iamroots.api.v1.PublicKey)
   - [ReplyingParty](#hoguera.platform.iamroots.api.v1.ReplyingParty)
+  - [RevokeConnectionRequest](#hoguera.platform.iamroots.api.v1.RevokeConnectionRequest)
+  - [RevokeConnectionResponse](#hoguera.platform.iamroots.api.v1.RevokeConnectionResponse)
+  - [StartRegistrationRequest](#hoguera.platform.iamroots.api.v1.StartRegistrationRequest)
   - [StartRegistrationResponse](#hoguera.platform.iamroots.api.v1.StartRegistrationResponse)
-  - [StartRegistrationResquest](#hoguera.platform.iamroots.api.v1.StartRegistrationResquest)
 
 ### Enums
 
@@ -71,15 +93,41 @@ title: Error, Profile, Webauthn
 
 
 
+### UserAccount
+*Description comment will be shown here*
+
+| Method Name | Description |
+| ----------- | ------------|
+| `GetUserInfo` <br /><br /> Request: [GetUserInfoRequest](#hoguera.platform.iamroots.api.v1.GetUserInfoRequest) <br /> Response: [GetUserInfoResponse](#hoguera.platform.iamroots.api.v1.GetUserInfoRequest) | <para></para> |
+| `InsertUserInfo` <br /><br /> Request: [InsertUserInfoRequest](#hoguera.platform.iamroots.api.v1.InsertUserInfoRequest) <br /> Response: [InsertUserInfoResponse](#hoguera.platform.iamroots.api.v1.InsertUserInfoRequest) | <para></para> |
+| `DeleteUserInfo` <br /><br /> Request: [DeleteUserInfoRequest](#hoguera.platform.iamroots.api.v1.DeleteUserInfoRequest) <br /> Response: [DeleteUserInfoResponse](#hoguera.platform.iamroots.api.v1.DeleteUserInfoRequest) | <para></para> |
+
+
+
+
 ### Webauthn
 *Description comment will be shown here*
 
 | Method Name | Description |
 | ----------- | ------------|
-| `StartRegistration` <br /><br /> Request: [StartRegistrationResquest](#hoguera.platform.iamroots.api.v1.StartRegistrationResquest) <br /> Response: [StartRegistrationResponse](#hoguera.platform.iamroots.api.v1.StartRegistrationResquest) | <para></para> |
+| `StartRegistration` <br /><br /> Request: [StartRegistrationRequest](#hoguera.platform.iamroots.api.v1.StartRegistrationRequest) <br /> Response: [StartRegistrationResponse](#hoguera.platform.iamroots.api.v1.StartRegistrationRequest) | <para></para> |
 | `FinishRegistration` <br /><br /> Request: [FinishRegistrationRequest](#hoguera.platform.iamroots.api.v1.FinishRegistrationRequest) <br /> Response: [FinishRegistrationResponse](#hoguera.platform.iamroots.api.v1.FinishRegistrationRequest) | <para></para> |
+| `RevokeConnection` <br /><br /> Request: [RevokeConnectionRequest](#hoguera.platform.iamroots.api.v1.RevokeConnectionRequest) <br /> Response: [RevokeConnectionResponse](#hoguera.platform.iamroots.api.v1.RevokeConnectionRequest) | <para></para> |
 
 
+
+
+
+
+<a name="hoguera/platform/proto/iam-roots/api/v1/account_management.proto"></a>
+
+<!-- ------  Filename ------ -->
+## Account_management.Proto
+
+
+<!-- ------  Messages ------ -->
+
+<!-- ------  Enums ------ -->
 
 
 
@@ -109,7 +157,7 @@ Error type for Generic
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| UNKOWN | 0 | <para>Default code</para> |
+| UNKNOWN | 0 | <para>Default code</para> |
 | MISSING_PARAMETER | 1 | <para>The request is missing a required parameter</para> |
 | INVALID_PARAMETER | 2 | <para>The request has an invalid parameter</para> |
 
@@ -172,16 +220,80 @@ Error type for Webauthn
 
 
 
-<a name="hoguera/platform/proto/iam-roots/api/v1/profile.proto"></a>
+<a name="hoguera/platform/proto/iam-roots/api/v1/user_account.proto"></a>
 
 <!-- ------  Filename ------ -->
-## Profile.Proto
+## User_account.Proto
 
 
 <!-- ------  Messages ------ -->
+<a name="hoguera.platform.iamroots.api.v1.DeleteUserInfoRequest"></a>
+### DeleteUserInfoRequest
+*Description comment will be shown here (markdown supported)*
+
+
+#### Fields
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id | [string](#string) |  | <para></para> |
+
+
+
+
+<a name="hoguera.platform.iamroots.api.v1.DeleteUserInfoResponse"></a>
+### DeleteUserInfoResponse
+*Description comment will be shown here (markdown supported)*
+
+
+
+
+<a name="hoguera.platform.iamroots.api.v1.GetUserInfoRequest"></a>
+### GetUserInfoRequest
+*Description comment will be shown here (markdown supported)*
+
+
+#### Fields
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id | [string](#string) |  | <para></para> |
+
+
+
+
+<a name="hoguera.platform.iamroots.api.v1.GetUserInfoResponse"></a>
+### GetUserInfoResponse
+*Description comment will be shown here (markdown supported)*
+
+
+
+
+<a name="hoguera.platform.iamroots.api.v1.InsertUserInfoRequest"></a>
+### InsertUserInfoRequest
+*Description comment will be shown here (markdown supported)*
+
+
+#### Fields
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| email | [string](#string) |  | <para></para> |
+| subject | [string](#string) |  | <para></para> |
+
+
+
+
+<a name="hoguera.platform.iamroots.api.v1.InsertUserInfoResponse"></a>
+### InsertUserInfoResponse
+*Description comment will be shown here (markdown supported)*
+
+
+
+
 <a name="hoguera.platform.iamroots.api.v1.User"></a>
 ### User
-*Description comment will be shown here (markdown supported)*
+Candidate to be rewritten
 
 
 #### Fields
@@ -322,6 +434,49 @@ Error type for Webauthn
 
 
 
+<a name="hoguera.platform.iamroots.api.v1.RevokeConnectionRequest"></a>
+### RevokeConnectionRequest
+*Description comment will be shown here (markdown supported)*
+
+
+#### Fields
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| email | [string](#string) |  | <para></para> |
+| id | [string](#string) |  | <para></para> |
+
+
+
+
+<a name="hoguera.platform.iamroots.api.v1.RevokeConnectionResponse"></a>
+### RevokeConnectionResponse
+*Description comment will be shown here (markdown supported)*
+
+
+#### Fields
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| status | [string](#string) |  | <para></para> |
+
+
+
+
+<a name="hoguera.platform.iamroots.api.v1.StartRegistrationRequest"></a>
+### StartRegistrationRequest
+*Description comment will be shown here (markdown supported)*
+
+
+#### Fields
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| email | [string](#string) |  | <para></para> |
+
+
+
+
 <a name="hoguera.platform.iamroots.api.v1.StartRegistrationResponse"></a>
 ### StartRegistrationResponse
 *Description comment will be shown here (markdown supported)*
@@ -332,20 +487,6 @@ Error type for Webauthn
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | public_key | [PublicKey](#hoguera.platform.iamroots.api.v1.PublicKey) |  | <para></para> |
-
-
-
-
-<a name="hoguera.platform.iamroots.api.v1.StartRegistrationResquest"></a>
-### StartRegistrationResquest
-*Description comment will be shown here (markdown supported)*
-
-
-#### Fields
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| email | [string](#string) |  | <para></para> |
 
 
 

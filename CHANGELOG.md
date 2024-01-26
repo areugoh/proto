@@ -1,4 +1,26 @@
 
+<a name="v1.24.0"></a>
+## [v1.24.0](https://github.com/GreenSpaceNASA/proto/compare/v1.23.2...v1.24.0)
+
+> 2024-01-26
+
+### Add
+
+* **iam-xylem:** create oidc service
+
+### Change
+
+* **iam-roots:** fix linting
+* **iam-roots:** rename profile to user_account
+* **iamroots:** add bff layer
+* **webauthn:** add RevokeConnection
+
+### Fix
+
+* **cd:** doc-registry
+* **iam-roots:** rename bff
+
+
 <a name="v1.23.2"></a>
 ## [v1.23.2](https://github.com/GreenSpaceNASA/proto/compare/v1.23.1...v1.23.2)
 
