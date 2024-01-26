@@ -1,5 +1,5 @@
 ---
-title: Setup
+title: Definitions
 description: OpenAPI contracts
 ---
 :::danger
