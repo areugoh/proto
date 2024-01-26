@@ -1,4 +1,14 @@
 
+<a name="v1.23.2"></a>
+## [v1.23.2](https://github.com/GreenSpaceNASA/proto/compare/v1.23.1...v1.23.2)
+
+> 2024-01-26
+
+### Change
+
+* **doc-registry:** add CD & update docs
+
+
 <a name="v1.23.1"></a>
 ## [v1.23.1](https://github.com/GreenSpaceNASA/proto/compare/v1.23.0...v1.23.1)
 
