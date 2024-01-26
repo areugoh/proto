@@ -1,4 +1,10 @@
 
+<a name="v1.24.2"></a>
+## [v1.24.2](https://github.com/GreenSpaceNASA/proto/compare/v1.24.1...v1.24.2)
+
+> 2024-01-26
+
+
 <a name="v1.24.1"></a>
 ## [v1.24.1](https://github.com/GreenSpaceNASA/proto/compare/v1.24.0...v1.24.1)
 
