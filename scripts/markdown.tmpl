@@ -1,8 +1,12 @@
 ---
-title: Reference
+{{$title := ""}}{{$len := len .Files}}
+{{range $index, $el := .Files}}
+{{$baseName := $el.Name | splitList "/" | last | splitList "." | first | title }}
+{{if eq (add $index 1) $len}}{{$title = (print $title $baseName "")}}{{else}}{{$title = (print $title $baseName ", ")}}{{end}}
+{{end}}
+title: {{$title}}
 ---
-import path from 'path';
-{{/* ------  Overall Reference ------ */}}
+<!-- ------  Overall Reference ------ -->
 {{range .Files}}
 {{$file_name := .Name}}[{{.Name}}](#{{.Name}})
 <details>
@@ -19,7 +23,7 @@ import path from 'path';
 </details>
 {{end}}
 
-{{/* ------  Service and Methods ------ */}}
+<!-- ------  Service and Methods ------ -->
 ## Services
 {{range .Files}}
 {{range .Services}}
@@ -36,19 +40,20 @@ import path from 'path';
 {{range .Methods -}}
 | `{{.Name}}` <br /><br /> Request: [{{.RequestLongType}}](#{{.RequestFullType}}) <br /> Response: [{{.ResponseLongType}}](#{{.RequestFullType}}) | {{para .Description | replace "|" "\\|"}} |
 {{end}}
-{{end}} {/* end services */}
-{{end}} {/* end files */}
+{{end}}
+{{end}}
 
 {{range .Files}}
 {{$file_name := .Name}}
 <a name="{{.Name}}"></a>
 
-{/* FILENAME */}
-<h2>{path.parse("{{.Name}}").base}</h2>
+<!-- ------  Filename ------ -->
+## {{ .Name | splitList "/" | last | title }}
 {{.Description}}
 
-{{/* ------  Messages ------ */}}
+<!-- ------  Messages ------ -->
 {{- range .Messages}}
+<a name="{{.FullName}}"></a>
 ### {{.LongName}}
 
 {{- if .Description}}
@@ -77,7 +82,7 @@ import path from 'path';
 
 {{- end}}
 
-{{/* ------  Enums ------ */}}
+<!-- ------  Enums ------ -->
 {{range .Enums}}
 <a name="{{.FullName}}"></a>
 
@@ -106,7 +111,7 @@ import path from 'path';
   | {{.Name}} | {{.Number}} | {{para .Description | replace "|" "\\|"}} |
 {{end}}
 {{end}}
-{{end}} {/* end enums */}
+{{end}}
 {{if .HasExtensions}}
 <a name="{{$file_name}}-extensions"></a>
 
@@ -116,5 +121,5 @@ import path from 'path';
 {{range .Extensions -}}
   | {{.Name}} | {{.LongType}} | {{.ContainingLongType}} | {{.Number}} | {{para .Description | replace "|" "\\|"}}{{if .DefaultValue}} Default: `{{.DefaultValue}}`{{end}} |
 {{end}}
-{{end}} {/* end HasExtensions */}
+{{end}}
 {{end}}
