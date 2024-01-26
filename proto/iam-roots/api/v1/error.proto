@@ -9,7 +9,7 @@ message PreconditionErrorDetail {
     // Error type for Generic
     enum GenericErrorType {
         // Default code
-        UNKOWN = 0;
+        UNKNOWN = 0;
         // The request is missing a required parameter
         MISSING_PARAMETER = 1;
         // The request has an invalid parameter

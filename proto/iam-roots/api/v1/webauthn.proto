@@ -9,12 +9,12 @@ import "hoguera/platform/proto/iam-roots/api/v1/user_account.proto";
 
 
 service Webauthn {
-    rpc StartRegistration(StartRegistrationResquest) returns (StartRegistrationResponse);
+    rpc StartRegistration(StartRegistrationRequest) returns (StartRegistrationResponse);
     rpc FinishRegistration(FinishRegistrationRequest) returns (FinishRegistrationResponse);
     rpc RevokeConnection(RevokeConnectionRequest) returns (RevokeConnectionResponse);
 }
 
-message StartRegistrationResquest {
+message StartRegistrationRequest {
     string email = 1;
 }
 

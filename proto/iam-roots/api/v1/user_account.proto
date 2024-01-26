@@ -16,5 +16,26 @@ message GetUserInfoRequest {
 }
 
 message GetUserInfoResponse {
+}
 
+message InsertUserInfoRequest {
+    string email = 1;
+    string subject = 2;
+}
+
+message InsertUserInfoResponse {
+}
+
+message DeleteUserInfoRequest {
+    string id = 1;
+}
+
+message DeleteUserInfoResponse {
+}
+
+// Candidate to be rewritten
+message User {
+    string id = 1;
+    string name = 2;
+    string display_name = 3;
 }

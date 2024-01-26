@@ -1,0 +1,6 @@
+syntax = "proto3";
+
+package hoguera.platform.iamroots.api.v1;
+
+option go_package = "iam-roots/api/v1;iamroots";
+

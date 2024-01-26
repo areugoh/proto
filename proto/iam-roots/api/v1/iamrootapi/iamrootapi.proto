@@ -8,7 +8,7 @@ import "google/api/annotations.proto";
 import "hoguera/platform/proto/iam-roots/api/v1/webauthn.proto";
 
 service IamRootsApi {
-    rpc StartWebauthnRegistration(StartWebauthnRegistrationResquest) returns (StartWebauthnRegistrationResponse) {
+    rpc StartWebauthnRegistration(StartWebauthnRegistrationRequest) returns (StartWebauthnRegistrationResponse) {
         option (google.api.http) = {
             post: "/registration/webauthn/start"
             body: "*"
@@ -23,7 +23,7 @@ service IamRootsApi {
 }
 
 
-message StartWebauthnRegistrationResquest {
+message StartWebauthnRegistrationRequest {
     string email = 1;
 }
 
