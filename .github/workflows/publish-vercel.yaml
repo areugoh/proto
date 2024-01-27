@@ -24,7 +24,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install Vercel CLI
-        run: npm install --global vercel@latest
+        run: npm install --global vercel@latest bun
       - name: Pull Vercel Environment Information
         run: cd ./scripts/doc-registry && vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
       - name: Build Project Artifacts
