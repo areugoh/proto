@@ -1,4 +1,14 @@
 
+<a name="v1.24.3"></a>
+## [v1.24.3](https://github.com/GreenSpaceNASA/proto/compare/v1.24.2...v1.24.3)
+
+> 2024-01-27
+
+### Change
+
+* **cd:** clean code & install bun on pipeline
+
+
 <a name="v1.24.2"></a>
 ## [v1.24.2](https://github.com/GreenSpaceNASA/proto/compare/v1.24.1...v1.24.2)
 
