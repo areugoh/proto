@@ -13,6 +13,10 @@ sidebar:
 [https://github.com/areugoh/proto](https://github.com/areugoh/proto)
 :::
 
+:::caution[Remember]
+If you **modify** or **add** an endpoint, whether it's *internal* or *external (BFF)*, make sure to update [**Scopes and Permissions**](/design/iam-scopes/) documentation.
+:::
+
 ### Release
 
 Release new version by executing [Release new version](https://github.com/areugoh/proto/actions/workflows/changelog-tag.yaml) workflow.
