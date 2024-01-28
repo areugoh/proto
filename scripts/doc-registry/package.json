@@ -27,7 +27,7 @@
     "@mdx-js/language-server": "^0.3.0",
     "prettier": "^3.2.4",
     "prettier-plugin-astro": "^0.13.0",
-    "remark-emoji": "^4.0.1",
+    "remark-gemoji": "^8.0.0",
     "remark-gfm": "^4.0.0",
     "unist-util-visit": "^5.0.0"
   }

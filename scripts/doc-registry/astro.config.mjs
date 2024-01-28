@@ -2,7 +2,7 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import tailwind from '@astrojs/tailwind';
 import simplePlantUML from '@akebifiky/remark-simple-plantuml';
-import remarkEmoji from 'remark-emoji';
+import remarkGemoji from 'remark-gemoji';
 import remarkGfm from 'remark-gfm';
 
 import vercelStatic from '@astrojs/vercel/static';
@@ -29,7 +29,7 @@ export default defineConfig({
             autogenerate: {
                 directory: 'sdk'
             },
-            collapsed: false
+            collapsed: true
         }, {
             label: 'Design documents',
             autogenerate: {
@@ -69,7 +69,7 @@ export default defineConfig({
         applyBaseStyles: false
     })],
     markdown: {
-        remarkPlugins: [simplePlantUML, remarkEmoji, remarkGfm],
+        remarkPlugins: [simplePlantUML, remarkGemoji, remarkGfm],
         shikiConfig: {
             theme: 'github-dark'
         }
