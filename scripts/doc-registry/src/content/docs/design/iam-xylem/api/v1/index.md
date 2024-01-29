@@ -31,7 +31,6 @@ The following are the expected actions on the token service:
 
 - `token/refresh`
 - `token/revoke`
-- `token/validate`
 - `token/verify`
 
 ### OIDC
