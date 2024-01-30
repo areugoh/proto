@@ -6,6 +6,7 @@ package hoguera.platform.iamleaves.api.v1;
 option go_package = "iam-leaves/api/v1;iamleaves";
 
 import "google/api/annotations.proto";
+import "google/api/httpbody.proto";
 import "google/protobuf/empty.proto";
 
 // AccountService is the service for managing the templates of IAM user interactions.
