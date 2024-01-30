@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+// IAM Leaves package should be treated as Frontend to render the HTMX templates.
+package hoguera.platform.iamleaves.api.v1;
+
+option go_package = "iam-leaves/api/v1;iamleaves";
+
+import "google/api/annotations.proto";
+import "google/api/httpbody.proto";
+import "google/protobuf/empty.proto";
+
+// AccountService is the service for managing the templates of IAM user interactions.
+// It will communicate with the IAM family services to render the HTMX templates for the ACCOUNT page,
+// which includes but not limited to;
+// sign in, sign up, profile management and session management.
+service AccountService {
+    // GetSignupPage returns the HTMX template for new users to sign up. Check
+    // https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/grpc_json_transcoder_filter#sending-arbitrary-content for more information on the return type.
+    rpc GetSignupPage(google.protobuf.Empty) returns (google.api.HttpBody) {
+        option (google.api.http) = {
+            get: "/signup"
+        };
+    }
+}
