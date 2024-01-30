@@ -1,4 +1,24 @@
 
+<a name="v1.25.0"></a>
+## [v1.25.0](https://github.com/GreenSpaceNASA/proto/compare/v1.24.3...v1.25.0)
+
+> 2024-01-30
+
+### Change
+
+* **doc-registry:** emoji support
+* **docs:** OIDC scopes
+* **iam-xx:** update docs
+
+### Feat
+
+* **iam-leaves:** add signup proto
+
+### Fix
+
+* **iam-leaves:** missing import
+
+
 <a name="v1.24.3"></a>
 ## [v1.24.3](https://github.com/GreenSpaceNASA/proto/compare/v1.24.2...v1.24.3)
 
