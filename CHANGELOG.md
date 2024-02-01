@@ -1,4 +1,14 @@
 
+<a name="v1.26.2"></a>
+## [v1.26.2](https://github.com/GreenSpaceNASA/proto/compare/v1.26.1...v1.26.2)
+
+> 2024-02-01
+
+### Fix
+
+* **imports:** imports for iam-roots bff
+
+
 <a name="v1.26.1"></a>
 ## [v1.26.1](https://github.com/GreenSpaceNASA/proto/compare/v1.26.0...v1.26.1)
 
