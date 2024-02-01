@@ -13,10 +13,10 @@ title: Iamrootsapi
 <summary>Click to show</summary>
 
 ### Messages
-  - [FinishWebauthnRegistrationRequest](#hoguera.platform.iamroots.api.v1.iamrootsapi.FinishWebauthnRegistrationRequest)
-  - [FinishWebauthnRegistrationResponse](#hoguera.platform.iamroots.api.v1.iamrootsapi.FinishWebauthnRegistrationResponse)
-  - [StartWebauthnRegistrationRequest](#hoguera.platform.iamroots.api.v1.iamrootsapi.StartWebauthnRegistrationRequest)
-  - [StartWebauthnRegistrationResponse](#hoguera.platform.iamroots.api.v1.iamrootsapi.StartWebauthnRegistrationResponse)
+  - [FinishWebauthnRegistrationRequest](#hoguera.platform.iamroots.api.bff.v1.FinishWebauthnRegistrationRequest)
+  - [FinishWebauthnRegistrationResponse](#hoguera.platform.iamroots.api.bff.v1.FinishWebauthnRegistrationResponse)
+  - [StartWebauthnRegistrationRequest](#hoguera.platform.iamroots.api.bff.v1.StartWebauthnRegistrationRequest)
+  - [StartWebauthnRegistrationResponse](#hoguera.platform.iamroots.api.bff.v1.StartWebauthnRegistrationResponse)
 
 ### Enums
 
@@ -33,8 +33,8 @@ title: Iamrootsapi
 
 | Method Name | Description |
 | ----------- | ------------|
-| `StartWebauthnRegistration` <br /><br /> Request: [StartWebauthnRegistrationRequest](#hoguera.platform.iamroots.api.v1.iamrootsapi.StartWebauthnRegistrationRequest) <br /> Response: [StartWebauthnRegistrationResponse](#hoguera.platform.iamroots.api.v1.iamrootsapi.StartWebauthnRegistrationRequest) | <para></para> |
-| `FinishWebauthnRegistration` <br /><br /> Request: [FinishWebauthnRegistrationRequest](#hoguera.platform.iamroots.api.v1.iamrootsapi.FinishWebauthnRegistrationRequest) <br /> Response: [FinishWebauthnRegistrationResponse](#hoguera.platform.iamroots.api.v1.iamrootsapi.FinishWebauthnRegistrationRequest) | <para></para> |
+| `StartWebauthnRegistration` <br /><br /> Request: [StartWebauthnRegistrationRequest](#hoguera.platform.iamroots.api.bff.v1.StartWebauthnRegistrationRequest) <br /> Response: [StartWebauthnRegistrationResponse](#hoguera.platform.iamroots.api.bff.v1.StartWebauthnRegistrationRequest) | <para></para> |
+| `FinishWebauthnRegistration` <br /><br /> Request: [FinishWebauthnRegistrationRequest](#hoguera.platform.iamroots.api.bff.v1.FinishWebauthnRegistrationRequest) <br /> Response: [FinishWebauthnRegistrationResponse](#hoguera.platform.iamroots.api.bff.v1.FinishWebauthnRegistrationRequest) | <para></para> |
 
 
 
@@ -48,7 +48,7 @@ title: Iamrootsapi
 
 
 <!-- ------  Messages ------ -->
-<a name="hoguera.platform.iamroots.api.v1.iamrootsapi.FinishWebauthnRegistrationRequest"></a>
+<a name="hoguera.platform.iamroots.api.bff.v1.FinishWebauthnRegistrationRequest"></a>
 ### FinishWebauthnRegistrationRequest
 *Description comment will be shown here (markdown supported)*
 
@@ -67,7 +67,7 @@ title: Iamrootsapi
 
 
 
-<a name="hoguera.platform.iamroots.api.v1.iamrootsapi.FinishWebauthnRegistrationResponse"></a>
+<a name="hoguera.platform.iamroots.api.bff.v1.FinishWebauthnRegistrationResponse"></a>
 ### FinishWebauthnRegistrationResponse
 *Description comment will be shown here (markdown supported)*
 
@@ -81,7 +81,7 @@ title: Iamrootsapi
 
 
 
-<a name="hoguera.platform.iamroots.api.v1.iamrootsapi.StartWebauthnRegistrationRequest"></a>
+<a name="hoguera.platform.iamroots.api.bff.v1.StartWebauthnRegistrationRequest"></a>
 ### StartWebauthnRegistrationRequest
 *Description comment will be shown here (markdown supported)*
 
@@ -95,7 +95,7 @@ title: Iamrootsapi
 
 
 
-<a name="hoguera.platform.iamroots.api.v1.iamrootsapi.StartWebauthnRegistrationResponse"></a>
+<a name="hoguera.platform.iamroots.api.bff.v1.StartWebauthnRegistrationResponse"></a>
 ### StartWebauthnRegistrationResponse
 *Description comment will be shown here (markdown supported)*
 
