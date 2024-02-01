@@ -1,4 +1,14 @@
 
+<a name="v1.26.1"></a>
+## [v1.26.1](https://github.com/GreenSpaceNASA/proto/compare/v1.26.0...v1.26.1)
+
+> 2024-02-01
+
+### Fix
+
+* **pkg:** go_packages
+
+
 <a name="v1.26.0"></a>
 ## [v1.26.0](https://github.com/GreenSpaceNASA/proto/compare/v1.25.0...v1.26.0)
 
