@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package hoguera.platform.example.api.v1;
 
-option go_package = "client-go/example/api/v1;ping";
+option go_package = "example/api/v1;ping";
 
 import "google/api/annotations.proto";
 import "google/protobuf/empty.proto";

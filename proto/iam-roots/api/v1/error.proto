@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package hoguera.platform.iamroots.api.v1;
 
-option go_package = "client-go/iam-roots/api/v1;iamroots";
+option go_package = "iam-roots/api/v1;iamroots";
 
 // PreconditionErrorDetail is the error detail for precondition errors.
 message PreconditionErrorDetail {
