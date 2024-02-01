@@ -3,7 +3,7 @@ syntax = "proto3";
 // IAM Leaves package should be treated as Frontend to render the HTMX templates.
 package hoguera.platform.iamleaves.api.v1;
 
-option go_package = "client-go/iam-leaves/api/v1;iamleaves";
+option go_package = "iam-leaves/api/v1;iamleaves";
 
 import "google/api/annotations.proto";
 import "google/api/httpbody.proto";
