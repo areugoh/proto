@@ -13,6 +13,7 @@ title: Web
 <summary>Click to show</summary>
 
 ### Messages
+  - [SignupPageRequest](#hoguera.platform.iamleaves.api.v1.SignupPageRequest)
 
 ### Enums
 
@@ -32,7 +33,7 @@ sign in, sign up, profile management and session management.
 
 | Method Name | Description |
 | ----------- | ------------|
-| `GetSignupPage` <br /><br /> Request: [.google.protobuf.Empty](#google.protobuf.Empty) <br /> Response: [.google.api.HttpBody](#google.protobuf.Empty) | <para>GetSignupPage returns the HTMX template for new users to sign up. Check</para><para>https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/grpc_json_transcoder_filter#sending-arbitrary-content for more information on the return type.</para> |
+| `GetSignupPage` <br /><br /> Request: [SignupPageRequest](#hoguera.platform.iamleaves.api.v1.SignupPageRequest) <br /> Response: [.google.api.HttpBody](#hoguera.platform.iamleaves.api.v1.SignupPageRequest) | <para>GetSignupPage returns the HTMX template for new users to sign up. Check</para><para>https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/grpc_json_transcoder_filter#sending-arbitrary-content for more information on the return type.</para> |
 
 
 
@@ -46,6 +47,21 @@ sign in, sign up, profile management and session management.
 
 
 <!-- ------  Messages ------ -->
+<a name="hoguera.platform.iamleaves.api.v1.SignupPageRequest"></a>
+### SignupPageRequest
+SignupPageRequest is the customitation of the Signup layout. All the fields are optional.
+
+
+#### Fields
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| namespace | [string](#string) |  | <para>Namespace is the name of the organization.</para> |
+| logo | [string](#string) |  | <para>Logo is the URL of the logo of the organization.</para> |
+
+
+
+
 
 <!-- ------  Enums ------ -->
 

@@ -1,4 +1,19 @@
 
+<a name="v1.26.0"></a>
+## [v1.26.0](https://github.com/GreenSpaceNASA/proto/compare/v1.25.0...v1.26.0)
+
+> 2024-02-01
+
+### Change
+
+* **iam-leaves:** add signup request
+
+### Fix
+
+* **bff:** fix package for iam family bff
+* **pkg:** go_pkg
+
+
 <a name="v1.25.0"></a>
 ## [v1.25.0](https://github.com/GreenSpaceNASA/proto/compare/v1.24.3...v1.25.0)
 
