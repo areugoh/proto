@@ -7,7 +7,7 @@ option go_package = "iam-leaves/api/v1;iamleaves";
 
 import "google/api/annotations.proto";
 import "google/api/httpbody.proto";
-import "google/protobuf/empty.proto";
+import "google/api/field_behavior.proto";
 
 // AccountService is the service for managing the templates of IAM user interactions.
 // It will communicate with the IAM family services to render the HTMX templates for the ACCOUNT page,
@@ -16,9 +16,17 @@ import "google/protobuf/empty.proto";
 service AccountService {
     // GetSignupPage returns the HTMX template for new users to sign up. Check
     // https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/grpc_json_transcoder_filter#sending-arbitrary-content for more information on the return type.
-    rpc GetSignupPage(google.protobuf.Empty) returns (google.api.HttpBody) {
+    rpc GetSignupPage(SignupPageRequest) returns (google.api.HttpBody) {
         option (google.api.http) = {
             get: "/signup"
         };
     }
+}
+
+// SignupPageRequest is the customitation of the Signup layout. All the fields are optional.
+message SignupPageRequest {
+    // Namespace is the name of the organization.
+    string namespace = 1 [(google.api.field_behavior) = OPTIONAL];
+    // Logo is the URL of the logo of the organization.
+    string logo = 2 [(google.api.field_behavior) = OPTIONAL];
 }
