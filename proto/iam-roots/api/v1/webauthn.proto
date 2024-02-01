@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package hoguera.platform.iamroots.api.v1;
 
-option go_package = "iam-roots/api/v1;iamroots";
+option go_package = "github.com/areugoh/client-go/iam-roots/api/v1;iamroots";
 
 import "google/api/field_behavior.proto";
 import "hoguera/platform/proto/iam-roots/api/v1/user_account.proto";
