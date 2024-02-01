@@ -2,5 +2,5 @@ syntax = "proto3";
 
 package hoguera.platform.iamxylem.api.v1;
 
-option go_package = "iam-xylem/api/v1;xylem";
+option go_package = "github.com/areugoh/client-go/iam-xylem/api/v1;xylem";
 

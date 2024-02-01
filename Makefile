@@ -1,5 +1,6 @@
 export
 CLIENTS=go nodejs rust
+PROTO_GO_REPO=github.com/areugoh/client-go
 
 # CONFIG
 CPUS=`getconf _NPROCESSORS_ONLN 2>/dev/null || echo 1`
@@ -167,7 +168,7 @@ release/go: proto
 	@cp $(PWD)/scripts/go/go.mod ${TMP_REPO_DIR}/client-go/go.mod
 	@cp $(PWD)/scripts/go/README.md ${TMP_REPO_DIR}/client-go/README.md
 	@cp $(PWD)/CHANGELOG.md ${TMP_REPO_DIR}/client-go/CHANGELOG.md
-	@cp -R $(PWD)/$(GEN_GO_DIR)/* ${TMP_REPO_DIR}/client-go
+	@cp -R $(PWD)/$(GEN_GO_DIR)/$(PROTO_GO_REPO)/* ${TMP_REPO_DIR}/client-go
 	@rm -rf ${TMP_REPO_DIR}/client-go/**openapi**.*
 	@$(eval NEXT_VERSION=$(shell test $(NEXT_VERSION) && echo $(NEXT_VERSION) || echo $(LAST_TAG)))
 	@$(eval RELEASE_BRANCH=$(shell test $(PSEUDO) && echo $(PSEUDO_VERSION) || echo $(GIT_CLIENT_BASE_BRANCH)))

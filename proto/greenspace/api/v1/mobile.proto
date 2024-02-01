@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package hoguera.platform.greenspace.api.v1;
 
-option go_package = "greenspace/api/v1;mobile";
+option go_package = "github.com/areugoh/client-go/greenspace/api/v1;mobile";
 
 import "google/api/annotations.proto";
 import "google/protobuf/empty.proto";
