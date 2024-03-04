@@ -4,12 +4,23 @@ import tailwind from '@astrojs/tailwind';
 import simplePlantUML from '@akebifiky/remark-simple-plantuml';
 import remarkGemoji from 'remark-gemoji';
 import remarkGfm from 'remark-gfm';
+import starlightOpenAPI, { openAPISidebarGroups } from 'starlight-openapi'
 
 import vercelStatic from '@astrojs/vercel/static';
 
 // https://astro.build/config
 export default defineConfig({
     integrations: [starlight({
+        plugins: [
+            starlightOpenAPI([
+                {
+                    base: 'penapi/pet',
+                    collapsed: true,
+                    label: 'Pet',
+                    schema: 'src/openapi/test/petstore-expanded.yaml',
+                },
+            ]),
+        ],
         title: "Hoguera Docs",
         social: {
             github: 'https://github.com/areugoh/proto'
@@ -48,9 +59,7 @@ export default defineConfig({
             collapsed: true
         }, {
             label: 'OpenAPI',
-            autogenerate: {
-                directory: 'openapi'
-            },
+            items: openAPISidebarGroups,
             collapsed: true,
             badge: {
                 text: 'Auto',
