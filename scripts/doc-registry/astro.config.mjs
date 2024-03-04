@@ -5,21 +5,30 @@ import simplePlantUML from '@akebifiky/remark-simple-plantuml';
 import remarkGemoji from 'remark-gemoji';
 import remarkGfm from 'remark-gfm';
 import starlightOpenAPI, { openAPISidebarGroups } from 'starlight-openapi'
+import yaml from 'js-yaml';
 
 import vercelStatic from '@astrojs/vercel/static';
+
+
+const targetDir = 'src/openapi/proto'
+const openAPIDef = fs.readdirSync(targetDir, { recursive: true })
+    .filter(file => file.endsWith('.yaml'))
+    .map(path => {
+        const doc = yaml.load(fs.readFileSync(targetDir + '/' + path, 'utf8'));
+        return {
+            base: path.replace(/\/[^/]*$/, ''),
+            collapsed: true,
+            label: doc.info.title,
+            schema: targetDir + '/' + path
+        }
+    })
+    .filter(sidebar => sidebar.label != '')
 
 // https://astro.build/config
 export default defineConfig({
     integrations: [starlight({
         plugins: [
-            starlightOpenAPI([
-                {
-                    base: 'penapi/pet',
-                    collapsed: true,
-                    label: 'Pet',
-                    schema: 'src/openapi/test/petstore-expanded.yaml',
-                },
-            ]),
+            starlightOpenAPI(openAPIDef),
         ],
         title: "Hoguera Docs",
         social: {

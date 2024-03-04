@@ -27,6 +27,7 @@
     "@astrojs/language-server": "2.7.6",
     "@mdx-js/language-server": "^0.3.0",
     "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
+    "js-yaml": "^4.1.0",
     "prettier": "^3.2.4",
     "prettier-plugin-astro": "^0.13.0",
     "remark-gemoji": "^8.0.0",
