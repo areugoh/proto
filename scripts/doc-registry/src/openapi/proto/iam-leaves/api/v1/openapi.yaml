@@ -1,0 +1,41 @@
+# Generated with protoc-gen-openapi
+# https://github.com/google/gnostic/tree/master/cmd/protoc-gen-openapi
+
+openapi: 3.0.3
+info:
+    title: AccountService API
+    description: |-
+        AccountService is the service for managing the templates of IAM user interactions.
+         It will communicate with the IAM family services to render the HTMX templates for the ACCOUNT page,
+         which includes but not limited to;
+         sign in, sign up, profile management and session management.
+    version: 0.0.1
+paths:
+    /signup:
+        get:
+            tags:
+                - AccountService
+            description: |-
+                GetSignupPage returns the HTMX template for new users to sign up. Check
+                 https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/grpc_json_transcoder_filter#sending-arbitrary-content for more information on the return type.
+            operationId: AccountService_GetSignupPage
+            parameters:
+                - name: namespace
+                  in: query
+                  description: Namespace is the name of the organization.
+                  schema:
+                    type: string
+                - name: logo
+                  in: query
+                  description: Logo is the URL of the logo of the organization.
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        '*/*': {}
+components:
+    schemas: {}
+tags:
+    - name: AccountService
