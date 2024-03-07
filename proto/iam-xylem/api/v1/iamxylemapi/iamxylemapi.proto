@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package hoguera.platform.iamxylem.api.bff.v1;
+package garajonai.platform.iamxylem.api.bff.v1;
 
-option go_package = "github.com/areugoh/client-go/iam-xylem/api/bff/v1;xylemapi";
+option go_package = "github.com/garajonai/client-go/iam-xylem/api/bff/v1;xylemapi";
 

@@ -30,12 +30,12 @@ export default defineConfig({
         plugins: [
             starlightOpenAPI(openAPIDef),
         ],
-        title: "Hoguera Docs",
+        title: "GarajonAI Docs",
         social: {
-            github: 'https://github.com/areugoh/proto'
+            github: 'https://github.com/garajonai/proto'
         },
         editLink: {
-            baseUrl: 'https://github.com/areugoh/proto/edit/main/scripts/doc-registry/'
+            baseUrl: 'https://github.com/garajonai/proto/edit/main/scripts/doc-registry/'
         },
         sidebar: [{
             label: 'Start here',

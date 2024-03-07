@@ -2,20 +2,20 @@
 
 > **Warning:** This repository is automatically generated. Please don't make any changes here.
 
-This repository contains the client libraries for the [areugoh](https://github.com/areugoh) services.
-It's **automatically generated** from the [proto](https://github.com/areugoh/proto) repository.
+This repository contains the client libraries for the [garajonai](https://github.com/garajonai) services.
+It's **automatically generated** from the [proto](https://github.com/garajonai/proto) repository.
 
 ## Installation
 
-> **Note:** You can see the latest version [here](https://github.com/areugoh/client-go/tags).
+> **Note:** You can see the latest version [here](https://github.com/garajonai/client-go/tags).
 
 ```bash
-$ go get -u github.com/areugoh/client-go@vx.x.x
+$ go get -u github.com/garajonai/client-go@vx.x.x
 ```
 
 ## Usage
 
-> **Note:** You can see the proto docs in each package. For example, [here](https://github.com/areugoh/proto/blob/main/proto/greenspace/api/v1/README.md).
+> **Note:** You can see the proto docs in each package. For example, [here](https://github.com/garajonai/proto/blob/main/proto/greenspace/api/v1/README.md).
 
 ```go
 package main
@@ -25,7 +25,7 @@ import (
     "log"
 
     // inporting greenspace namespace as an example
-    pb "github.com/areugoh/client-go/greenspace/api/v1"
+    pb "github.com/garajonai/client-go/greenspace/api/v1"
 )
 
 func main() {

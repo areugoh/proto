@@ -17,10 +17,10 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/hoguera.platform.example.api.v1.PingResponse'
+                                $ref: '#/components/schemas/garajonai.platform.example.api.v1.PingResponse'
 components:
     schemas:
-        hoguera.platform.example.api.v1.PingResponse:
+        garajonai.platform.example.api.v1.PingResponse:
             type: object
             properties:
                 message:

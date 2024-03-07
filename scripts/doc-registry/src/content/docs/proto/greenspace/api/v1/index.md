@@ -8,21 +8,21 @@ title: Mobile
 ---
 <!-- ------  Overall Reference ------ -->
 
-[hoguera/platform/proto/greenspace/api/v1/mobile.proto](#hoguera/platform/proto/greenspace/api/v1/mobile.proto)
+[garajonai/platform/proto/greenspace/api/v1/mobile.proto](#garajonai/platform/proto/greenspace/api/v1/mobile.proto)
 <details>
 <summary>Click to show</summary>
 
 ### Messages
-  - [Animal](#hoguera.platform.greenspace.api.v1.Animal)
-  - [AnimalsRequest](#hoguera.platform.greenspace.api.v1.AnimalsRequest)
-  - [CoastRequest](#hoguera.platform.greenspace.api.v1.CoastRequest)
-  - [CoastResponse](#hoguera.platform.greenspace.api.v1.CoastResponse)
-  - [LocationRequest](#hoguera.platform.greenspace.api.v1.LocationRequest)
-  - [LocationResponse](#hoguera.platform.greenspace.api.v1.LocationResponse)
-  - [V1Response](#hoguera.platform.greenspace.api.v1.V1Response)
+  - [Animal](#garajonai.platform.greenspace.api.v1.Animal)
+  - [AnimalsRequest](#garajonai.platform.greenspace.api.v1.AnimalsRequest)
+  - [CoastRequest](#garajonai.platform.greenspace.api.v1.CoastRequest)
+  - [CoastResponse](#garajonai.platform.greenspace.api.v1.CoastResponse)
+  - [LocationRequest](#garajonai.platform.greenspace.api.v1.LocationRequest)
+  - [LocationResponse](#garajonai.platform.greenspace.api.v1.LocationResponse)
+  - [V1Response](#garajonai.platform.greenspace.api.v1.V1Response)
 
 ### Enums
-  - [Condition](#hoguera.platform.greenspace.api.v1.Condition)
+  - [Condition](#garajonai.platform.greenspace.api.v1.Condition)
 
 
 </details>
@@ -37,9 +37,9 @@ GreenSpace is the service that provides all the information for NASA's GreenSpac
 
 | Method Name | Description |
 | ----------- | ------------|
-| `GetAnimals` <br /><br /> Request: [AnimalsRequest](#hoguera.platform.greenspace.api.v1.AnimalsRequest) <br /> Response: [Animal](#hoguera.platform.greenspace.api.v1.AnimalsRequest) | <para>GetAnimals returns the animals that are in danger in the coast as a stream.</para> |
-| `GetCoast` <br /><br /> Request: [CoastRequest](#hoguera.platform.greenspace.api.v1.CoastRequest) <br /> Response: [CoastResponse](#hoguera.platform.greenspace.api.v1.CoastRequest) | <para>GetCoast returns the nearest coast to the user location.</para> |
-| `GetLocation` <br /><br /> Request: [LocationRequest](#hoguera.platform.greenspace.api.v1.LocationRequest) <br /> Response: [LocationResponse](#hoguera.platform.greenspace.api.v1.LocationRequest) | <para>GetLocation returns the location of the user.</para> |
+| `GetAnimals` <br /><br /> Request: [AnimalsRequest](#garajonai.platform.greenspace.api.v1.AnimalsRequest) <br /> Response: [Animal](#garajonai.platform.greenspace.api.v1.AnimalsRequest) | <para>GetAnimals returns the animals that are in danger in the coast as a stream.</para> |
+| `GetCoast` <br /><br /> Request: [CoastRequest](#garajonai.platform.greenspace.api.v1.CoastRequest) <br /> Response: [CoastResponse](#garajonai.platform.greenspace.api.v1.CoastRequest) | <para>GetCoast returns the nearest coast to the user location.</para> |
+| `GetLocation` <br /><br /> Request: [LocationRequest](#garajonai.platform.greenspace.api.v1.LocationRequest) <br /> Response: [LocationResponse](#garajonai.platform.greenspace.api.v1.LocationRequest) | <para>GetLocation returns the location of the user.</para> |
 | `GetV1` <br /><br /> Request: [.google.protobuf.Empty](#google.protobuf.Empty) <br /> Response: [V1Response](#google.protobuf.Empty) | <para>GetV1 is the BFF endpoint. It returns the location of the user, the nearest coast and the animals in danger.</para> |
 
 
@@ -47,14 +47,14 @@ GreenSpace is the service that provides all the information for NASA's GreenSpac
 
 
 
-<a name="hoguera/platform/proto/greenspace/api/v1/mobile.proto"></a>
+<a name="garajonai/platform/proto/greenspace/api/v1/mobile.proto"></a>
 
 <!-- ------  Filename ------ -->
 ## Mobile.Proto
 
 
 <!-- ------  Messages ------ -->
-<a name="hoguera.platform.greenspace.api.v1.Animal"></a>
+<a name="garajonai.platform.greenspace.api.v1.Animal"></a>
 ### Animal
 Animals the animals that are in danger in the coast.
 
@@ -70,7 +70,7 @@ Animals the animals that are in danger in the coast.
 
 
 
-<a name="hoguera.platform.greenspace.api.v1.AnimalsRequest"></a>
+<a name="garajonai.platform.greenspace.api.v1.AnimalsRequest"></a>
 ### AnimalsRequest
 AnimalsRequest the user location is required to get the nearest animals living in the coast.
 
@@ -79,12 +79,12 @@ AnimalsRequest the user location is required to get the nearest animals living i
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| location | [LocationResponse](#hoguera.platform.greenspace.api.v1.LocationResponse) |  | <para></para> |
+| location | [LocationResponse](#garajonai.platform.greenspace.api.v1.LocationResponse) |  | <para></para> |
 
 
 
 
-<a name="hoguera.platform.greenspace.api.v1.CoastRequest"></a>
+<a name="garajonai.platform.greenspace.api.v1.CoastRequest"></a>
 ### CoastRequest
 CoastRequest the user location is required to get the nearest coast.
 
@@ -93,12 +93,12 @@ CoastRequest the user location is required to get the nearest coast.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| location | [LocationResponse](#hoguera.platform.greenspace.api.v1.LocationResponse) |  | <para></para> |
+| location | [LocationResponse](#garajonai.platform.greenspace.api.v1.LocationResponse) |  | <para></para> |
 
 
 
 
-<a name="hoguera.platform.greenspace.api.v1.CoastResponse"></a>
+<a name="garajonai.platform.greenspace.api.v1.CoastResponse"></a>
 ### CoastResponse
 CoastResponse the nearest coast to the user location.
 
@@ -108,14 +108,14 @@ CoastResponse the nearest coast to the user location.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | name | [string](#string) |  | <para>The name of the coast. e.g. "Playa de la Concha"</para> |
-| condition | [Condition](#hoguera.platform.greenspace.api.v1.Condition) |  | <para>The condition of the water. e.g. "GOOD"</para> |
+| condition | [Condition](#garajonai.platform.greenspace.api.v1.Condition) |  | <para>The condition of the water. e.g. "GOOD"</para> |
 | temperature | [float](#float) |  | <para>The temperature of the water in Celsius. e.g. 20</para> |
 | distance | [double](#double) |  | <para>The distance in kilometers to the coast. e.g. 4.1</para> |
 
 
 
 
-<a name="hoguera.platform.greenspace.api.v1.LocationRequest"></a>
+<a name="garajonai.platform.greenspace.api.v1.LocationRequest"></a>
 ### LocationRequest
 LocationRequest the IP of the user is required to get the location.
 
@@ -129,7 +129,7 @@ LocationRequest the IP of the user is required to get the location.
 
 
 
-<a name="hoguera.platform.greenspace.api.v1.LocationResponse"></a>
+<a name="garajonai.platform.greenspace.api.v1.LocationResponse"></a>
 ### LocationResponse
 Location
 
@@ -145,7 +145,7 @@ Location
 
 
 
-<a name="hoguera.platform.greenspace.api.v1.V1Response"></a>
+<a name="garajonai.platform.greenspace.api.v1.V1Response"></a>
 ### V1Response
 V1Response the response of the V1 endpoint. It contains the location of the user, the nearest coast and the animals
 in danger. It serves as a wrapper for the other responses. It is used to avoid multiple requests to the API and
@@ -156,9 +156,9 @@ follow the BFF pattern.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| location | [LocationResponse](#hoguera.platform.greenspace.api.v1.LocationResponse) |  | <para></para> |
-| nearest_aquatic_location | [CoastResponse](#hoguera.platform.greenspace.api.v1.CoastResponse) |  | <para></para> |
-| animals | [Animal](#hoguera.platform.greenspace.api.v1.Animal) | repeated | <para></para> |
+| location | [LocationResponse](#garajonai.platform.greenspace.api.v1.LocationResponse) |  | <para></para> |
+| nearest_aquatic_location | [CoastResponse](#garajonai.platform.greenspace.api.v1.CoastResponse) |  | <para></para> |
+| animals | [Animal](#garajonai.platform.greenspace.api.v1.Animal) | repeated | <para></para> |
 
 
 
@@ -166,7 +166,7 @@ follow the BFF pattern.
 
 <!-- ------  Enums ------ -->
 
-<a name="hoguera.platform.greenspace.api.v1.Condition"></a>
+<a name="garajonai.platform.greenspace.api.v1.Condition"></a>
 
 ### Condition
 Condition, the condition of the water. In house algorithm to define the condition.

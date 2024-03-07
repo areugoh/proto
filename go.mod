@@ -1,4 +1,4 @@
-module github.com/areugoh/proto
+module github.com/garajonai/proto
 
 go 1.21.3
 

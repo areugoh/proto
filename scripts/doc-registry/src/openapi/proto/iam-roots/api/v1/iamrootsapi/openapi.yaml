@@ -15,7 +15,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/hoguera.platform.iamroots.api.bff.v1.FinishWebauthnRegistrationRequest'
+                            $ref: '#/components/schemas/garajonai.platform.iamroots.api.bff.v1.FinishWebauthnRegistrationRequest'
                 required: true
             responses:
                 "200":
@@ -23,7 +23,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/hoguera.platform.iamroots.api.bff.v1.FinishWebauthnRegistrationResponse'
+                                $ref: '#/components/schemas/garajonai.platform.iamroots.api.bff.v1.FinishWebauthnRegistrationResponse'
     /registration/webauthn/start:
         post:
             tags:
@@ -33,7 +33,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/hoguera.platform.iamroots.api.bff.v1.StartWebauthnRegistrationRequest'
+                            $ref: '#/components/schemas/garajonai.platform.iamroots.api.bff.v1.StartWebauthnRegistrationRequest'
                 required: true
             responses:
                 "200":
@@ -41,10 +41,10 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/hoguera.platform.iamroots.api.bff.v1.StartWebauthnRegistrationResponse'
+                                $ref: '#/components/schemas/garajonai.platform.iamroots.api.bff.v1.StartWebauthnRegistrationResponse'
 components:
     schemas:
-        hoguera.platform.iamroots.api.bff.v1.FinishWebauthnRegistrationRequest:
+        garajonai.platform.iamroots.api.bff.v1.FinishWebauthnRegistrationRequest:
             type: object
             properties:
                 email:
@@ -61,30 +61,30 @@ components:
                     items:
                         type: string
                 response:
-                    $ref: '#/components/schemas/hoguera.platform.iamroots.api.v1.AttestationResponse'
-        hoguera.platform.iamroots.api.bff.v1.FinishWebauthnRegistrationResponse:
+                    $ref: '#/components/schemas/garajonai.platform.iamroots.api.v1.AttestationResponse'
+        garajonai.platform.iamroots.api.bff.v1.FinishWebauthnRegistrationResponse:
             type: object
             properties:
                 status:
                     type: string
-        hoguera.platform.iamroots.api.bff.v1.StartWebauthnRegistrationRequest:
+        garajonai.platform.iamroots.api.bff.v1.StartWebauthnRegistrationRequest:
             type: object
             properties:
                 email:
                     type: string
-        hoguera.platform.iamroots.api.bff.v1.StartWebauthnRegistrationResponse:
+        garajonai.platform.iamroots.api.bff.v1.StartWebauthnRegistrationResponse:
             type: object
             properties:
                 publicKey:
-                    $ref: '#/components/schemas/hoguera.platform.iamroots.api.v1.PublicKey'
-        hoguera.platform.iamroots.api.v1.AttestationResponse:
+                    $ref: '#/components/schemas/garajonai.platform.iamroots.api.v1.PublicKey'
+        garajonai.platform.iamroots.api.v1.AttestationResponse:
             type: object
             properties:
                 clientDataJson:
                     type: string
                 attestationObject:
                     type: string
-        hoguera.platform.iamroots.api.v1.AuthenticatorSelection:
+        garajonai.platform.iamroots.api.v1.AuthenticatorSelection:
             type: object
             properties:
                 authenticatorAttachment:
@@ -93,7 +93,7 @@ components:
                     type: boolean
                 userVerification:
                     type: string
-        hoguera.platform.iamroots.api.v1.PuKeyCredParams:
+        garajonai.platform.iamroots.api.v1.PuKeyCredParams:
             type: object
             properties:
                 type:
@@ -101,35 +101,35 @@ components:
                 alg:
                     type: integer
                     format: int32
-        hoguera.platform.iamroots.api.v1.PublicKey:
+        garajonai.platform.iamroots.api.v1.PublicKey:
             type: object
             properties:
                 challenge:
                     type: string
                     format: bytes
                 rp:
-                    $ref: '#/components/schemas/hoguera.platform.iamroots.api.v1.ReplyingParty'
+                    $ref: '#/components/schemas/garajonai.platform.iamroots.api.v1.ReplyingParty'
                 user:
-                    $ref: '#/components/schemas/hoguera.platform.iamroots.api.v1.User'
+                    $ref: '#/components/schemas/garajonai.platform.iamroots.api.v1.User'
                 pubKeyCredParams:
                     type: array
                     items:
-                        $ref: '#/components/schemas/hoguera.platform.iamroots.api.v1.PuKeyCredParams'
+                        $ref: '#/components/schemas/garajonai.platform.iamroots.api.v1.PuKeyCredParams'
                 authenticatorSelection:
-                    $ref: '#/components/schemas/hoguera.platform.iamroots.api.v1.AuthenticatorSelection'
+                    $ref: '#/components/schemas/garajonai.platform.iamroots.api.v1.AuthenticatorSelection'
                 timeout:
                     type: integer
                     format: int32
                 attestation:
                     type: string
-        hoguera.platform.iamroots.api.v1.ReplyingParty:
+        garajonai.platform.iamroots.api.v1.ReplyingParty:
             type: object
             properties:
                 id:
                     type: string
                 name:
                     type: string
-        hoguera.platform.iamroots.api.v1.User:
+        garajonai.platform.iamroots.api.v1.User:
             type: object
             properties:
                 id:
