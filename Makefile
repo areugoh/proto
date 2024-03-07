@@ -1,6 +1,6 @@
 export
 CLIENTS=go nodejs rust
-PROTO_GO_REPO=github.com/areugoh/client-go
+PROTO_GO_REPO=github.com/garajonai/client-go
 
 # CONFIG
 CPUS=`getconf _NPROCESSORS_ONLN 2>/dev/null || echo 1`
@@ -14,7 +14,7 @@ LAST_TAG:=$(shell git describe --tags --abbrev=0 2>/dev/null || echo v0.0.0)
 PSEUDO_VERSION:=$(shell git rev-parse --short HEAD | awk -v LAST_TAG=$(LAST_TAG) '{print LAST_TAG"-pre."$$1}')
 GIT_USERNAME:=$(shell git config user.name)
 GIT_EMAIL:=$(shell git config user.email)
-GITHUB_ORG:=areugoh
+GITHUB_ORG:=garajonai
 GIT_CLIENT_BASE_BRANCH=main
 find=find
 ifeq ($(shell uname),Darwin)
@@ -24,7 +24,7 @@ endif
 
 export GO111MODULE=on
 
-PLATFORM_PREFIX=hoguera/platform
+PLATFORM_PREFIX=garajonai/platform
 DOC_REGISTRY_DIR=scripts/doc-registry/src/content/docs
 NODE_MODULES_BIN=$(PWD)/node_modules/.bin
 # PROTO
@@ -77,9 +77,9 @@ define BODY
 Your pseudo version `$(PSEUDO_VERSION)` is ready to use!
 Follow the instructions in the README.md of each client to use it.
 
-- :hamster: **GO**: https://github.com/areugoh/client-go/releases/tag/$(PSEUDO_VERSION)
-- :crab: **RUST**: https://github.com/areugoh/client-rust/releases/tag/$(PSEUDO_VERSION)
-- :penguin: **NODEJS**: https://github.com/areugoh/client-nodejs/tree/$(PSEUDO_VERSION)
+- :hamster: **GO**: https://github.com/garajonai/client-go/releases/tag/$(PSEUDO_VERSION)
+- :crab: **RUST**: https://github.com/garajonai/client-rust/releases/tag/$(PSEUDO_VERSION)
+- :penguin: **NODEJS**: https://github.com/garajonai/client-nodejs/tree/$(PSEUDO_VERSION)
 
 > :warning: **WARNING**: This version is not stable and can be changed at any time.
 > To recreate this version, remove the `pseudo-version` label from the PR and add it again.

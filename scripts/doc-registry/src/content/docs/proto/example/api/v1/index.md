@@ -8,12 +8,12 @@ title: Ping
 ---
 <!-- ------  Overall Reference ------ -->
 
-[hoguera/platform/proto/example/api/v1/ping.proto](#hoguera/platform/proto/example/api/v1/ping.proto)
+[garajonai/platform/proto/example/api/v1/ping.proto](#garajonai/platform/proto/example/api/v1/ping.proto)
 <details>
 <summary>Click to show</summary>
 
 ### Messages
-  - [PingResponse](#hoguera.platform.example.api.v1.PingResponse)
+  - [PingResponse](#garajonai.platform.example.api.v1.PingResponse)
 
 ### Enums
 
@@ -37,14 +37,14 @@ title: Ping
 
 
 
-<a name="hoguera/platform/proto/example/api/v1/ping.proto"></a>
+<a name="garajonai/platform/proto/example/api/v1/ping.proto"></a>
 
 <!-- ------  Filename ------ -->
 ## Ping.Proto
 
 
 <!-- ------  Messages ------ -->
-<a name="hoguera.platform.example.api.v1.PingResponse"></a>
+<a name="garajonai.platform.example.api.v1.PingResponse"></a>
 ### PingResponse
 *Description comment will be shown here (markdown supported)*
 

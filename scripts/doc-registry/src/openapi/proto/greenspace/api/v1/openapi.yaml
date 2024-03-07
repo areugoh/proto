@@ -19,10 +19,10 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/hoguera.platform.greenspace.api.v1.V1Response'
+                                $ref: '#/components/schemas/garajonai.platform.greenspace.api.v1.V1Response'
 components:
     schemas:
-        hoguera.platform.greenspace.api.v1.Animal:
+        garajonai.platform.greenspace.api.v1.Animal:
             type: object
             properties:
                 name:
@@ -32,7 +32,7 @@ components:
                 description:
                     type: string
             description: Animals the animals that are in danger in the coast.
-        hoguera.platform.greenspace.api.v1.CoastResponse:
+        garajonai.platform.greenspace.api.v1.CoastResponse:
             type: object
             properties:
                 name:
@@ -51,7 +51,7 @@ components:
                     description: The distance in kilometers to the coast. e.g. 4.1
                     format: double
             description: CoastResponse the nearest coast to the user location.
-        hoguera.platform.greenspace.api.v1.LocationResponse:
+        garajonai.platform.greenspace.api.v1.LocationResponse:
             type: object
             properties:
                 longitude:
@@ -64,17 +64,17 @@ components:
                     type: string
                     description: The name of the location. e.g. "San Sebastian"
             description: Location
-        hoguera.platform.greenspace.api.v1.V1Response:
+        garajonai.platform.greenspace.api.v1.V1Response:
             type: object
             properties:
                 location:
-                    $ref: '#/components/schemas/hoguera.platform.greenspace.api.v1.LocationResponse'
+                    $ref: '#/components/schemas/garajonai.platform.greenspace.api.v1.LocationResponse'
                 nearestAquaticLocation:
-                    $ref: '#/components/schemas/hoguera.platform.greenspace.api.v1.CoastResponse'
+                    $ref: '#/components/schemas/garajonai.platform.greenspace.api.v1.CoastResponse'
                 animals:
                     type: array
                     items:
-                        $ref: '#/components/schemas/hoguera.platform.greenspace.api.v1.Animal'
+                        $ref: '#/components/schemas/garajonai.platform.greenspace.api.v1.Animal'
             description: |-
                 V1Response the response of the V1 endpoint. It contains the location of the user, the nearest coast and the animals
                  in danger. It serves as a wrapper for the other responses. It is used to avoid multiple requests to the API and

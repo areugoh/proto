@@ -1,11 +1,11 @@
 syntax = "proto3";
 
-package hoguera.platform.iamroots.api.v1;
+package garajonai.platform.iamroots.api.v1;
 
-option go_package = "github.com/areugoh/client-go/iam-roots/api/v1;iamroots";
+option go_package = "github.com/garajonai/client-go/iam-roots/api/v1;iamroots";
 
 import "google/api/field_behavior.proto";
-import "hoguera/platform/proto/iam-roots/api/v1/user_account.proto";
+import "garajonai/platform/proto/iam-roots/api/v1/user_account.proto";
 
 
 service Webauthn {
@@ -43,7 +43,7 @@ message AttestationResponse {
 message PublicKey {
     bytes challenge = 1;
     ReplyingParty rp = 2;
-    hoguera.platform.iamroots.api.v1.User user = 3;
+    garajonai.platform.iamroots.api.v1.User user = 3;
     repeated PuKeyCredParams pub_key_cred_params = 4;
     AuthenticatorSelection authenticator_selection = 5;
     int32 timeout = 6 [(google.api.field_behavior) = OPTIONAL];

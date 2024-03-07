@@ -17,7 +17,7 @@ title: Account_management, Error, User_account, Webauthn
 ---
 <!-- ------  Overall Reference ------ -->
 
-[hoguera/platform/proto/iam-roots/api/v1/account_management.proto](#hoguera/platform/proto/iam-roots/api/v1/account_management.proto)
+[garajonai/platform/proto/iam-roots/api/v1/account_management.proto](#garajonai/platform/proto/iam-roots/api/v1/account_management.proto)
 <details>
 <summary>Click to show</summary>
 
@@ -28,56 +28,56 @@ title: Account_management, Error, User_account, Webauthn
 
 </details>
 
-[hoguera/platform/proto/iam-roots/api/v1/error.proto](#hoguera/platform/proto/iam-roots/api/v1/error.proto)
+[garajonai/platform/proto/iam-roots/api/v1/error.proto](#garajonai/platform/proto/iam-roots/api/v1/error.proto)
 <details>
 <summary>Click to show</summary>
 
 ### Messages
-  - [PreconditionErrorDetail](#hoguera.platform.iamroots.api.v1.PreconditionErrorDetail)
+  - [PreconditionErrorDetail](#garajonai.platform.iamroots.api.v1.PreconditionErrorDetail)
 
 ### Enums
-  - [PreconditionErrorDetail.GenericErrorType](#hoguera.platform.iamroots.api.v1.PreconditionErrorDetail.GenericErrorType)
-  - [PreconditionErrorDetail.TokenErrorType](#hoguera.platform.iamroots.api.v1.PreconditionErrorDetail.TokenErrorType)
-  - [PreconditionErrorDetail.UserErrorType](#hoguera.platform.iamroots.api.v1.PreconditionErrorDetail.UserErrorType)
-  - [PreconditionErrorDetail.WebauthnErrorType](#hoguera.platform.iamroots.api.v1.PreconditionErrorDetail.WebauthnErrorType)
+  - [PreconditionErrorDetail.GenericErrorType](#garajonai.platform.iamroots.api.v1.PreconditionErrorDetail.GenericErrorType)
+  - [PreconditionErrorDetail.TokenErrorType](#garajonai.platform.iamroots.api.v1.PreconditionErrorDetail.TokenErrorType)
+  - [PreconditionErrorDetail.UserErrorType](#garajonai.platform.iamroots.api.v1.PreconditionErrorDetail.UserErrorType)
+  - [PreconditionErrorDetail.WebauthnErrorType](#garajonai.platform.iamroots.api.v1.PreconditionErrorDetail.WebauthnErrorType)
 
 
 </details>
 
-[hoguera/platform/proto/iam-roots/api/v1/user_account.proto](#hoguera/platform/proto/iam-roots/api/v1/user_account.proto)
+[garajonai/platform/proto/iam-roots/api/v1/user_account.proto](#garajonai/platform/proto/iam-roots/api/v1/user_account.proto)
 <details>
 <summary>Click to show</summary>
 
 ### Messages
-  - [DeleteUserInfoRequest](#hoguera.platform.iamroots.api.v1.DeleteUserInfoRequest)
-  - [DeleteUserInfoResponse](#hoguera.platform.iamroots.api.v1.DeleteUserInfoResponse)
-  - [GetUserInfoRequest](#hoguera.platform.iamroots.api.v1.GetUserInfoRequest)
-  - [GetUserInfoResponse](#hoguera.platform.iamroots.api.v1.GetUserInfoResponse)
-  - [InsertUserInfoRequest](#hoguera.platform.iamroots.api.v1.InsertUserInfoRequest)
-  - [InsertUserInfoResponse](#hoguera.platform.iamroots.api.v1.InsertUserInfoResponse)
-  - [User](#hoguera.platform.iamroots.api.v1.User)
+  - [DeleteUserInfoRequest](#garajonai.platform.iamroots.api.v1.DeleteUserInfoRequest)
+  - [DeleteUserInfoResponse](#garajonai.platform.iamroots.api.v1.DeleteUserInfoResponse)
+  - [GetUserInfoRequest](#garajonai.platform.iamroots.api.v1.GetUserInfoRequest)
+  - [GetUserInfoResponse](#garajonai.platform.iamroots.api.v1.GetUserInfoResponse)
+  - [InsertUserInfoRequest](#garajonai.platform.iamroots.api.v1.InsertUserInfoRequest)
+  - [InsertUserInfoResponse](#garajonai.platform.iamroots.api.v1.InsertUserInfoResponse)
+  - [User](#garajonai.platform.iamroots.api.v1.User)
 
 ### Enums
 
 
 </details>
 
-[hoguera/platform/proto/iam-roots/api/v1/webauthn.proto](#hoguera/platform/proto/iam-roots/api/v1/webauthn.proto)
+[garajonai/platform/proto/iam-roots/api/v1/webauthn.proto](#garajonai/platform/proto/iam-roots/api/v1/webauthn.proto)
 <details>
 <summary>Click to show</summary>
 
 ### Messages
-  - [AttestationResponse](#hoguera.platform.iamroots.api.v1.AttestationResponse)
-  - [AuthenticatorSelection](#hoguera.platform.iamroots.api.v1.AuthenticatorSelection)
-  - [FinishRegistrationRequest](#hoguera.platform.iamroots.api.v1.FinishRegistrationRequest)
-  - [FinishRegistrationResponse](#hoguera.platform.iamroots.api.v1.FinishRegistrationResponse)
-  - [PuKeyCredParams](#hoguera.platform.iamroots.api.v1.PuKeyCredParams)
-  - [PublicKey](#hoguera.platform.iamroots.api.v1.PublicKey)
-  - [ReplyingParty](#hoguera.platform.iamroots.api.v1.ReplyingParty)
-  - [RevokeConnectionRequest](#hoguera.platform.iamroots.api.v1.RevokeConnectionRequest)
-  - [RevokeConnectionResponse](#hoguera.platform.iamroots.api.v1.RevokeConnectionResponse)
-  - [StartRegistrationRequest](#hoguera.platform.iamroots.api.v1.StartRegistrationRequest)
-  - [StartRegistrationResponse](#hoguera.platform.iamroots.api.v1.StartRegistrationResponse)
+  - [AttestationResponse](#garajonai.platform.iamroots.api.v1.AttestationResponse)
+  - [AuthenticatorSelection](#garajonai.platform.iamroots.api.v1.AuthenticatorSelection)
+  - [FinishRegistrationRequest](#garajonai.platform.iamroots.api.v1.FinishRegistrationRequest)
+  - [FinishRegistrationResponse](#garajonai.platform.iamroots.api.v1.FinishRegistrationResponse)
+  - [PuKeyCredParams](#garajonai.platform.iamroots.api.v1.PuKeyCredParams)
+  - [PublicKey](#garajonai.platform.iamroots.api.v1.PublicKey)
+  - [ReplyingParty](#garajonai.platform.iamroots.api.v1.ReplyingParty)
+  - [RevokeConnectionRequest](#garajonai.platform.iamroots.api.v1.RevokeConnectionRequest)
+  - [RevokeConnectionResponse](#garajonai.platform.iamroots.api.v1.RevokeConnectionResponse)
+  - [StartRegistrationRequest](#garajonai.platform.iamroots.api.v1.StartRegistrationRequest)
+  - [StartRegistrationResponse](#garajonai.platform.iamroots.api.v1.StartRegistrationResponse)
 
 ### Enums
 
@@ -98,9 +98,9 @@ title: Account_management, Error, User_account, Webauthn
 
 | Method Name | Description |
 | ----------- | ------------|
-| `GetUserInfo` <br /><br /> Request: [GetUserInfoRequest](#hoguera.platform.iamroots.api.v1.GetUserInfoRequest) <br /> Response: [GetUserInfoResponse](#hoguera.platform.iamroots.api.v1.GetUserInfoRequest) | <para></para> |
-| `InsertUserInfo` <br /><br /> Request: [InsertUserInfoRequest](#hoguera.platform.iamroots.api.v1.InsertUserInfoRequest) <br /> Response: [InsertUserInfoResponse](#hoguera.platform.iamroots.api.v1.InsertUserInfoRequest) | <para></para> |
-| `DeleteUserInfo` <br /><br /> Request: [DeleteUserInfoRequest](#hoguera.platform.iamroots.api.v1.DeleteUserInfoRequest) <br /> Response: [DeleteUserInfoResponse](#hoguera.platform.iamroots.api.v1.DeleteUserInfoRequest) | <para></para> |
+| `GetUserInfo` <br /><br /> Request: [GetUserInfoRequest](#garajonai.platform.iamroots.api.v1.GetUserInfoRequest) <br /> Response: [GetUserInfoResponse](#garajonai.platform.iamroots.api.v1.GetUserInfoRequest) | <para></para> |
+| `InsertUserInfo` <br /><br /> Request: [InsertUserInfoRequest](#garajonai.platform.iamroots.api.v1.InsertUserInfoRequest) <br /> Response: [InsertUserInfoResponse](#garajonai.platform.iamroots.api.v1.InsertUserInfoRequest) | <para></para> |
+| `DeleteUserInfo` <br /><br /> Request: [DeleteUserInfoRequest](#garajonai.platform.iamroots.api.v1.DeleteUserInfoRequest) <br /> Response: [DeleteUserInfoResponse](#garajonai.platform.iamroots.api.v1.DeleteUserInfoRequest) | <para></para> |
 
 
 
@@ -110,16 +110,16 @@ title: Account_management, Error, User_account, Webauthn
 
 | Method Name | Description |
 | ----------- | ------------|
-| `StartRegistration` <br /><br /> Request: [StartRegistrationRequest](#hoguera.platform.iamroots.api.v1.StartRegistrationRequest) <br /> Response: [StartRegistrationResponse](#hoguera.platform.iamroots.api.v1.StartRegistrationRequest) | <para></para> |
-| `FinishRegistration` <br /><br /> Request: [FinishRegistrationRequest](#hoguera.platform.iamroots.api.v1.FinishRegistrationRequest) <br /> Response: [FinishRegistrationResponse](#hoguera.platform.iamroots.api.v1.FinishRegistrationRequest) | <para></para> |
-| `RevokeConnection` <br /><br /> Request: [RevokeConnectionRequest](#hoguera.platform.iamroots.api.v1.RevokeConnectionRequest) <br /> Response: [RevokeConnectionResponse](#hoguera.platform.iamroots.api.v1.RevokeConnectionRequest) | <para></para> |
+| `StartRegistration` <br /><br /> Request: [StartRegistrationRequest](#garajonai.platform.iamroots.api.v1.StartRegistrationRequest) <br /> Response: [StartRegistrationResponse](#garajonai.platform.iamroots.api.v1.StartRegistrationRequest) | <para></para> |
+| `FinishRegistration` <br /><br /> Request: [FinishRegistrationRequest](#garajonai.platform.iamroots.api.v1.FinishRegistrationRequest) <br /> Response: [FinishRegistrationResponse](#garajonai.platform.iamroots.api.v1.FinishRegistrationRequest) | <para></para> |
+| `RevokeConnection` <br /><br /> Request: [RevokeConnectionRequest](#garajonai.platform.iamroots.api.v1.RevokeConnectionRequest) <br /> Response: [RevokeConnectionResponse](#garajonai.platform.iamroots.api.v1.RevokeConnectionRequest) | <para></para> |
 
 
 
 
 
 
-<a name="hoguera/platform/proto/iam-roots/api/v1/account_management.proto"></a>
+<a name="garajonai/platform/proto/iam-roots/api/v1/account_management.proto"></a>
 
 <!-- ------  Filename ------ -->
 ## Account_management.Proto
@@ -132,14 +132,14 @@ title: Account_management, Error, User_account, Webauthn
 
 
 
-<a name="hoguera/platform/proto/iam-roots/api/v1/error.proto"></a>
+<a name="garajonai/platform/proto/iam-roots/api/v1/error.proto"></a>
 
 <!-- ------  Filename ------ -->
 ## Error.Proto
 
 
 <!-- ------  Messages ------ -->
-<a name="hoguera.platform.iamroots.api.v1.PreconditionErrorDetail"></a>
+<a name="garajonai.platform.iamroots.api.v1.PreconditionErrorDetail"></a>
 ### PreconditionErrorDetail
 PreconditionErrorDetail is the error detail for precondition errors.
 
@@ -149,7 +149,7 @@ PreconditionErrorDetail is the error detail for precondition errors.
 
 <!-- ------  Enums ------ -->
 
-<a name="hoguera.platform.iamroots.api.v1.PreconditionErrorDetail.GenericErrorType"></a>
+<a name="garajonai.platform.iamroots.api.v1.PreconditionErrorDetail.GenericErrorType"></a>
 
 ### PreconditionErrorDetail.GenericErrorType
 Error type for Generic
@@ -163,7 +163,7 @@ Error type for Generic
 
 
 
-<a name="hoguera.platform.iamroots.api.v1.PreconditionErrorDetail.TokenErrorType"></a>
+<a name="garajonai.platform.iamroots.api.v1.PreconditionErrorDetail.TokenErrorType"></a>
 
 ### PreconditionErrorDetail.TokenErrorType
 Error type for Token
@@ -177,7 +177,7 @@ Error type for Token
 
 
 
-<a name="hoguera.platform.iamroots.api.v1.PreconditionErrorDetail.UserErrorType"></a>
+<a name="garajonai.platform.iamroots.api.v1.PreconditionErrorDetail.UserErrorType"></a>
 
 ### PreconditionErrorDetail.UserErrorType
 Error type for User
@@ -193,7 +193,7 @@ Error type for User
 
 
 
-<a name="hoguera.platform.iamroots.api.v1.PreconditionErrorDetail.WebauthnErrorType"></a>
+<a name="garajonai.platform.iamroots.api.v1.PreconditionErrorDetail.WebauthnErrorType"></a>
 
 ### PreconditionErrorDetail.WebauthnErrorType
 Error type for Webauthn
@@ -220,14 +220,14 @@ Error type for Webauthn
 
 
 
-<a name="hoguera/platform/proto/iam-roots/api/v1/user_account.proto"></a>
+<a name="garajonai/platform/proto/iam-roots/api/v1/user_account.proto"></a>
 
 <!-- ------  Filename ------ -->
 ## User_account.Proto
 
 
 <!-- ------  Messages ------ -->
-<a name="hoguera.platform.iamroots.api.v1.DeleteUserInfoRequest"></a>
+<a name="garajonai.platform.iamroots.api.v1.DeleteUserInfoRequest"></a>
 ### DeleteUserInfoRequest
 *Description comment will be shown here (markdown supported)*
 
@@ -241,14 +241,14 @@ Error type for Webauthn
 
 
 
-<a name="hoguera.platform.iamroots.api.v1.DeleteUserInfoResponse"></a>
+<a name="garajonai.platform.iamroots.api.v1.DeleteUserInfoResponse"></a>
 ### DeleteUserInfoResponse
 *Description comment will be shown here (markdown supported)*
 
 
 
 
-<a name="hoguera.platform.iamroots.api.v1.GetUserInfoRequest"></a>
+<a name="garajonai.platform.iamroots.api.v1.GetUserInfoRequest"></a>
 ### GetUserInfoRequest
 *Description comment will be shown here (markdown supported)*
 
@@ -262,14 +262,14 @@ Error type for Webauthn
 
 
 
-<a name="hoguera.platform.iamroots.api.v1.GetUserInfoResponse"></a>
+<a name="garajonai.platform.iamroots.api.v1.GetUserInfoResponse"></a>
 ### GetUserInfoResponse
 *Description comment will be shown here (markdown supported)*
 
 
 
 
-<a name="hoguera.platform.iamroots.api.v1.InsertUserInfoRequest"></a>
+<a name="garajonai.platform.iamroots.api.v1.InsertUserInfoRequest"></a>
 ### InsertUserInfoRequest
 *Description comment will be shown here (markdown supported)*
 
@@ -284,14 +284,14 @@ Error type for Webauthn
 
 
 
-<a name="hoguera.platform.iamroots.api.v1.InsertUserInfoResponse"></a>
+<a name="garajonai.platform.iamroots.api.v1.InsertUserInfoResponse"></a>
 ### InsertUserInfoResponse
 *Description comment will be shown here (markdown supported)*
 
 
 
 
-<a name="hoguera.platform.iamroots.api.v1.User"></a>
+<a name="garajonai.platform.iamroots.api.v1.User"></a>
 ### User
 Candidate to be rewritten
 
@@ -313,14 +313,14 @@ Candidate to be rewritten
 
 
 
-<a name="hoguera/platform/proto/iam-roots/api/v1/webauthn.proto"></a>
+<a name="garajonai/platform/proto/iam-roots/api/v1/webauthn.proto"></a>
 
 <!-- ------  Filename ------ -->
 ## Webauthn.Proto
 
 
 <!-- ------  Messages ------ -->
-<a name="hoguera.platform.iamroots.api.v1.AttestationResponse"></a>
+<a name="garajonai.platform.iamroots.api.v1.AttestationResponse"></a>
 ### AttestationResponse
 *Description comment will be shown here (markdown supported)*
 
@@ -335,7 +335,7 @@ Candidate to be rewritten
 
 
 
-<a name="hoguera.platform.iamroots.api.v1.AuthenticatorSelection"></a>
+<a name="garajonai.platform.iamroots.api.v1.AuthenticatorSelection"></a>
 ### AuthenticatorSelection
 *Description comment will be shown here (markdown supported)*
 
@@ -351,7 +351,7 @@ Candidate to be rewritten
 
 
 
-<a name="hoguera.platform.iamroots.api.v1.FinishRegistrationRequest"></a>
+<a name="garajonai.platform.iamroots.api.v1.FinishRegistrationRequest"></a>
 ### FinishRegistrationRequest
 *Description comment will be shown here (markdown supported)*
 
@@ -365,12 +365,12 @@ Candidate to be rewritten
 | raw_id | [bytes](#bytes) |  | <para></para> |
 | type | [string](#string) |  | <para></para> |
 | transports | [string](#string) | repeated | <para></para> |
-| response | [AttestationResponse](#hoguera.platform.iamroots.api.v1.AttestationResponse) |  | <para></para> |
+| response | [AttestationResponse](#garajonai.platform.iamroots.api.v1.AttestationResponse) |  | <para></para> |
 
 
 
 
-<a name="hoguera.platform.iamroots.api.v1.FinishRegistrationResponse"></a>
+<a name="garajonai.platform.iamroots.api.v1.FinishRegistrationResponse"></a>
 ### FinishRegistrationResponse
 *Description comment will be shown here (markdown supported)*
 
@@ -384,7 +384,7 @@ Candidate to be rewritten
 
 
 
-<a name="hoguera.platform.iamroots.api.v1.PuKeyCredParams"></a>
+<a name="garajonai.platform.iamroots.api.v1.PuKeyCredParams"></a>
 ### PuKeyCredParams
 *Description comment will be shown here (markdown supported)*
 
@@ -399,7 +399,7 @@ Candidate to be rewritten
 
 
 
-<a name="hoguera.platform.iamroots.api.v1.PublicKey"></a>
+<a name="garajonai.platform.iamroots.api.v1.PublicKey"></a>
 ### PublicKey
 *Description comment will be shown here (markdown supported)*
 
@@ -409,17 +409,17 @@ Candidate to be rewritten
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | challenge | [bytes](#bytes) |  | <para></para> |
-| rp | [ReplyingParty](#hoguera.platform.iamroots.api.v1.ReplyingParty) |  | <para></para> |
-| user | [User](#hoguera.platform.iamroots.api.v1.User) |  | <para></para> |
-| pub_key_cred_params | [PuKeyCredParams](#hoguera.platform.iamroots.api.v1.PuKeyCredParams) | repeated | <para></para> |
-| authenticator_selection | [AuthenticatorSelection](#hoguera.platform.iamroots.api.v1.AuthenticatorSelection) |  | <para></para> |
+| rp | [ReplyingParty](#garajonai.platform.iamroots.api.v1.ReplyingParty) |  | <para></para> |
+| user | [User](#garajonai.platform.iamroots.api.v1.User) |  | <para></para> |
+| pub_key_cred_params | [PuKeyCredParams](#garajonai.platform.iamroots.api.v1.PuKeyCredParams) | repeated | <para></para> |
+| authenticator_selection | [AuthenticatorSelection](#garajonai.platform.iamroots.api.v1.AuthenticatorSelection) |  | <para></para> |
 | timeout | [int32](#int32) |  | <para></para> |
 | attestation | [string](#string) |  | <para></para> |
 
 
 
 
-<a name="hoguera.platform.iamroots.api.v1.ReplyingParty"></a>
+<a name="garajonai.platform.iamroots.api.v1.ReplyingParty"></a>
 ### ReplyingParty
 *Description comment will be shown here (markdown supported)*
 
@@ -434,7 +434,7 @@ Candidate to be rewritten
 
 
 
-<a name="hoguera.platform.iamroots.api.v1.RevokeConnectionRequest"></a>
+<a name="garajonai.platform.iamroots.api.v1.RevokeConnectionRequest"></a>
 ### RevokeConnectionRequest
 *Description comment will be shown here (markdown supported)*
 
@@ -449,7 +449,7 @@ Candidate to be rewritten
 
 
 
-<a name="hoguera.platform.iamroots.api.v1.RevokeConnectionResponse"></a>
+<a name="garajonai.platform.iamroots.api.v1.RevokeConnectionResponse"></a>
 ### RevokeConnectionResponse
 *Description comment will be shown here (markdown supported)*
 
@@ -463,7 +463,7 @@ Candidate to be rewritten
 
 
 
-<a name="hoguera.platform.iamroots.api.v1.StartRegistrationRequest"></a>
+<a name="garajonai.platform.iamroots.api.v1.StartRegistrationRequest"></a>
 ### StartRegistrationRequest
 *Description comment will be shown here (markdown supported)*
 
@@ -477,7 +477,7 @@ Candidate to be rewritten
 
 
 
-<a name="hoguera.platform.iamroots.api.v1.StartRegistrationResponse"></a>
+<a name="garajonai.platform.iamroots.api.v1.StartRegistrationResponse"></a>
 ### StartRegistrationResponse
 *Description comment will be shown here (markdown supported)*
 
@@ -486,7 +486,7 @@ Candidate to be rewritten
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| public_key | [PublicKey](#hoguera.platform.iamroots.api.v1.PublicKey) |  | <para></para> |
+| public_key | [PublicKey](#garajonai.platform.iamroots.api.v1.PublicKey) |  | <para></para> |
 
 
 

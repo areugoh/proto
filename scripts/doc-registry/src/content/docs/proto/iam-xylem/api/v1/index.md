@@ -8,7 +8,7 @@ title: Oidc
 ---
 <!-- ------  Overall Reference ------ -->
 
-[hoguera/platform/proto/iam-xylem/api/v1/oidc.proto](#hoguera/platform/proto/iam-xylem/api/v1/oidc.proto)
+[garajonai/platform/proto/iam-xylem/api/v1/oidc.proto](#garajonai/platform/proto/iam-xylem/api/v1/oidc.proto)
 <details>
 <summary>Click to show</summary>
 
@@ -28,7 +28,7 @@ title: Oidc
 
 
 
-<a name="hoguera/platform/proto/iam-xylem/api/v1/oidc.proto"></a>
+<a name="garajonai/platform/proto/iam-xylem/api/v1/oidc.proto"></a>
 
 <!-- ------  Filename ------ -->
 ## Oidc.Proto

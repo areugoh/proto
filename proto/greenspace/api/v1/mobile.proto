@@ -1,8 +1,8 @@
 syntax = "proto3";
 
-package hoguera.platform.greenspace.api.v1;
+package garajonai.platform.greenspace.api.v1;
 
-option go_package = "github.com/areugoh/client-go/greenspace/api/v1;mobile";
+option go_package = "github.com/garajonai/client-go/greenspace/api/v1;mobile";
 
 import "google/api/annotations.proto";
 import "google/protobuf/empty.proto";

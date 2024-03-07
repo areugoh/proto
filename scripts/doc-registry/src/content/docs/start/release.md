@@ -10,7 +10,7 @@ sidebar:
 
 ## Proto platform
 :::note[Repository]
-[https://github.com/areugoh/proto](https://github.com/areugoh/proto)
+[https://github.com/garajonai/proto](https://github.com/garajonai/proto)
 :::
 
 :::caution[Remember]
@@ -19,7 +19,7 @@ If you **modify** or **add** an endpoint, whether it's *internal* or *external (
 
 ### Release
 
-Release new version by executing [Release new version](https://github.com/areugoh/proto/actions/workflows/changelog-tag.yaml) workflow.
+Release new version by executing [Release new version](https://github.com/garajonai/proto/actions/workflows/changelog-tag.yaml) workflow.
 
 - If the `new_version` is omitted, the workflow will try to determine the new version based on the latest tag. It will increment the minor version by default.
 - If the `new_version` is provided, the workflow will create a new tag with the provided version.
@@ -29,7 +29,7 @@ When the PR is created, approve and merge it to the main branch, the workflow wi
 
 #### Steps
 
-1. Run [Release new version](https://github.com/areugoh/proto/actions/workflows/changelog-tag.yaml) workflow.
+1. Run [Release new version](https://github.com/garajonai/proto/actions/workflows/changelog-tag.yaml) workflow.
    1. Provide a new version or let the workflow determine the next minor version.
 2. Create and approve a new PR with the changelog file from the release branch with the `changelog_vM.m.p` format.
 3. Merge the PR to the main branch.

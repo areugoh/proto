@@ -1,8 +1,8 @@
 syntax = "proto3";
 
-package hoguera.platform.iamroots.api.v1;
+package garajonai.platform.iamroots.api.v1;
 
-option go_package = "github.com/areugoh/client-go/iam-roots/api/v1;iamroots";
+option go_package = "github.com/garajonai/client-go/iam-roots/api/v1;iamroots";
 
 
 service UserAccount {

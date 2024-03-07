@@ -13,10 +13,10 @@ import NodejsIcon from '../../../icons/Nodejs.astro';
 
 ### Installation
 
-> **Note:** You can see the latest version [here](https://github.com/areugoh/client-go/tags).
+> **Note:** You can see the latest version [here](https://github.com/garajonai/client-go/tags).
 
 ```bash
-$ go get -u github.com/areugoh/client-go@vx.x.x
+$ go get -u github.com/garajonai/client-go@vx.x.x
 ```
 
 ### Usage
@@ -29,7 +29,7 @@ import (
     "log"
 
     // inporting greenspace namespace as an example
-    pb "github.com/areugoh/client-go/greenspace/api/v1"
+    pb "github.com/garajonai/client-go/greenspace/api/v1"
 )
 
 func main() {
@@ -59,10 +59,10 @@ func main() {
 
 ### Installation
 
-> **Note:** You can see the latest version [here](https://github.com/areugoh/client-rust/tags).
+> **Note:** You can see the latest version [here](https://github.com/garajonai/client-rust/tags).
 
 ```bash
-$ cargo add --git ssh://git@github.com:areugoh/client-rust.git --tag v1.0.0
+$ cargo add --git ssh://git@github.com:garajonai/client-rust.git --tag v1.0.0
 ```
 
 Your Cargo file should looks like this with `workspaces`:
@@ -74,7 +74,7 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-client-rust = { git = "ssh://git@github.com:areugoh/client-rust.git", tag = "v1.0.0" }
+client-rust = { git = "ssh://git@github.com:garajonai/client-rust.git", tag = "v1.0.0" }
 
 [workspace]
 members = [ "client-rust" ]
@@ -89,20 +89,20 @@ Update your `~/.npmrc` file to include the following line.
 ```bash
 # ~/.npmrc
 registry=https://registry.npmjs.org/
-@areugoh:registry=https://npm.pkg.github.com/
+@garajonai:registry=https://npm.pkg.github.com/
 //npm.pkg.github.com/:_authToken=<MD_TO_REQUEST_TOKEN>
 ```
 Then install the package.
 
 ```bash
-$ npm install @areugoh/client-nodejs@latest
+$ npm install @garajonai/client-nodejs@latest
 ```
 
 ### Usage
 
 ```javascript
 import { credentials } from "@grpc/grpc-js";
-import { GreenSpaceClient } from '@areugoh/client-nodejs/proto/greenspace/api/v1/mobile_grpc_pb';
+import { GreenSpaceClient } from '@garajonai/client-nodejs/proto/greenspace/api/v1/mobile_grpc_pb';
 
 const client = new GreenSpaceClient('localhost:50051', credentials.createInsecure());
 // ...

@@ -1,11 +1,11 @@
 syntax = "proto3";
 
-package hoguera.platform.iamroots.api.bff.v1;
+package garajonai.platform.iamroots.api.bff.v1;
 
-option go_package = "github.com/areugoh/client-go/iam-roots/api/bff/v1;iamrootsapi";
+option go_package = "github.com/garajonai/client-go/iam-roots/api/bff/v1;iamrootsapi";
 
 import "google/api/annotations.proto";
-import "hoguera/platform/proto/iam-roots/api/v1/webauthn.proto";
+import "garajonai/platform/proto/iam-roots/api/v1/webauthn.proto";
 
 service IamRootsApi {
     rpc StartWebauthnRegistration(StartWebauthnRegistrationRequest) returns (StartWebauthnRegistrationResponse) {
@@ -28,7 +28,7 @@ message StartWebauthnRegistrationRequest {
 }
 
 message StartWebauthnRegistrationResponse {
-    hoguera.platform.iamroots.api.v1.PublicKey public_key = 1;
+    garajonai.platform.iamroots.api.v1.PublicKey public_key = 1;
 }
 
 message FinishWebauthnRegistrationRequest {
@@ -37,7 +37,7 @@ message FinishWebauthnRegistrationRequest {
     bytes raw_id = 3;
     string type = 4;
     repeated string transports = 5;
-    hoguera.platform.iamroots.api.v1.AttestationResponse response = 6;
+    garajonai.platform.iamroots.api.v1.AttestationResponse response = 6;
 }
 
 message FinishWebauthnRegistrationResponse {

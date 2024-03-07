@@ -1,6 +1,6 @@
 # Doc Registry
 
-Automatic documentation and document registry for `Hoguera` projects.
+Automatic documentation and document registry for `GarajonAI` projects.
 
 ## Run on dev
 
