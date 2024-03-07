@@ -1,4 +1,24 @@
 
+<a name="v1.26.4"></a>
+## [v1.26.4](https://github.com/GreenSpaceNASA/proto/compare/v1.26.3...v1.26.4)
+
+> 2024-03-04
+
+### Change
+
+* **doc-registry:** read openAPI definitions from folder
+
+
+<a name="v1.26.3"></a>
+## [v1.26.3](https://github.com/GreenSpaceNASA/proto/compare/v1.26.2...v1.26.3)
+
+> 2024-03-04
+
+### Change
+
+* **doc-registry:** add openapi docs on registry
+
+
 <a name="v1.26.2"></a>
 ## [v1.26.2](https://github.com/GreenSpaceNASA/proto/compare/v1.26.1...v1.26.2)
 

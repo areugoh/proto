@@ -4,12 +4,32 @@ import tailwind from '@astrojs/tailwind';
 import simplePlantUML from '@akebifiky/remark-simple-plantuml';
 import remarkGemoji from 'remark-gemoji';
 import remarkGfm from 'remark-gfm';
+import starlightOpenAPI, { openAPISidebarGroups } from 'starlight-openapi'
+import yaml from 'js-yaml';
 
 import vercelStatic from '@astrojs/vercel/static';
+
+
+const targetDir = 'src/openapi/proto'
+const openAPIDef = fs.readdirSync(targetDir, { recursive: true })
+    .filter(file => file.endsWith('.yaml'))
+    .map(path => {
+        const doc = yaml.load(fs.readFileSync(targetDir + '/' + path, 'utf8'));
+        return {
+            base: path.replace(/\/[^/]*$/, ''),
+            collapsed: true,
+            label: doc.info.title,
+            schema: targetDir + '/' + path
+        }
+    })
+    .filter(sidebar => sidebar.label != '')
 
 // https://astro.build/config
 export default defineConfig({
     integrations: [starlight({
+        plugins: [
+            starlightOpenAPI(openAPIDef),
+        ],
         title: "Hoguera Docs",
         social: {
             github: 'https://github.com/areugoh/proto'
@@ -48,9 +68,7 @@ export default defineConfig({
             collapsed: true
         }, {
             label: 'OpenAPI',
-            autogenerate: {
-                directory: 'openapi'
-            },
+            items: openAPISidebarGroups,
             collapsed: true,
             badge: {
                 text: 'Auto',
