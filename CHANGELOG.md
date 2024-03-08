@@ -1,4 +1,14 @@
 
+<a name="v1.27.1"></a>
+## [v1.27.1](https://github.com/GreenSpaceNASA/proto/compare/v1.27.0...v1.27.1)
+
+> 2024-03-08
+
+### Dep
+
+* **client-go:** dump tidy versions
+
+
 <a name="v1.27.0"></a>
 ## [v1.27.0](https://github.com/GreenSpaceNASA/proto/compare/v1.26.4...v1.27.0)
 
