@@ -3,9 +3,6 @@ env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 on:
-  push:
-    tags:
-      - 'v**'
   pull_request:
     branches:
       - main
@@ -16,7 +13,7 @@ permissions:
 
 jobs:
   starlight:
-    if: ${{contains(github.head_ref, 'changelog') || contains(github.ref_type, 'tag')}}
+    if: ${{contains(github.head_ref, 'changelog')}}
     environment: production
     runs-on: ubuntu-latest
     steps:
