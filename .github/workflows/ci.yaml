@@ -1,28 +1,28 @@
 name: Test
 on:
   push:
-  pull_request:
-    types: [opened]
-
 
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
+      - name: Load secrets
+        uses: garajonai/workflows-lib/load-secrets@main
+        id: botanibit
+        with:
+          op-token: ${{ secrets.OP_TOKEN }}
+          stack: go
+
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           submodules: 'recursive'
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ steps.botanibit.outputs.token }}
+
       - name: Install protoc
         uses: arduino/setup-protoc@v2
         with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Setup go
-        uses: actions/setup-go@v4
-        with:
-          go-version: '1.21'
+          repo-token: ${{ steps.botanibit.outputs.token }}
 
       - name: Install dependencies
         run: make plugin/lint

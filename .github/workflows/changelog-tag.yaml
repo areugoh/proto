@@ -13,28 +13,32 @@ jobs:
   changelog-tag:
     runs-on: ubuntu-latest
     steps:
+      - name: Load secrets
+        uses: garajonai/workflows-lib/load-secrets@main
+        id: botanibit
+        with:
+          op-token: ${{ secrets.OP_TOKEN }}
+          stack: go
+
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           submodules: 'recursive'
           fetch-tags: 'true'
           fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}
-      - uses: fregante/setup-git-user@v2
+          token: ${{ steps.botanibit.outputs.token }}
 
       - name: Install protoc
         uses: arduino/setup-protoc@v2
         with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Setup go
-        uses: actions/setup-go@v4
+          repo-token: ${{ steps.botanibit.outputs.token }}
+
+      - name: Install plugin
+        run: make plugin
+
+      - name: Release changelog
+        uses: garajonai/workflows-lib/changelog@main
         with:
-          go-version: '1.21'
-
-      - name: Install dependencies
-        run: |
-          go install github.com/git-chglog/git-chglog/cmd/git-chglog@latest
-          make plugin
-
-      - name: Building new version
-        run: NEXT_VERSION=${{github.event.inputs.next_version}} make changelog
+          token: ${{ steps.botanibit.outputs.token }}
+          stack: go
+          next-version: ${{ github.event.inputs.next_version }}
