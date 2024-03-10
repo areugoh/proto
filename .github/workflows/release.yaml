@@ -50,7 +50,7 @@ jobs:
         run: make plugin
 
       - name: Release
-        if: ${{contains(github.head_ref, 'changelog') || contains(github.ref_type, 'tag')}}
+        if: ${{contains(github.ref_type, 'tag')}}
         run: make release
         env:
           GH_TOKEN: ${{ steps.botanibit.outputs.token }}
