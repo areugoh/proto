@@ -1,4 +1,14 @@
 
+<a name="v1.27.3"></a>
+## [v1.27.3](https://github.com/garajonai/proto/compare/v1.27.2...v1.27.3)
+
+> 2024-03-10
+
+### Change
+
+* **workflows:** use common lib
+
+
 <a name="v1.27.2"></a>
 ## [v1.27.2](https://github.com/garajonai/proto/compare/v1.27.1...v1.27.2)
 
