@@ -74,7 +74,7 @@ pseudo/version:
 	@echo $(PSEUDO_VERSION)
 
 define BODY
-#### $(PSEUDO_VERSION)
+## $(PSEUDO_VERSION)
 Your pseudo version `$(PSEUDO_VERSION)` is ready to use!
 Follow the instructions in the README.md of each client to use it.
 
@@ -173,8 +173,8 @@ release/go: proto
 	@rm -rf ${TMP_REPO_DIR}/client-go/**openapi**.*
 	@$(eval NEXT_VERSION=$(shell test $(NEXT_VERSION) && echo $(NEXT_VERSION) || echo $(LAST_TAG)))
 	@$(eval RELEASE_BRANCH=$(shell test $(PSEUDO) && echo $(PSEUDO_VERSION) || echo $(GIT_CLIENT_BASE_BRANCH)))
-	@$(eval PSEUDO_ARGS=$(shell test $(PSEUDO) && echo -f || echo))
-	@cd ${TMP_REPO_DIR}/client-go && git add . && git commit -m "bump(version): $(NEXT_VERSION)" && git tag -a $(NEXT_VERSION) -m '$(NEXT_VERSION)' && git push --tags $(PSEUDO_ARGS) origin $(GIT_CLIENT_BASE_BRANCH):$(RELEASE_BRANCH)
+	@$(if $PSEUDO, @cd ${TMP_REPO_DIR}/client-go && git push origin --delete refs/tags/$(PSEUDO_VERSION) 2>/dev/null && git push origin --delete $(PSEUDO_VERSION) 2>/dev/null,@echo "")
+	@cd ${TMP_REPO_DIR}/client-go && git add . && git commit -m "bump(version): $(NEXT_VERSION)" && git tag -a $(NEXT_VERSION) -m '$(NEXT_VERSION)' && git push --tags origin $(GIT_CLIENT_BASE_BRANCH):$(RELEASE_BRANCH)
 
 .PHONY: release-pseudo/go
 release-pseudo/go:
@@ -218,8 +218,8 @@ release/nodejs: proto/nodejs
 	@cp -R $(PWD)/$(NODEJS_OUTPUT)/* ${TMP_REPO_DIR}/client-nodejs
 	@$(eval NEXT_VERSION=$(shell test $(NEXT_VERSION) && echo $(NEXT_VERSION) || echo $(LAST_TAG)))
 	@$(eval RELEASE_BRANCH=$(shell test $(PSEUDO) && echo $(PSEUDO_VERSION) || echo $(GIT_CLIENT_BASE_BRANCH)))
-	@$(eval PSEUDO_ARGS=$(shell test $(PSEUDO) && echo -f || echo))
-	@cd ${TMP_REPO_DIR}/client-nodejs && git add . && git commit -m "bump(version): $(NEXT_VERSION)" && npm version $(NEXT_VERSION) && git push --tags $(PSEUDO_ARGS) origin $(GIT_CLIENT_BASE_BRANCH):$(RELEASE_BRANCH)
+	@$(if $PSEUDO, @cd ${TMP_REPO_DIR}/client-nodejs && git push origin --delete refs/tags/$(PSEUDO_VERSION) 2>/dev/null && git push origin --delete $(PSEUDO_VERSION) 2>/dev/null && git fetch --tags,@echo "")
+	@cd ${TMP_REPO_DIR}/client-nodejs && git add . && git commit -m "bump(version): $(NEXT_VERSION)" && (npm version $(NEXT_VERSION) || true) && git push --tags origin $(GIT_CLIENT_BASE_BRANCH):$(RELEASE_BRANCH)
 
 .PHONY: release-pseudo/nodejs
 release-pseudo/nodejs:
@@ -257,8 +257,8 @@ release/rust: proto/rust
 	@cp -R $(PWD)/$(RUST_OUTPUT)/proto/* ${TMP_REPO_DIR}/client-rust/src
 	@$(eval NEXT_VERSION=$(shell test $(NEXT_VERSION) && echo $(NEXT_VERSION) || echo $(LAST_TAG)))
 	@$(eval RELEASE_BRANCH=$(shell test $(PSEUDO) && echo $(PSEUDO_VERSION) || echo $(GIT_CLIENT_BASE_BRANCH)))
-	@$(eval PSEUDO_ARGS=$(shell test $(PSEUDO) && echo -f || echo))
-	@cd ${TMP_REPO_DIR}/client-rust && git add . && git commit -m "bump(version): $(NEXT_VERSION)" && git tag -a $(NEXT_VERSION) -m '$(NEXT_VERSION)' && git push --tags $(PSEUDO_ARGS) origin $(GIT_CLIENT_BASE_BRANCH):$(RELEASE_BRANCH)
+	@$(if $PSEUDO, @cd ${TMP_REPO_DIR}/client-rust && git push origin --delete refs/tags/$(PSEUDO_VERSION) 2>/dev/null && git push origin --delete $(PSEUDO_VERSION) 2>/dev/null,@echo "")
+	@cd ${TMP_REPO_DIR}/client-rust && git add . && git commit -m "bump(version): $(NEXT_VERSION)" && git tag -a $(NEXT_VERSION) -m '$(NEXT_VERSION)' && git push --tags origin $(GIT_CLIENT_BASE_BRANCH):$(RELEASE_BRANCH)
 
 .PHONY: release-pseudo/rust
 release-pseudo/rust:
