@@ -1,0 +1,6 @@
+syntax = "proto3";
+
+package garajonai.platform.iamrootsauth.api.bff.v1;
+
+option go_package = "github.com/garajonai/client-go/iam-roots-auth/api/bff/v1;auth";
+

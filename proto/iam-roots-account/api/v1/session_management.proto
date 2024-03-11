@@ -1,0 +1,6 @@
+syntax = "proto3";
+
+package garajonai.platform.iamrootsaccount.api.v1;
+
+option go_package = "github.com/garajonai/client-go/iam-roots-account/api/v1;account";
+
