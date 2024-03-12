@@ -1,4 +1,4 @@
-name: "Release new version"
+name: "Plan new version release"
 on:
   workflow_dispatch:
     inputs:

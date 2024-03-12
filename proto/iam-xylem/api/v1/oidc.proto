@@ -1,6 +1,0 @@
-syntax = "proto3";
-
-package garajonai.platform.iamxylem.api.v1;
-
-option go_package = "github.com/garajonai/client-go/iam-xylem/api/v1;xylem";
-

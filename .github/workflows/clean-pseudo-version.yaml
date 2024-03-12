@@ -1,0 +1,41 @@
+#Generate a new version of the client
+name: Clean Pseudo Version
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - closed
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  clean-pseudo-version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Load secrets
+        uses: garajonai/workflows-lib/load-secrets@main
+        id: botanibit
+        with:
+          op-token: ${{ secrets.OP_TOKEN }}
+          stack: all
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: 'recursive'
+          fetch-tags: 'true'
+          fetch-depth: 0
+          token: ${{ steps.botanibit.outputs.token }}
+
+      - name: Clean pseudo
+        run: PR=${{ github.event.number }} make clean-pseudo
+        env:
+          GH_TOKEN: ${{ steps.botanibit.outputs.token }}
+
+      - name: Remove pseudo label
+        run: |
+          gh pr edit ${{ github.event.number }} --remove-label pseudo-version
+        env:
+          GITHUB_TOKEN: ${{ steps.botanibit.outputs.token }}

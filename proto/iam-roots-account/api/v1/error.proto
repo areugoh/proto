@@ -1,0 +1,65 @@
+syntax = "proto3";
+
+package garajonai.platform.iamrootsaccount.api.v1;
+
+option go_package = "github.com/garajonai/client-go/iam-roots-account/api/v1;account";
+
+
+// PreconditionErrorDetail is the error detail for precondition errors.
+message PreconditionErrorDetail {
+    // Error type for Generic
+    enum GenericErrorType {
+        // Default code
+        UNKNOWN = 0;
+        // The request is missing a required parameter
+        MISSING_PARAMETER = 1;
+        // The request has an invalid parameter
+        INVALID_PARAMETER = 2;
+    }
+
+    // Error type for User
+    enum UserErrorType {
+        // User already connected
+        USER_ALREADY_CONNECTED = 0;
+        // User not connected
+        USER_NOT_CONNECTED = 1;
+        // User not found
+        USER_NOT_FOUND = 2;
+        // User already exists
+        USER_ALREADY_EXISTS = 3;
+        // User is not authorized to perform this action
+        UNAUTHORIZED = 4;
+    }
+
+    // Error type for Token
+    enum TokenErrorType {
+        // Token is expired
+        TOKEN_EXPIRED = 0;
+        // Refresh token is not valid
+        REFRESH_TOKEN_INVALID = 1;
+        // Token is not valid
+        TOKEN_INVALID = 2;
+    }
+
+    // Error type for Webauthn
+    enum WebauthnErrorType {
+        // Default code
+        UNSPECIFIED = 0;
+        // Registration failed
+        ATTESTATION_VERIFY = 1;
+        // Authentication failed
+        ASSERTION_VERIFY = 2;
+        // Authenticating with a key that is not approved
+        UNAPPROVED_KEY = 3;
+        // Approving expired key
+        EXPIRED_KEY = 4;
+        // Approving key that is not yet valid
+        NOT_YET_VALID_KEY = 5;
+        // Approving deleted key
+        DELETED_KEY = 6;
+        // Authenticating with a key when the user does not have any approved keys
+        NO_APPROVED_KEYS = 7;
+        // Attempting to delete an undeletable key
+        UNDELETABLE_KEY = 8;
+    }
+}
