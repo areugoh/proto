@@ -1,4 +1,19 @@
 
+<a name="v1.28.0"></a>
+## [v1.28.0](https://github.com/garajonai/proto/compare/v1.27.5...v1.28.0)
+
+> 2024-03-12
+
+### Change
+
+* **makefile:** refactor release
+* **makefile:** bot msg
+
+### Chore
+
+* **rename:** iam-roots family
+
+
 <a name="v1.27.5"></a>
 ## [v1.27.5](https://github.com/garajonai/proto/compare/v1.27.4...v1.27.5)
 
