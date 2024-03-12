@@ -164,7 +164,7 @@ release/go: proto/go
 	@echo "Publishing go client..."
 	@make clone-repo CLIENT=go
 	@make cp-go
-	@RELEASE_BRANCH=$(GIT_CLIENT_BASE_BRANCH) make push-client CLIENT=go
+	@RELEASE_BRANCH=$(GIT_CLIENT_BASE_BRANCH) NEXT_VERSION=$(LAST_TAG) make push-client CLIENT=go
 
 .PHONY: release-pseudo/go
 release-pseudo/go: proto/go
@@ -201,7 +201,7 @@ release/nodejs: proto/nodejs
 	@echo "Publishing nodejs client..."
 	@make clone-repo CLIENT=nodejs
 	@make cp-nodejs
-	@cd ${TMP_REPO_DIR}/client-nodejs && git add . && git commit -m "bump(version): $(NEXT_VERSION)" && (npm version $(NEXT_VERSION) || true) && git push --tags origin $(GIT_CLIENT_BASE_BRANCH)
+	@cd ${TMP_REPO_DIR}/client-nodejs && git add . && git commit -m "bump(version): $(LAST_TAG)" && (npm version $(LAST_TAG) || true) && git push --tags origin $(GIT_CLIENT_BASE_BRANCH)
 
 .PHONY: release-pseudo/nodejs
 release-pseudo/nodejs: proto/nodejs
@@ -233,7 +233,7 @@ release/rust: proto/rust
 	@echo "Publishing rust client..."
 	@make clone-repo CLIENT=rust
 	@make cp-rust
-	@RELEASE_BRANCH=$(GIT_CLIENT_BASE_BRANCH) make push-client CLIENT=rust
+	@RELEASE_BRANCH=$(GIT_CLIENT_BASE_BRANCH) NEXT_VERSION=$(LAST_TAG) make push-client CLIENT=rust
 
 .PHONY: release-pseudo/rust
 release-pseudo/rust: proto/rust
