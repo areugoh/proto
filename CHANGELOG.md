@@ -1,4 +1,10 @@
 
+<a name="v1.29.3"></a>
+## [v1.29.3](https://github.com/garajonai/proto/compare/v1.29.1...v1.29.3)
+
+> 2024-03-12
+
+
 <a name="v1.29.1"></a>
 ## [v1.29.1](https://github.com/garajonai/proto/compare/v1.28.0...v1.29.1)
 
