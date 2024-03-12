@@ -11,7 +11,7 @@ REPO:=$(shell test $(REPO) && echo $(REPO) || git ls-remote --get-url | rev | cu
 TMP_REPO_DIR=$(PWD)/repo
 GEN_GO_DIR=gen/go
 LAST_TAG:=$(shell git describe --tags --abbrev=0 2>/dev/null || echo v0.0.0)
-NEXT_VERSION?=$(shell echo $(LAST_TAG) | awk -F. '{print $$1"."$$2+1".0"}')
+NEXT_VERSION:=$(shell test $(NEXT_VERSION) && echo $(NEXT_VERSION) || echo $(LAST_TAG) | awk -F. '{print $$1"."$$2+1".0"}')
 PR?=$(shell git rev-parse --short HEAD)
 PSEUDO_VERSION:=$(shell echo $(PR) | awk -v LAST_TAG=$(LAST_TAG) '{print LAST_TAG"-pre."$$1}')
 GIT_USERNAME:=$(shell git config user.name)
@@ -125,9 +125,8 @@ proto: $(foreach var, $(CLIENTS), proto/$(var))
 clean: $(foreach var, $(CLIENTS), clean/$(var))
 release: $(foreach var, $(CLIENTS), release/$(var))
 release-pseudo: $(foreach var, $(CLIENTS), release-pseudo/$(var))
-clean-pseudo: $(foreach var, $(CLIENTS), clean-pseudo-version CLIENT=$(var))
 
-proto/% release/% clean/% release-pseudo/% clean-pseudo/%:
+proto/% release/% clean/% release-pseudo/%:
 	@:
 
 # GO
@@ -282,18 +281,14 @@ push-client:
 	@cd ${TMP_REPO_DIR}/client-${CLIENT} && git add . && git commit -m "bump(version): $(NEXT_VERSION)" && git tag -a $(NEXT_VERSION) -m '$(NEXT_VERSION)' && git push --tags origin $(GIT_CLIENT_BASE_BRANCH):$(RELEASE_BRANCH)
 
 delete-pseudo-version:
-	# @$(eval TAG_EXISTS=$(shell cd ${TMP_REPO_DIR}/client-${CLIENT} && git rev-parse -q --verify "refs/tags/$(PSEUDO_VERSION)" 1>/dev/null && echo true || echo false))
-	# @$(if $(TAG_EXISTS), @cd ${TMP_REPO_DIR}/client-${CLIENT} && git push origin --delete refs/tags/$(PSEUDO_VERSION) || true, @echo "Tag $(PSEUDO_VERSION) does not exist")
 	@cd ${TMP_REPO_DIR}/client-${CLIENT} && git push origin --delete refs/tags/$(PSEUDO_VERSION) || true
-	# @$(eval BRANCH_EXISTS=$(shell cd ${TMP_REPO_DIR}/client-${CLIENT} && git rev-parse -q --verify tmp_$(PSEUDO_VERSION) 1>/dev/null && echo true || echo false))
-	# @$(if $(BRANCH_EXISTS), @cd ${TMP_REPO_DIR}/client-${CLIENT} && git push origin :tmp_$(PSEUDO_VERSION) || true, @echo "Branch tmp_$(PSEUDO_VERSION) does not exist")
 	@cd ${TMP_REPO_DIR}/client-${CLIENT} && git push origin :tmp_$(PSEUDO_VERSION) || true
 # RELEASE UTILS END
 
-clean-pseudo-version:
+.PHONY: clean-pseudo
+clean-pseudo:
 	@echo "Cleaning pseudo client..."
-	@make clone-repo PSEUDO=true CLIENT=$(CLIENT)
-	@make delete-pseudo-version CLIENT=$(CLIENT)
+	$(foreach var, $(CLIENTS), @make clone-repo PSEUDO=true CLIENT=$(var) && make delete-pseudo-version CLIENT=$(var);)
 
 .PHONY: dep
 dep:
