@@ -10,19 +10,25 @@ import "garajonai/platform/proto/iam-roots-account/api/v1/user_account.proto";
 
 // Webauthn service is used to register and revoke Webauthn credentials.
 service Webauthn {
+    // StartRegistration is used to start the registration of a Webauthn credential.
     rpc StartRegistration(StartRegistrationRequest) returns (StartRegistrationResponse);
+    // FinishRegistration is used to finish the registration of a Webauthn credential.
     rpc FinishRegistration(FinishRegistrationRequest) returns (FinishRegistrationResponse);
+    // RevokeConnection is used to revoke a Webauthn credential.
     rpc RevokeConnection(RevokeConnectionRequest) returns (RevokeConnectionResponse);
 }
 
+// StartRegistrationRequest is the request to start the registration of a Webauthn credential.
 message StartRegistrationRequest {
     string email = 1;
 }
 
+// StartRegistrationResponse is the response to the StartRegistrationRequest.
 message StartRegistrationResponse {
     PublicKey public_key = 1;
 }
 
+// FinishRegistrationRequest is the request to finish the registration of a Webauthn credential.
 message FinishRegistrationRequest {
     string email = 1;
     string id = 2;
@@ -32,15 +38,18 @@ message FinishRegistrationRequest {
     AttestationResponse response = 6;
 }
 
+// FinishRegistrationResponse is the response to the FinishRegistrationRequest.
 message FinishRegistrationResponse {
     string status = 1;
 }
 
+// AttestationResponse is the response from the Webauthn authenticator.
 message AttestationResponse {
     string client_data_json = 1;
     string attestation_object = 2;
 }
 
+// PublicKey is the public key used to register a Webauthn credential.
 message PublicKey {
     bytes challenge = 1;
     ReplyingParty rp = 2;
@@ -51,27 +60,32 @@ message PublicKey {
     string attestation = 7;
 }
 
+// ReplyingParty is the party that is replying to the Webauthn request.
 message ReplyingParty {
     string id = 1;
     string name = 2;
 }
 
+// PuKeyCredParams is the public key credential parameters.
 message PuKeyCredParams {
     string type = 1;
     int32 alg = 2;
 }
 
+// AuthenticatorSelection is the selection of the authenticator.
 message AuthenticatorSelection {
     string authenticator_attachment = 1;
     bool require_resident_key = 2;
     string user_verification = 3;
 }
 
+// RevokeConnectionRequest is the request to revoke a Webauthn credential.
 message RevokeConnectionRequest {
     string email = 1;
     string id = 2;
 }
 
+// RevokeConnectionResponse is the response to the RevokeConnectionRequest.
 message RevokeConnectionResponse {
     string status = 1;
 }
