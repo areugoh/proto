@@ -24,11 +24,20 @@ jobs:
           fetch-depth: 0
           token: ${{ steps.botanibit.outputs.token }}
 
-      - name: Run reviewdog
-        uses: yoheimuta/action-protolint@v1
+      - name: Setup go
+        uses: actions/setup-go@v5
         with:
-          github_token: ${{ steps.botanibit.outputs.token }}
-          level: info
-          protolint_flags: "-config_path .github/.protolint.yml proto"
-          reporter: github-pr-review
-          fail_on_error: true
+          go-version: '1.22'
+
+      - name: Setup reviewdog
+        uses: reviewdog/action-setup@v1
+        with:
+          reviewdog_version: latest
+
+      - name: Setup protolint
+        run: go install github.com/yoheimuta/protolint/cmd/protolint@latest
+
+      - name: Run reviewdog
+        env:
+          REVIEWDOG_GITHUB_API_TOKEN: ${{ steps.botanibit.outputs.token }}
+        run: protolint -config_path=.github/.protolint.yml proto | reviewdog -efm="[%f:%l:%c] %m" -name="linter-name (protolint)" -fail-on-error=true -level=Info -reporter=github-pr-review -runners=protolint .
