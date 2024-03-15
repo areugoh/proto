@@ -30,7 +30,7 @@ jobs:
           token: ${{ steps.botanibit.outputs.token }}
 
       - name: Install protoc
-        uses: arduino/setup-protoc@v2
+        uses: arduino/setup-protoc@v3
         with:
           repo-token: ${{ steps.botanibit.outputs.token }}
 
