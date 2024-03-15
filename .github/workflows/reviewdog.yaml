@@ -1,0 +1,34 @@
+name: "Review Dog"
+on:
+  pull_request:
+permissions:
+  checks: write
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Load secrets
+        uses: garajonai/workflows-lib/load-secrets@main
+        id: botanibit
+        with:
+          op-token: ${{ secrets.OP_TOKEN }}
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: 'recursive'
+          fetch-depth: 0
+          token: ${{ steps.botanibit.outputs.token }}
+
+      - name: Run reviewdog
+        uses: yoheimuta/action-protolint@v1
+        with:
+          github_token: ${{ steps.botanibit.outputs.token }}
+          level: info
+          protolint_flags: "-config_path .github/.protolint.yml proto"
+          reporter: github-pr-review
+          fail_on_error: true
