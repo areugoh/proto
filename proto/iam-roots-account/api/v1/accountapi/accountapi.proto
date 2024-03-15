@@ -7,13 +7,17 @@ option go_package = "github.com/garajonai/client-go/iam-roots-account/api/bff/v1
 import "google/api/annotations.proto";
 import "garajonai/platform/proto/iam-roots-account/api/v1/webauthn.proto";
 
+
+// IAMRootsAccountApi BFF service
 service IAMRootsAccountApi {
+    // StartWebauthnRegistration starts a WebAuthn registration process
     rpc StartWebauthnRegistration(StartWebauthnRegistrationRequest) returns (StartWebauthnRegistrationResponse) {
         option (google.api.http) = {
             post: "/registration/webauthn/start"
             body: "*"
         };
     }
+    // FinishWebauthnRegistration finishes a WebAuthn registration process
     rpc FinishWebauthnRegistration(FinishWebauthnRegistrationRequest) returns (FinishWebauthnRegistrationResponse) {
         option (google.api.http) = {
             post: "/registration/webauthn/finish"
@@ -23,14 +27,17 @@ service IAMRootsAccountApi {
 }
 
 
+// StartWebauthnRegistrationRequest is the request message for StartWebauthnRegistration
 message StartWebauthnRegistrationRequest {
     string email = 1;
 }
 
+// StartWebauthnRegistrationResponse is the response message for StartWebauthnRegistration
 message StartWebauthnRegistrationResponse {
     garajonai.platform.iamrootsaccount.api.v1.PublicKey public_key = 1;
 }
 
+// FinishWebauthnRegistrationRequest is the request message for FinishWebauthnRegistration
 message FinishWebauthnRegistrationRequest {
     string email = 1;
     string id = 2;
@@ -40,6 +47,7 @@ message FinishWebauthnRegistrationRequest {
     garajonai.platform.iamrootsaccount.api.v1.AttestationResponse response = 6;
 }
 
+// FinishWebauthnRegistrationResponse is the response message for FinishWebauthnRegistration
 message FinishWebauthnRegistrationResponse {
     string status = 1;
 }

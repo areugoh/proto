@@ -1,0 +1,5 @@
+* @garajonai/family
+proto/iam*/ @jorgechato
+scripts/go/ @jorgechato
+scripts/nodejs/ @jorgechato
+scripts/rust/ @jorgechato
