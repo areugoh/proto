@@ -40,4 +40,4 @@ jobs:
       - name: Run reviewdog
         env:
           REVIEWDOG_GITHUB_API_TOKEN: ${{ steps.botanibit.outputs.token }}
-        run: protolint -config_path=.github/.protolint.yml proto | reviewdog -efm="[%f:%l:%c] %m" -name="linter-name (protolint)" -fail-on-error=true -level=Info -reporter=github-pr-review -runners=protolint .
+        run: protolint -config_path=.github/.protolint.yml proto | reviewdog -efm="[%f:%l:%c] %m" -name="linter-name (protolint)" -fail-on-error=true -level=Info -reporter=github-pr-review -runners=protolint
