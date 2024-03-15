@@ -18,12 +18,10 @@ service Webauthn {
     rpc RevokeConnection(RevokeConnectionRequest) returns (RevokeConnectionResponse);
 }
 
-
+// StartRegistrationRequest is the request to start the registration of a Webauthn credential.
 message StartRegistrationRequest {
     string email = 1;
 }
-
-message test {}
 
 // StartRegistrationResponse is the response to the StartRegistrationRequest.
 message StartRegistrationResponse {
