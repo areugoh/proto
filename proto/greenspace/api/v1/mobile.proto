@@ -40,12 +40,19 @@ message LocationRequest {
 
 // Condition, the condition of the water. In house algorithm to define the condition.
 enum Condition {
+    // The water is good.
     GOOD = 0;
+    // The water is moderate.
     MODERATE = 1;
+    // The water is contaminated.
     CONTAMINATED = 2;
+    // The condition of the water is unknown.
     UNKNOWN = 3;
+    // The water has radiation.
     RADIATION = 4;
+    // The water is in danger due to a natural disaster, human activity or danger animal lives there.
     DANGER = 5;
+    // The water is protected due to its natural beauty, flora, fauna or geological formations.
     PROTECTED = 6;
 }
 
