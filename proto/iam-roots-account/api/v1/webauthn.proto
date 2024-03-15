@@ -23,6 +23,8 @@ message StartRegistrationRequest {
     string email = 1;
 }
 
+message test {}
+
 // StartRegistrationResponse is the response to the StartRegistrationRequest.
 message StartRegistrationResponse {
     PublicKey public_key = 1;
@@ -66,7 +68,7 @@ message ReplyingParty {
     string name = 2;
 }
 
-//
+// PuKeyCredParams is the public key credential parameters.
 message PuKeyCredParams {
     string type = 1;
     int32 alg = 2;
