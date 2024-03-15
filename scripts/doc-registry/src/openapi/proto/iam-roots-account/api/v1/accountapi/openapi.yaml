@@ -4,12 +4,14 @@
 openapi: 3.0.3
 info:
     title: IAMRootsAccountApi API
+    description: IAMRootsAccountApi BFF service
     version: 0.0.1
 paths:
     /registration/webauthn/finish:
         post:
             tags:
                 - IAMRootsAccountApi
+            description: FinishWebauthnRegistration finishes a WebAuthn registration process
             operationId: IAMRootsAccountApi_FinishWebauthnRegistration
             requestBody:
                 content:
@@ -28,6 +30,7 @@ paths:
         post:
             tags:
                 - IAMRootsAccountApi
+            description: StartWebauthnRegistration starts a WebAuthn registration process
             operationId: IAMRootsAccountApi_StartWebauthnRegistration
             requestBody:
                 content:
@@ -62,21 +65,25 @@ components:
                         type: string
                 response:
                     $ref: '#/components/schemas/garajonai.platform.iamrootsaccount.api.v1.AttestationResponse'
+            description: FinishWebauthnRegistrationRequest is the request message for FinishWebauthnRegistration
         garajonai.platform.iamrootsaccount.api.bff.v1.FinishWebauthnRegistrationResponse:
             type: object
             properties:
                 status:
                     type: string
+            description: FinishWebauthnRegistrationResponse is the response message for FinishWebauthnRegistration
         garajonai.platform.iamrootsaccount.api.bff.v1.StartWebauthnRegistrationRequest:
             type: object
             properties:
                 email:
                     type: string
+            description: StartWebauthnRegistrationRequest is the request message for StartWebauthnRegistration
         garajonai.platform.iamrootsaccount.api.bff.v1.StartWebauthnRegistrationResponse:
             type: object
             properties:
                 publicKey:
                     $ref: '#/components/schemas/garajonai.platform.iamrootsaccount.api.v1.PublicKey'
+            description: StartWebauthnRegistrationResponse is the response message for StartWebauthnRegistration
         garajonai.platform.iamrootsaccount.api.v1.AttestationResponse:
             type: object
             properties:

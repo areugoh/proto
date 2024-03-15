@@ -1,4 +1,18 @@
 
+<a name="v1.29.4"></a>
+## [v1.29.4](https://github.com/garajonai/proto/compare/v1.29.3...v1.29.4)
+
+> 2024-03-15
+
+### Change
+
+* **ci:** update secrets
+
+### Feat
+
+* **ci:** add reviewdog
+
+
 <a name="v1.29.3"></a>
 ## [v1.29.3](https://github.com/garajonai/proto/compare/v1.29.1...v1.29.3)
 

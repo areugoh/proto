@@ -29,12 +29,12 @@ title: Accountapi
 
 
 ### IAMRootsAccountApi
-*Description comment will be shown here*
+IAMRootsAccountApi BFF service
 
 | Method Name | Description |
 | ----------- | ------------|
-| `StartWebauthnRegistration` <br /><br /> Request: [StartWebauthnRegistrationRequest](#garajonai.platform.iamrootsaccount.api.bff.v1.StartWebauthnRegistrationRequest) <br /> Response: [StartWebauthnRegistrationResponse](#garajonai.platform.iamrootsaccount.api.bff.v1.StartWebauthnRegistrationRequest) | <para></para> |
-| `FinishWebauthnRegistration` <br /><br /> Request: [FinishWebauthnRegistrationRequest](#garajonai.platform.iamrootsaccount.api.bff.v1.FinishWebauthnRegistrationRequest) <br /> Response: [FinishWebauthnRegistrationResponse](#garajonai.platform.iamrootsaccount.api.bff.v1.FinishWebauthnRegistrationRequest) | <para></para> |
+| `StartWebauthnRegistration` <br /><br /> Request: [StartWebauthnRegistrationRequest](#garajonai.platform.iamrootsaccount.api.bff.v1.StartWebauthnRegistrationRequest) <br /> Response: [StartWebauthnRegistrationResponse](#garajonai.platform.iamrootsaccount.api.bff.v1.StartWebauthnRegistrationRequest) | <para>StartWebauthnRegistration starts a WebAuthn registration process</para> |
+| `FinishWebauthnRegistration` <br /><br /> Request: [FinishWebauthnRegistrationRequest](#garajonai.platform.iamrootsaccount.api.bff.v1.FinishWebauthnRegistrationRequest) <br /> Response: [FinishWebauthnRegistrationResponse](#garajonai.platform.iamrootsaccount.api.bff.v1.FinishWebauthnRegistrationRequest) | <para>FinishWebauthnRegistration finishes a WebAuthn registration process</para> |
 
 
 
@@ -50,7 +50,7 @@ title: Accountapi
 <!-- ------  Messages ------ -->
 <a name="garajonai.platform.iamrootsaccount.api.bff.v1.FinishWebauthnRegistrationRequest"></a>
 ### FinishWebauthnRegistrationRequest
-*Description comment will be shown here (markdown supported)*
+FinishWebauthnRegistrationRequest is the request message for FinishWebauthnRegistration
 
 
 #### Fields
@@ -69,7 +69,7 @@ title: Accountapi
 
 <a name="garajonai.platform.iamrootsaccount.api.bff.v1.FinishWebauthnRegistrationResponse"></a>
 ### FinishWebauthnRegistrationResponse
-*Description comment will be shown here (markdown supported)*
+FinishWebauthnRegistrationResponse is the response message for FinishWebauthnRegistration
 
 
 #### Fields
@@ -83,7 +83,7 @@ title: Accountapi
 
 <a name="garajonai.platform.iamrootsaccount.api.bff.v1.StartWebauthnRegistrationRequest"></a>
 ### StartWebauthnRegistrationRequest
-*Description comment will be shown here (markdown supported)*
+StartWebauthnRegistrationRequest is the request message for StartWebauthnRegistration
 
 
 #### Fields
@@ -97,7 +97,7 @@ title: Accountapi
 
 <a name="garajonai.platform.iamrootsaccount.api.bff.v1.StartWebauthnRegistrationResponse"></a>
 ### StartWebauthnRegistrationResponse
-*Description comment will be shown here (markdown supported)*
+StartWebauthnRegistrationResponse is the response message for StartWebauthnRegistration
 
 
 #### Fields
