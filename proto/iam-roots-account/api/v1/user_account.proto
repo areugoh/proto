@@ -5,31 +5,41 @@ package garajonai.platform.iamrootsaccount.api.v1;
 option go_package = "github.com/garajonai/client-go/iam-roots-account/api/v1;account";
 
 
+// UserAccount is the service that provides user account information.
 service UserAccount {
+    // GetUserInfo returns the user information.
     rpc GetUserInfo(GetUserInfoRequest) returns (GetUserInfoResponse);
+    // InsertUserInfo inserts the user information.
     rpc InsertUserInfo(InsertUserInfoRequest) returns (InsertUserInfoResponse);
+    // DeleteUserInfo deletes the user information.
     rpc DeleteUserInfo(DeleteUserInfoRequest) returns (DeleteUserInfoResponse);
 }
 
+// GetUserInfoRequest is the request message for GetUserInfo.
 message GetUserInfoRequest {
     string id = 1;
 }
 
+// GetUserInfoResponse is the response message for GetUserInfo.
 message GetUserInfoResponse {
 }
 
+// InsertUserInfoRequest is the request message for InsertUserInfo.
 message InsertUserInfoRequest {
     string email = 1;
     string subject = 2;
 }
 
+// InsertUserInfoResponse is the response message for InsertUserInfo.
 message InsertUserInfoResponse {
 }
 
+// DeleteUserInfoRequest is the request message for DeleteUserInfo.
 message DeleteUserInfoRequest {
     string id = 1;
 }
 
+// DeleteUserInfoResponse is the response message for DeleteUserInfo.
 message DeleteUserInfoResponse {
 }
 

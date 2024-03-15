@@ -8,6 +8,7 @@ import "google/api/field_behavior.proto";
 import "garajonai/platform/proto/iam-roots-account/api/v1/user_account.proto";
 
 
+// Webauthn service is used to register and revoke Webauthn credentials.
 service Webauthn {
     rpc StartRegistration(StartRegistrationRequest) returns (StartRegistrationResponse);
     rpc FinishRegistration(FinishRegistrationRequest) returns (FinishRegistrationResponse);
