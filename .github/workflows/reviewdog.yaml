@@ -1,0 +1,43 @@
+name: "Review Dog"
+on:
+  pull_request:
+permissions:
+  checks: write
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Load secrets
+        uses: garajonai/workflows-lib/load-secrets@main
+        id: botanibit
+        with:
+          app-id: ${{ secrets.GH_APP_ID }}
+          app-pk: ${{ secrets.GH_APP_PK }}
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ steps.botanibit.outputs.token }}
+
+      - name: Setup go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.22'
+
+      - name: Setup reviewdog
+        uses: reviewdog/action-setup@v1
+        with:
+          reviewdog_version: latest
+
+      - name: Setup protolint
+        run: go install github.com/yoheimuta/protolint/cmd/protolint@latest
+
+      - name: Run reviewdog
+        env:
+          REVIEWDOG_GITHUB_API_TOKEN: ${{ steps.botanibit.outputs.token }}
+        run: protolint -config_path=.github/.protolint.yml proto | reviewdog -name="protolint" -fail-on-error=true -level=info -reporter="github-pr-review" -f=protolint -filter-mode=added
