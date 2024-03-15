@@ -15,7 +15,8 @@ jobs:
         uses: garajonai/workflows-lib/load-secrets@main
         id: botanibit
         with:
-          op-token: ${{ secrets.OP_TOKEN }}
+          app-id: ${{ secrets.GH_APP_ID }}
+          app-pk: ${{ secrets.GH_APP_PK }}
 
       - name: Checkout repository
         uses: actions/checkout@v4
